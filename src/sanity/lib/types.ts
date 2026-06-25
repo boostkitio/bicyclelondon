@@ -25,6 +25,7 @@ export type CaseStudy = CaseStudyCard & {
   results?: { metric?: string; label?: string }[];
   body?: unknown[];
   gallery?: SanityImage[];
+  videoPlaybackId?: string;
   client?: { name?: string; logo?: SanityImage; website?: string };
   seo?: Seo;
 };

@@ -76,6 +76,13 @@ export default defineType({
       group: "content",
     }),
     defineField({
+      name: "video",
+      title: "Showcase video (Mux)",
+      type: "mux.video",
+      group: "content",
+      description: "Optional campaign film. Uploaded and streamed via Mux.",
+    }),
+    defineField({
       name: "gallery",
       title: "Image gallery",
       type: "array",

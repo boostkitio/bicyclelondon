@@ -5,9 +5,12 @@ import { PageHero } from "@/components/page/page-hero";
 import { CtaBand } from "@/components/page/cta-band";
 import { Section } from "@/components/ui/section";
 import { PortableText } from "@/components/portable-text";
+import { MuxVideo } from "@/components/mux-video";
+import { JsonLd } from "@/components/seo/json-ld";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { caseStudyBySlugQuery, caseStudySlugsQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
+import { breadcrumb } from "@/lib/schema";
 import type { CaseStudy } from "@/sanity/lib/types";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -27,9 +30,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     params: { slug },
   });
   if (!cs) return {};
+  const img = cs.heroImage?.asset
+    ? urlFor(cs.heroImage).width(1200).height(630).url()
+    : undefined;
   return {
     title: cs.seo?.metaTitle || `${cs.title} | Work`,
     description: cs.seo?.metaDescription || cs.standfirst,
+    openGraph: {
+      title: cs.title,
+      description: cs.standfirst,
+      images: img ? [img] : undefined,
+    },
   };
 }
 
@@ -48,6 +59,13 @@ export default async function CaseStudyPage({ params }: Props) {
 
   return (
     <>
+      <JsonLd
+        data={breadcrumb([
+          { name: "Home", path: "/" },
+          { name: "Work", path: "/work" },
+          { name: cs.title, path: `/work/${cs.slug}` },
+        ])}
+      />
       <PageHero
         eyebrow={cs.client?.name || cs.clientName}
         title={cs.title}
@@ -85,6 +103,12 @@ export default async function CaseStudyPage({ params }: Props) {
 
           <PortableText value={cs.body} />
         </div>
+
+        {cs.videoPlaybackId && (
+          <div className="mx-auto mt-14 max-w-5xl">
+            <MuxVideo playbackId={cs.videoPlaybackId} title={cs.title} />
+          </div>
+        )}
 
         {cs.gallery && cs.gallery.length > 0 && (
           <div className="mx-auto mt-16 max-w-5xl">

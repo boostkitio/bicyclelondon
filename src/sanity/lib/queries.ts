@@ -13,6 +13,7 @@ export const caseStudySlugsQuery = groq`
 export const caseStudyBySlugQuery = groq`
   *[_type == "caseStudy" && slug.current == $slug][0]{
     _id, title, "slug": slug.current, standfirst, heroImage, services, results, body, gallery,
+    "videoPlaybackId": video.asset->playbackId,
     "client": client->{name, logo, website},
     seo
   }`;

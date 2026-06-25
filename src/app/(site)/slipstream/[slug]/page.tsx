@@ -4,10 +4,12 @@ import { PageHero } from "@/components/page/page-hero";
 import { CtaBand } from "@/components/page/cta-band";
 import { Section } from "@/components/ui/section";
 import { PortableText } from "@/components/portable-text";
+import { JsonLd } from "@/components/seo/json-ld";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { articleBySlugQuery, articleSlugsQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import { SITE } from "@/lib/site";
+import { articleSchema, breadcrumb } from "@/lib/schema";
 import type { Article } from "@/sanity/lib/types";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -27,9 +29,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     params: { slug },
   });
   if (!a) return {};
+  const img = a.heroImage?.asset
+    ? urlFor(a.heroImage).width(1200).height(630).url()
+    : undefined;
   return {
     title: a.seo?.metaTitle || a.title,
     description: a.seo?.metaDescription || a.standfirst,
+    openGraph: {
+      type: "article",
+      title: a.title,
+      description: a.standfirst,
+      images: img ? [img] : undefined,
+    },
   };
 }
 
@@ -56,6 +67,23 @@ export default async function ArticlePage({ params }: Props) {
 
   return (
     <>
+      <JsonLd
+        data={articleSchema({
+          title: a.title,
+          slug: a.slug,
+          standfirst: a.standfirst,
+          publishedAt: a.publishedAt,
+          authorName: a.author?.name,
+          image: heroUrl,
+        })}
+      />
+      <JsonLd
+        data={breadcrumb([
+          { name: "Home", path: "/" },
+          { name: "Slipstream", path: "/slipstream" },
+          { name: a.title, path: `/slipstream/${a.slug}` },
+        ])}
+      />
       <PageHero
         eyebrow={a.category?.title || "Slipstream"}
         title={a.title}

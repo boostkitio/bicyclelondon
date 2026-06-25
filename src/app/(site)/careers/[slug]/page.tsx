@@ -9,6 +9,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { jobBySlugQuery, jobSlugsQuery } from "@/sanity/lib/queries";
 import { SITE } from "@/lib/site";
+import { breadcrumb } from "@/lib/schema";
 import type { Job } from "@/sanity/lib/types";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -78,6 +79,13 @@ export default async function JobPage({ params }: Props) {
   return (
     <>
       <JsonLd data={jobPosting} />
+      <JsonLd
+        data={breadcrumb([
+          { name: "Home", path: "/" },
+          { name: "Careers", path: "/careers" },
+          { name: job.title, path: `/careers/${job.slug}` },
+        ])}
+      />
       <PageHero eyebrow={job.team || "Careers"} title={job.title} lead={job.summary} />
 
       <Section>

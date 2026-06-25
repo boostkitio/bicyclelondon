@@ -44,9 +44,14 @@ export default function SiteLayout({
     <>
       <JsonLd data={organisationSchema} />
       <JsonLd data={websiteSchema} />
+      <a href="#main" className="skip-link">
+        Skip to content
+      </a>
       <ScrollToTop />
       <SiteHeader />
-      <main className="flex-1">{children}</main>
+      <main id="main" className="flex-1">
+        {children}
+      </main>
       <SiteFooter />
     </>
   );

@@ -37,6 +37,10 @@ export function SiteHeader() {
   // Solid header when scrolled, off the homepage, or when the menu is open.
   const solid = scrolled || !isHome || open;
 
+  const isActive = (href: string) =>
+    pathname === href || pathname.startsWith(`${href}/`);
+  const servicesActive = SERVICES.some((s) => isActive(s.href));
+
   return (
     <header
       className={cn(
@@ -51,7 +55,10 @@ export function SiteHeader() {
           <div className="group relative">
             <button
               type="button"
-              className="flex items-center gap-1 text-sm font-semibold uppercase tracking-wide hover:text-brand"
+              className={cn(
+                "flex items-center gap-1 text-sm font-semibold uppercase tracking-wide",
+                servicesActive ? "text-brand" : "hover:text-brand",
+              )}
             >
               What we do
               <svg
@@ -93,7 +100,11 @@ export function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm font-semibold uppercase tracking-wide hover:text-brand"
+              aria-current={isActive(item.href) ? "page" : undefined}
+              className={cn(
+                "text-sm font-semibold uppercase tracking-wide",
+                isActive(item.href) ? "text-brand" : "hover:text-brand",
+              )}
             >
               {item.label}
             </Link>
