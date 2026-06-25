@@ -9,6 +9,7 @@ export const services: Record<string, ServiceContent> = {
     title: "Our ecosystem",
     logo: "/images/logo-bicycle-white.png",
     heroImage: wix("5f4cac_249ad8befffe4e5ca68659383d8dc870~mv2.jpg"),
+    featureImage: "/images/feature-bicycle.jpg",
     lead: [
       "Our ecosystem is free from muscle memory and typical legacy-driven thinking.",
       "We don’t have to do everything for every client. Put simply: if we’re your media agency, you get our industry-leading creativity built in. If we’re your creative agency, you get proper media thinking woven into the work. But when it all comes together, something special happens.",
@@ -28,6 +29,7 @@ export const services: Record<string, ServiceContent> = {
     title: "Meet Blade",
     logo: "/images/logo-blade.png",
     heroImage: wix("5f4cac_4a2e00204cdb41dfa3c518ac79034cde~mv2.jpg"),
+    featureImage: "/images/feature-blade.jpg",
     lead: [
       "Blade is our specialised unit that redefines traditional performance marketing. Creatively and data-driven.",
     ],
@@ -60,6 +62,7 @@ export const services: Record<string, ServiceContent> = {
     title: "Meet Studio",
     logo: "/images/logo-studio.png",
     heroImage: wix("5f4cac_f28ebfca779643a19d21df9d054bc8ba~mv2.png", 1400, 730),
+    featureImage: "/images/feature-studio.jpg",
     lead: [
       "We provide our clients with a cohesive suite of creative solutions, from brand to performance, online to offline, and everything in between.",
       "Bicycle Studio is a direct response to our clients’ growing need for the rapid development of creative assets that align with increasingly complex media plans. We streamline the process, ensuring creative output is innovative and perfectly synchronised with strategic media objectives.",
@@ -77,6 +80,7 @@ export const services: Record<string, ServiceContent> = {
     title: "Meet Ripple",
     logo: "/images/logo-ripple.png",
     heroImage: wix("5f4cac_018d0874e0a747f49e6a72b912fcededf000.jpg"),
+    featureImage: "/images/feature-ripple.jpg",
     lead: [
       "Our integrated, social-first solution. Ripple combines our own organic social hub with an influencer offering powered by our partnership with Hypetap.",
     ],
@@ -101,6 +105,7 @@ export const services: Record<string, ServiceContent> = {
     title: "Are you a multi-market brand?",
     logo: "/images/logo-international.png",
     heroImage: wix("5f4cac_7ca0c84eb71049459eb64a47cb6b898a~mv2.jpg"),
+    featureImage: "/images/feature-international.jpg",
     lead: [
       "Someone who wants to venture into new markets seamlessly and quickly? Who needs cross-market activity and craves the independent spirit, but fears a bland, identikit network solution is the only option? We’ve got good news for you.",
     ],

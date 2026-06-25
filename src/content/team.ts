@@ -76,3 +76,12 @@ export function initials(name: string): string {
   const last = parts.length > 1 ? parts[parts.length - 1][0] : "";
   return (first + last).toUpperCase();
 }
+
+// Matches the filenames written by scripts/download-team.mjs.
+export function photoSlug(name: string): string {
+  return name
+    .replace(/\(.*?\)/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}

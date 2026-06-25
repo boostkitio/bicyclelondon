@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/page/page-hero";
 import { CtaBand } from "@/components/page/cta-band";
 import { Section } from "@/components/ui/section";
-import { TEAM, initials } from "@/content/team";
+import { Avatar } from "@/components/avatar";
+import { TEAM, initials, photoSlug } from "@/content/team";
 
 export const metadata: Metadata = {
   title: "The Peloton",
@@ -22,14 +23,16 @@ export default function PelotonPage() {
       <Section>
         <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4">
           {TEAM.map((m) => (
-            <div key={m.name} className="text-center">
-              <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-navy font-display text-xl font-bold tracking-tight text-brand">
-                {initials(m.name)}
-              </div>
-              <h2 className="mt-4 font-display text-base font-bold uppercase leading-tight">
+            <div key={m.name} className="group">
+              <Avatar
+                src={`/team/${photoSlug(m.name)}.jpg`}
+                name={m.name}
+                initials={initials(m.name)}
+              />
+              <h2 className="mt-3 font-display text-base font-bold uppercase leading-tight">
                 {m.name}
               </h2>
-              <p className="mt-1 text-sm text-black/60">{m.role}</p>
+              <p className="mt-0.5 text-sm text-black/60">{m.role}</p>
             </div>
           ))}
         </div>

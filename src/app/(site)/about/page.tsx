@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { PageHero } from "@/components/page/page-hero";
 import { CtaBand } from "@/components/page/cta-band";
 import { Section } from "@/components/ui/section";
+import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button";
 
 export const metadata: Metadata = {
@@ -42,6 +44,18 @@ export default function AboutPage() {
           </ul>
         </div>
       </Section>
+
+      <Container className="pb-4">
+        <div className="relative aspect-[16/9] overflow-hidden rounded-3xl">
+          <Image
+            src="/images/about-team.jpg"
+            alt="The Bicycle team"
+            fill
+            sizes="(max-width: 1280px) 100vw, 1200px"
+            className="object-cover"
+          />
+        </div>
+      </Container>
 
       <Section tone="paper">
         <div className="mx-auto max-w-3xl">
