@@ -45,11 +45,13 @@ export function SiteHeader() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
-        solid ? "bg-white text-ink shadow-sm" : "bg-transparent text-white",
+        solid
+          ? "bg-navy text-white shadow-lg shadow-black/10"
+          : "bg-transparent text-white",
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
-        <Logo light={!solid} />
+        <Logo />
 
         <nav className="hidden items-center gap-7 lg:flex">
           <div className="group relative">

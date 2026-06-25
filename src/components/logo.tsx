@@ -1,16 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
-export function Logo({
-  light = false,
-  className,
-}: {
-  light?: boolean;
-  className?: string;
-}) {
+export function Logo({ className }: { className?: string }) {
   const pathname = usePathname();
 
   // Clicking the logo always returns to the top of the homepage,
@@ -27,13 +22,16 @@ export function Logo({
       href="/"
       onClick={onClick}
       aria-label="Bicycle London, home"
-      className={cn(
-        "font-display text-2xl font-extrabold uppercase tracking-tight transition-colors",
-        light ? "text-white" : "text-ink",
-        className,
-      )}
+      className={cn("inline-block", className)}
     >
-      Bic<span className="text-brand">y</span>cle
+      <Image
+        src="/images/logo-bicycle-white.png"
+        alt="Bicycle London"
+        width={150}
+        height={49}
+        priority
+        className="h-7 w-auto sm:h-8"
+      />
     </Link>
   );
 }
