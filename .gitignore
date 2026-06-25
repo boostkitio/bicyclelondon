@@ -45,3 +45,4 @@ next-env.d.ts
 # Playwright / scratch
 .playwright-mcp/
 *.local.jpeg
+qa-*.jpeg

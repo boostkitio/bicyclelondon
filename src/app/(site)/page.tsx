@@ -1,8 +1,16 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
+import { CtaBand } from "@/components/page/cta-band";
+import { Reveal } from "@/components/reveal";
+import { LogoWall } from "@/components/logo-wall";
 import { SERVICES } from "@/lib/site";
+import { sanityFetch } from "@/sanity/lib/fetch";
+import { featuredCaseStudiesQuery } from "@/sanity/lib/queries";
+import { urlFor } from "@/sanity/lib/image";
+import type { CaseStudyCard } from "@/sanity/lib/types";
 
 const ANDS: [string, string][] = [
   ["Media", "Creative"],
@@ -12,105 +20,197 @@ const ANDS: [string, string][] = [
   ["Man", "Machine"],
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const featured = await sanityFetch<CaseStudyCard[]>({
+    query: featuredCaseStudiesQuery,
+    tags: ["caseStudy"],
+  });
+
   return (
     <>
       {/* Hero */}
-      <section className="relative flex min-h-[88vh] items-center overflow-hidden bg-navy text-white">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(1,0,255,0.5),transparent_60%)]" />
-        <Container className="relative z-10 pt-28 pb-20">
-          <p className="mb-6 max-w-xl text-sm font-semibold uppercase tracking-[0.2em] text-white/80">
-            Independent integrated media and creative agency
-          </p>
-          <h1 className="display text-6xl sm:text-7xl lg:text-8xl">
-            Built on the
-            <br />
-            power of <span className="text-brand">and</span>
-          </h1>
-          <div className="mt-10 flex flex-wrap gap-4">
-            <ButtonLink href="/work" variant="primary" size="lg">
-              See our work
-            </ButtonLink>
-            <ButtonLink href="/contact-us" variant="white" size="lg">
-              Contact us
-            </ButtonLink>
-          </div>
+      <section className="relative isolate flex min-h-[92vh] items-center overflow-hidden bg-navy text-white">
+        <Image
+          src="/images/hero.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center opacity-55"
+        />
+        <div className="absolute inset-0 bg-gradient-to-tr from-navy via-navy/85 to-electric/20" />
+        <Container className="relative z-10 pb-24 pt-36">
+          <Reveal>
+            <p className="mb-6 max-w-xl text-sm font-semibold uppercase tracking-[0.2em] text-white/80">
+              Independent integrated media and creative agency
+            </p>
+          </Reveal>
+          <Reveal delay={80}>
+            <h1 className="display text-6xl sm:text-7xl lg:text-[7.5rem]">
+              Built on the
+              <br />
+              power of <span className="text-brand">and</span>
+            </h1>
+          </Reveal>
+          <Reveal delay={160}>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <ButtonLink href="/work" variant="primary" size="lg">
+                See our work
+              </ButtonLink>
+              <ButtonLink href="/contact-us" variant="white" size="lg">
+                Contact us
+              </ButtonLink>
+            </div>
+          </Reveal>
         </Container>
+        <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-brand">
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+            className="animate-floaty"
+          >
+            <path d="M12 4v16M6 14l6 6 6-6" stroke="currentColor" strokeWidth="2" />
+          </svg>
+        </div>
       </section>
 
-      {/* And ticker */}
-      <Section tone="brand" className="py-10">
-        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-center">
-          {ANDS.map(([a, b], i) => (
+      {/* And marquee */}
+      <div className="marquee group overflow-hidden bg-brand py-5 text-black">
+        <div
+          className="marquee-track flex w-max items-center gap-2"
+          style={{ ["--marquee-duration" as string]: "30s" }}
+        >
+          {[...ANDS, ...ANDS, ...ANDS].map(([a, b], i) => (
             <span
               key={i}
               className="font-display text-xl font-extrabold uppercase tracking-tight sm:text-2xl"
             >
               {a} <span className="text-white">&amp;</span> {b}
-              {i < ANDS.length - 1 && (
-                <span className="mx-3 text-black/30">/</span>
-              )}
+              <span className="mx-6 text-black/30">/</span>
             </span>
           ))}
         </div>
-      </Section>
+      </div>
 
       {/* Meet Bicycle */}
-      <Section tone="white">
+      <Section>
         <div className="grid items-center gap-12 lg:grid-cols-2">
-          <div>
-            <h2 className="display text-4xl sm:text-5xl">Meet Bicycle</h2>
-            <p className="mt-6 text-lg leading-relaxed text-black/70">
-              Media planning and buying is in our DNA, but we like to think of
-              ourselves as &lsquo;the newest version of the oldest model&rsquo;.
-              We provide integrated solutions for the modern media world,
-              traversing brand &amp; performance and creative &amp; media, driving
-              sustainable growth for our clients.
-            </p>
-            <div className="mt-8">
-              <ButtonLink href="/bicycle" variant="outline">
-                Read more
-              </ButtonLink>
+          <Reveal>
+            <div>
+              <h2 className="display text-4xl sm:text-5xl">Meet Bicycle</h2>
+              <p className="mt-6 text-lg leading-relaxed text-black/70">
+                Media planning and buying is in our DNA, but we like to think of
+                ourselves as &lsquo;the newest version of the oldest model&rsquo;.
+                We provide integrated solutions for the modern media world,
+                traversing brand &amp; performance and creative &amp; media,
+                driving sustainable growth for our clients.
+              </p>
+              <div className="mt-8">
+                <ButtonLink href="/bicycle" variant="outline">
+                  Read more
+                </ButtonLink>
+              </div>
             </div>
-          </div>
-          <div className="aspect-[4/3] rounded-3xl bg-paper" />
+          </Reveal>
+          <Reveal delay={120}>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+              <Image
+                src="/images/meet-bicycle.jpg"
+                alt="Inside Bicycle London"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* Logo wall */}
+      <Section tone="paper">
+        <Reveal>
+          <h2 className="display mx-auto max-w-3xl text-center text-2xl sm:text-3xl">
+            Bringing things together for ambitious brands since 2021
+          </h2>
+        </Reveal>
+        <div className="mt-12">
+          <LogoWall />
         </div>
       </Section>
 
       {/* Services */}
-      <Section tone="paper">
-        <h2 className="display text-4xl sm:text-5xl">What we do</h2>
+      <Section>
+        <Reveal>
+          <h2 className="display text-4xl sm:text-5xl">What we do</h2>
+          <p className="mt-4 max-w-2xl text-lg text-black/60">
+            We don&rsquo;t have to do everything for every client. But when it all
+            comes together, something special happens.
+          </p>
+        </Reveal>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {SERVICES.map((s) => (
-            <Link
-              key={s.href}
-              href={s.href}
-              className="group rounded-3xl bg-white p-8 ring-1 ring-black/5 transition hover:ring-brand"
-            >
-              <h3 className="font-display text-2xl font-extrabold uppercase">
-                {s.label}
-              </h3>
-              <p className="mt-3 text-black/60">{s.blurb}</p>
-              <span className="mt-6 inline-block text-sm font-semibold uppercase tracking-wide text-moss group-hover:text-brand-ink">
-                Read more →
-              </span>
-            </Link>
+          {SERVICES.map((s, i) => (
+            <Reveal key={s.href} delay={i * 70}>
+              <Link
+                href={s.href}
+                className="group flex h-full flex-col rounded-3xl bg-paper p-8 ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-xl hover:ring-brand"
+              >
+                <h3 className="font-display text-2xl font-extrabold uppercase">
+                  {s.label}
+                </h3>
+                <p className="mt-3 flex-1 text-black/60">{s.blurb}</p>
+                <span className="mt-6 inline-flex items-center gap-1 text-sm font-semibold uppercase tracking-wide text-moss transition group-hover:gap-2 group-hover:text-brand-ink">
+                  Read more →
+                </span>
+              </Link>
+            </Reveal>
           ))}
         </div>
       </Section>
 
-      {/* CTA */}
-      <Section tone="navy">
-        <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
-          <h2 className="display max-w-2xl text-3xl sm:text-4xl">
-            Want to understand how the power of &lsquo;and&rsquo; can
-            revolutionise your marketing?
-          </h2>
-          <ButtonLink href="/contact-us" variant="primary" size="lg">
-            Contact us
-          </ButtonLink>
-        </div>
-      </Section>
+      {/* Selected work */}
+      {featured.length > 0 && (
+        <Section tone="navy">
+          <div className="flex items-end justify-between gap-6">
+            <h2 className="display text-4xl sm:text-5xl">Selected work</h2>
+            <Link
+              href="/work"
+              className="shrink-0 text-sm font-semibold uppercase tracking-wide text-brand hover:text-white"
+            >
+              All work →
+            </Link>
+          </div>
+          <div className="mt-10 grid gap-8 md:grid-cols-3">
+            {featured.map((cs) => (
+              <Link key={cs._id} href={`/work/${cs.slug}`} className="group block">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white/5">
+                  {cs.heroImage?.asset && (
+                    <Image
+                      src={urlFor(cs.heroImage).width(700).height(525).url()}
+                      alt={cs.heroImage.alt || cs.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover transition duration-500 group-hover:scale-105"
+                    />
+                  )}
+                </div>
+                {cs.clientName && (
+                  <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-brand">
+                    {cs.clientName}
+                  </p>
+                )}
+                <h3 className="mt-1 font-display text-xl font-bold uppercase">
+                  {cs.title}
+                </h3>
+              </Link>
+            ))}
+          </div>
+        </Section>
+      )}
+
+      <CtaBand />
     </>
   );
 }

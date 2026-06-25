@@ -51,3 +51,13 @@ export const jobBySlugQuery = groq`
   }`;
 
 export const siteSettingsQuery = groq`*[_type == "siteSettings"][0]`;
+
+export const clientsWallQuery = groq`
+  *[_type == "client" && showOnLogoWall == true && defined(logo.asset)]
+    | order(order asc){ _id, name, logo }`;
+
+export const featuredCaseStudiesQuery = groq`
+  *[_type == "caseStudy"] | order(order asc, _createdAt desc)[0...3]{
+    _id, title, "slug": slug.current, standfirst, heroImage,
+    "clientName": client->name
+  }`;

@@ -7,6 +7,7 @@ export const services: Record<string, ServiceContent> = {
   bicycle: {
     eyebrow: "Meet Bicycle",
     title: "Our ecosystem",
+    logo: "/images/logo-bicycle-white.png",
     heroImage: wix("5f4cac_249ad8befffe4e5ca68659383d8dc870~mv2.jpg"),
     lead: [
       "Our ecosystem is free from muscle memory and typical legacy-driven thinking.",
@@ -25,6 +26,7 @@ export const services: Record<string, ServiceContent> = {
   blade: {
     eyebrow: "Performance consultancy",
     title: "Meet Blade",
+    logo: "/images/logo-blade.png",
     heroImage: wix("5f4cac_4a2e00204cdb41dfa3c518ac79034cde~mv2.jpg"),
     lead: [
       "Blade is our specialised unit that redefines traditional performance marketing. Creatively and data-driven.",
@@ -56,6 +58,7 @@ export const services: Record<string, ServiceContent> = {
   studio: {
     eyebrow: "Creative studio",
     title: "Meet Studio",
+    logo: "/images/logo-studio.png",
     heroImage: wix("5f4cac_f28ebfca779643a19d21df9d054bc8ba~mv2.png", 1400, 730),
     lead: [
       "We provide our clients with a cohesive suite of creative solutions, from brand to performance, online to offline, and everything in between.",
@@ -72,6 +75,7 @@ export const services: Record<string, ServiceContent> = {
   ripple: {
     eyebrow: "Influencer & social",
     title: "Meet Ripple",
+    logo: "/images/logo-ripple.png",
     heroImage: wix("5f4cac_018d0874e0a747f49e6a72b912fcededf000.jpg"),
     lead: [
       "Our integrated, social-first solution. Ripple combines our own organic social hub with an influencer offering powered by our partnership with Hypetap.",
@@ -95,6 +99,7 @@ export const services: Record<string, ServiceContent> = {
   international: {
     eyebrow: "Bicycle International",
     title: "Are you a multi-market brand?",
+    logo: "/images/logo-international.png",
     heroImage: wix("5f4cac_7ca0c84eb71049459eb64a47cb6b898a~mv2.jpg"),
     lead: [
       "Someone who wants to venture into new markets seamlessly and quickly? Who needs cross-market activity and craves the independent spirit, but fears a bland, identikit network solution is the only option? We’ve got good news for you.",

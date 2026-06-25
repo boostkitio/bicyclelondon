@@ -9,6 +9,7 @@ export type ServiceContent = {
   eyebrow: string;
   title: string;
   heroImage?: string;
+  logo?: string;
   lead?: string[];
   points?: ServicePoint[];
   sections?: ServiceSection[];
@@ -22,6 +23,7 @@ export function ServicePage({ content }: { content: ServiceContent }) {
         eyebrow={content.eyebrow}
         title={content.title}
         image={content.heroImage}
+        logo={content.logo}
       />
 
       {content.lead && content.lead.length > 0 && (

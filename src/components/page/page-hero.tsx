@@ -6,11 +6,13 @@ export function PageHero({
   title,
   lead,
   image,
+  logo,
 }: {
   eyebrow?: string;
   title: string;
   lead?: string;
   image?: string;
+  logo?: string;
 }) {
   return (
     <section className="relative isolate overflow-hidden bg-navy text-white">
@@ -28,6 +30,15 @@ export function PageHero({
         </>
       )}
       <Container className="relative z-10 pb-16 pt-36 sm:pb-20">
+        {logo && (
+          <Image
+            src={logo}
+            alt=""
+            width={260}
+            height={72}
+            className="mb-6 h-14 w-auto object-contain sm:h-16"
+          />
+        )}
         {eyebrow && (
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-brand">
             {eyebrow}

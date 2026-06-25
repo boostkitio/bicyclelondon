@@ -112,6 +112,20 @@ function mdToBlocks(md) {
   return blocks;
 }
 
+function summaryFromBlocks(blocks) {
+  const para = blocks.find(
+    (b) =>
+      b.style === "normal" &&
+      b.children?.[0]?.text &&
+      b.children[0].text.trim().length >= 40,
+  );
+  if (!para) return undefined;
+  const text = para.children[0].text.trim();
+  return text.length <= 220
+    ? text
+    : text.slice(0, 220).replace(/\s+\S*$/, "").trim() + "…";
+}
+
 function firstContentImage(md) {
   const re = /!\[[^\]]*\]\((https:\/\/static\.wixstatic\.com\/media\/[^)]+)\)/g;
   let m;
@@ -258,15 +272,16 @@ async function migrateCaseStudies() {
       const { markdown, metadata } = await scrape(cs.url);
       const clientRef = await ensureClient(cs.client);
       const hero = await uploadImage(firstContentImage(markdown), cs.title);
+      const blocks = mdToBlocks(markdown);
       await client.createOrReplace({
         _id: `caseStudy-${cs.slug}`,
         _type: "caseStudy",
         title: cs.title,
         slug: { _type: "slug", current: cs.slug },
         client: clientRef,
-        standfirst: metadata?.description?.slice(0, 280),
+        standfirst: summaryFromBlocks(blocks),
         heroImage: hero,
-        body: mdToBlocks(markdown),
+        body: blocks,
         order: order++,
       });
       console.log(`✓ case study: ${cs.title}`);
@@ -279,7 +294,8 @@ async function migrateCaseStudies() {
 async function migrateJobs() {
   for (const job of jobs) {
     try {
-      const { markdown, metadata } = await scrape(job.url);
+      const { markdown } = await scrape(job.url);
+      const blocks = mdToBlocks(markdown);
       await client.createOrReplace({
         _id: `job-${job.slug}`,
         _type: "job",
@@ -289,8 +305,8 @@ async function migrateJobs() {
         team: job.team,
         location: "London (Clerkenwell)",
         employmentType: "FULL_TIME",
-        summary: metadata?.description?.slice(0, 280),
-        body: mdToBlocks(markdown),
+        summary: summaryFromBlocks(blocks),
+        body: blocks,
         applyEmail: "jobs@bicyclelondon.com",
         postedAt: new Date().toISOString(),
       });
@@ -305,18 +321,19 @@ async function migrateArticles() {
   for (const a of articles) {
     const slug = slugify(a.title);
     try {
-      const { markdown, metadata } = await scrape(a.url);
+      const { markdown } = await scrape(a.url);
       const categoryRef = await ensureCategory(a.category);
+      const blocks = mdToBlocks(markdown);
       await client.createOrReplace({
         _id: `article-${slug}`,
         _type: "slipstreamArticle",
         title: a.title,
         slug: { _type: "slug", current: slug },
-        standfirst: metadata?.description?.slice(0, 280),
+        standfirst: summaryFromBlocks(blocks),
         category: categoryRef,
         issue: a.issue,
         publishedAt: new Date(2024, 0, 1).toISOString(),
-        body: mdToBlocks(markdown),
+        body: blocks,
       });
       console.log(`✓ article: ${a.title}`);
     } catch (e) {
