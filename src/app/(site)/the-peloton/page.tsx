@@ -1,0 +1,44 @@
+import type { Metadata } from "next";
+import { PageHero } from "@/components/page/page-hero";
+import { CtaBand } from "@/components/page/cta-band";
+import { Section } from "@/components/ui/section";
+import { TEAM, initials } from "@/content/team";
+
+export const metadata: Metadata = {
+  title: "The Peloton",
+  description:
+    "Meet the Peloton, the curious, intelligent and lovely people behind Bicycle. A fast-growing, 100% independent media and creative agency.",
+};
+
+export default function PelotonPage() {
+  return (
+    <>
+      <PageHero
+        eyebrow="Our people"
+        title="The Peloton"
+        lead="The curious, intelligent and lovely people who make Bicycle."
+        image="https://static.wixstatic.com/media/5f4cac_f47fcab6745345659ac0fe2a00cda470f000.jpg/v1/fill/w_1905,h_993,al_c,q_85,enc_avif,quality_auto/5f4cac_f47fcab6745345659ac0fe2a00cda470f000.jpg"
+      />
+      <Section>
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4">
+          {TEAM.map((m) => (
+            <div key={m.name} className="text-center">
+              <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-navy font-display text-xl font-bold tracking-tight text-brand">
+                {initials(m.name)}
+              </div>
+              <h2 className="mt-4 font-display text-base font-bold uppercase leading-tight">
+                {m.name}
+              </h2>
+              <p className="mt-1 text-sm text-black/60">{m.role}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+      <CtaBand
+        heading="Like the look of us? We’re always after good people."
+        label="See open roles"
+        href="/careers"
+      />
+    </>
+  );
+}

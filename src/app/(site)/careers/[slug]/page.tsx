@@ -1,0 +1,127 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { PageHero } from "@/components/page/page-hero";
+import { CtaBand } from "@/components/page/cta-band";
+import { Section } from "@/components/ui/section";
+import { PortableText } from "@/components/portable-text";
+import { JsonLd } from "@/components/seo/json-ld";
+import { ButtonLink } from "@/components/ui/button";
+import { sanityFetch } from "@/sanity/lib/fetch";
+import { jobBySlugQuery, jobSlugsQuery } from "@/sanity/lib/queries";
+import { SITE } from "@/lib/site";
+import type { Job } from "@/sanity/lib/types";
+
+type Props = { params: Promise<{ slug: string }> };
+
+export async function generateStaticParams() {
+  const slugs = await sanityFetch<{ slug: string }[]>({
+    query: jobSlugsQuery,
+    revalidate: 3600,
+  });
+  return slugs.map((s) => ({ slug: s.slug }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const job = await sanityFetch<Job | null>({
+    query: jobBySlugQuery,
+    params: { slug },
+  });
+  if (!job) return {};
+  return {
+    title: job.seo?.metaTitle || `${job.title} | Careers`,
+    description: job.seo?.metaDescription || job.summary,
+  };
+}
+
+export default async function JobPage({ params }: Props) {
+  const { slug } = await params;
+  const job = await sanityFetch<Job | null>({
+    query: jobBySlugQuery,
+    params: { slug },
+    tags: ["job"],
+  });
+  if (!job) notFound();
+
+  const applyEmail = job.applyEmail || SITE.jobsEmail;
+  const meta = [
+    job.location,
+    job.employmentType?.replace("_", "-").toLowerCase(),
+    job.salary,
+  ].filter(Boolean);
+
+  const jobPosting = {
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    title: job.title,
+    description: job.summary || job.title,
+    datePosted: job.postedAt,
+    employmentType: job.employmentType,
+    directApply: true,
+    hiringOrganization: {
+      "@type": "Organization",
+      name: SITE.name,
+      sameAs: SITE.url,
+    },
+    jobLocation: {
+      "@type": "Place",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: SITE.address.line1,
+        addressLocality: SITE.address.city,
+        postalCode: SITE.address.postcode,
+        addressCountry: "GB",
+      },
+    },
+  };
+
+  return (
+    <>
+      <JsonLd data={jobPosting} />
+      <PageHero eyebrow={job.team || "Careers"} title={job.title} lead={job.summary} />
+
+      <Section>
+        <div className="mx-auto max-w-3xl">
+          {meta.length > 0 && (
+            <ul className="mb-10 flex flex-wrap gap-2">
+              {meta.map((m) => (
+                <li
+                  key={m}
+                  className="rounded-full bg-paper px-4 py-1.5 text-sm font-semibold uppercase tracking-wide text-black/70"
+                >
+                  {m}
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <PortableText value={job.body} />
+
+          <div className="mt-12 rounded-3xl bg-paper p-8">
+            <h2 className="display text-2xl">How to apply</h2>
+            <p className="mt-2 text-black/65">
+              Send your CV and a few lines on why you’re a fit.
+            </p>
+            <div className="mt-5">
+              <ButtonLink
+                href={`mailto:${applyEmail}?subject=${encodeURIComponent(
+                  `Application: ${job.title}`,
+                )}`}
+                variant="primary"
+                size="lg"
+              >
+                Apply for this role
+              </ButtonLink>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <CtaBand
+        heading="Not quite the right role? We’re always keen to meet good people."
+        label="Email the team"
+        href={`mailto:${SITE.jobsEmail}`}
+      />
+    </>
+  );
+}
