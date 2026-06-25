@@ -87,7 +87,7 @@ export default async function SlipstreamPage({ searchParams }: Props) {
                 className="group flex flex-col overflow-hidden rounded-3xl bg-paper ring-1 ring-black/5 transition hover:ring-brand"
               >
                 <div className="relative aspect-[3/2] overflow-hidden bg-navy">
-                  {a.heroImage?.asset && (
+                  {a.heroImage?.asset ? (
                     <Image
                       src={urlFor(a.heroImage).width(700).height(467).url()}
                       alt={a.heroImage.alt || a.title}
@@ -95,6 +95,12 @@ export default async function SlipstreamPage({ searchParams }: Props) {
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="object-cover transition duration-500 group-hover:scale-105"
                     />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-navy via-navy to-electric p-6 transition duration-500 group-hover:scale-105">
+                      <span className="text-center font-display text-2xl font-extrabold uppercase leading-tight text-brand">
+                        {a.category || "Slipstream"}
+                      </span>
+                    </div>
                   )}
                 </div>
                 <div className="flex flex-1 flex-col p-6">

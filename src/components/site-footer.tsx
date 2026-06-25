@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "./ui/container";
 import {
   SITE,
@@ -20,11 +21,14 @@ export function SiteFooter() {
       <Container className="py-16">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div>
-            <Link
-              href="/"
-              className="font-display text-3xl font-extrabold uppercase tracking-tight"
-            >
-              Bic<span className="text-brand">y</span>cle
+            <Link href="/" aria-label="Bicycle London, home" className="inline-block">
+              <Image
+                src="/images/logo-bicycle-white.png"
+                alt="Bicycle London"
+                width={200}
+                height={66}
+                className="h-11 w-auto"
+              />
             </Link>
             <p className="mt-4 max-w-xs text-sm text-white/70">
               The independent, integrated media and creative agency built on the

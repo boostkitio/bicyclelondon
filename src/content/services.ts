@@ -47,6 +47,12 @@ export const services: Record<string, ServiceContent> = {
         body: "We reject the idea of a linear customer journey in favour of messy, real-world experiences. Creatively and data-driven.",
       },
     ],
+    badges: [
+      { src: "/images/badges/google-partner.jpg", alt: "Google Partner" },
+      { src: "/images/badges/meta-certified.png", alt: "Meta Certified Company" },
+      { src: "/images/badges/tiktok.jpg", alt: "TikTok Creative Exchange" },
+      { src: "/images/badges/amazon-ads.png", alt: "Amazon Ads Verified Partner" },
+    ],
     sections: [
       {
         heading: "Certified across the platforms that matter",

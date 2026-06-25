@@ -17,6 +17,7 @@ export type ServiceContent = {
   featureImage?: string;
   lead?: string[];
   points?: ServicePoint[];
+  badges?: { src: string; alt: string }[];
   sections?: ServiceSection[];
   cta?: { heading?: string; label?: string; href?: string };
 };
@@ -76,6 +77,25 @@ export function ServicePage({ content }: { content: ServiceContent }) {
               </Reveal>
             ))}
           </div>
+        </Section>
+      )}
+
+      {content.badges && content.badges.length > 0 && (
+        <Section tone="white" className="!pt-0">
+          <Reveal>
+            <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
+              {content.badges.map((b) => (
+                <Image
+                  key={b.src}
+                  src={b.src}
+                  alt={b.alt}
+                  width={120}
+                  height={80}
+                  className="h-14 w-auto object-contain sm:h-16"
+                />
+              ))}
+            </div>
+          </Reveal>
         </Section>
       )}
 
