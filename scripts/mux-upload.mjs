@@ -1,0 +1,83 @@
+// Uploads the extracted campaign videos to Mux and prints the playback IDs.
+// Needs a Mux Access Token (Settings -> Access Tokens, Mux Video read+write):
+//   MUX_TOKEN_ID=... MUX_TOKEN_SECRET=... node scripts/mux-upload.mjs
+//
+// Video files are remuxed to: %LOCALAPPDATA%\Temp\bike-videos\*.mp4
+
+import { readFileSync } from "node:fs";
+
+const TOKEN_ID = process.env.MUX_TOKEN_ID;
+const TOKEN_SECRET = process.env.MUX_TOKEN_SECRET;
+if (!TOKEN_ID || !TOKEN_SECRET) {
+  console.error("Set MUX_TOKEN_ID and MUX_TOKEN_SECRET.");
+  process.exit(1);
+}
+const auth = "Basic " + Buffer.from(`${TOKEN_ID}:${TOKEN_SECRET}`).toString("base64");
+const dir = "C:/Users/itswe/AppData/Local/Temp/bike-videos";
+
+const videos = [
+  { file: "its-pizza-time.mp4", title: "It's Pizza Time" },
+  { file: "your-pizza-cure.mp4", title: "Your Pizza Cure" },
+  { file: "you-need-pizza.mp4", title: "You Need Pizza" },
+];
+
+const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+
+async function api(path, opts = {}) {
+  const res = await fetch(`https://api.mux.com${path}`, {
+    ...opts,
+    headers: { Authorization: auth, "Content-Type": "application/json", ...(opts.headers || {}) },
+  });
+  const json = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(`${res.status} ${JSON.stringify(json)}`);
+  return json.data;
+}
+
+async function uploadOne(v) {
+  const up = await api("/video/v1/uploads", {
+    method: "POST",
+    body: JSON.stringify({
+      cors_origin: "*",
+      new_asset_settings: { playback_policy: ["public"] },
+    }),
+  });
+
+  const buf = readFileSync(`${dir}/${v.file}`);
+  const put = await fetch(up.url, {
+    method: "PUT",
+    body: buf,
+    headers: { "Content-Type": "video/mp4" },
+  });
+  if (!put.ok) throw new Error(`PUT failed ${put.status}`);
+
+  let assetId;
+  for (let i = 0; i < 60 && !assetId; i++) {
+    const u = await api(`/video/v1/uploads/${up.id}`);
+    assetId = u.asset_id;
+    if (!assetId) await wait(3000);
+  }
+  if (!assetId) throw new Error("no asset_id after upload");
+
+  let playbackId, status;
+  for (let i = 0; i < 90; i++) {
+    const a = await api(`/video/v1/assets/${assetId}`);
+    playbackId = a.playback_ids?.[0]?.id || playbackId;
+    status = a.status;
+    if (status === "ready") break;
+    await wait(4000);
+  }
+  return { title: v.title, file: v.file, assetId, playbackId, status };
+}
+
+const results = [];
+for (const v of videos) {
+  console.log(`Uploading ${v.title} ...`);
+  try {
+    const r = await uploadOne(v);
+    console.log(`  -> playbackId ${r.playbackId} (${r.status})`);
+    results.push(r);
+  } catch (e) {
+    console.error(`  failed: ${e.message}`);
+  }
+}
+console.log("\nRESULTS:\n" + JSON.stringify(results, null, 2));
