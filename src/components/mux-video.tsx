@@ -14,6 +14,7 @@ export function MuxVideo({
       streamType="on-demand"
       playbackId={playbackId}
       metadata={{ video_title: title ?? "Bicycle London" }}
+      envKey={process.env.NEXT_PUBLIC_MUX_ENV_KEY}
       accentColor="#00ff00"
       style={{ aspectRatio: "16 / 9", borderRadius: "1rem", overflow: "hidden" }}
     />

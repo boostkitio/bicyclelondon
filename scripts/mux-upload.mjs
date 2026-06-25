@@ -6,6 +6,17 @@
 
 import { readFileSync } from "node:fs";
 
+function loadEnv(path) {
+  try {
+    const t = readFileSync(path, "utf8");
+    for (const line of t.split(/\r?\n/)) {
+      const m = line.match(/^([A-Za-z0-9_]+)=(.*)$/);
+      if (m && !process.env[m[1]]) process.env[m[1]] = m[2];
+    }
+  } catch {}
+}
+loadEnv("C:/dev/projects/bicycle/.env.local");
+
 const TOKEN_ID = process.env.MUX_TOKEN_ID;
 const TOKEN_SECRET = process.env.MUX_TOKEN_SECRET;
 if (!TOKEN_ID || !TOKEN_SECRET) {
@@ -63,7 +74,8 @@ async function uploadOne(v) {
     const a = await api(`/video/v1/assets/${assetId}`);
     playbackId = a.playback_ids?.[0]?.id || playbackId;
     status = a.status;
-    if (status === "ready") break;
+    if (playbackId && status === "ready") break;
+    if (playbackId && i > 6) break; // have the id; encoding can finish async
     await wait(4000);
   }
   return { title: v.title, file: v.file, assetId, playbackId, status };

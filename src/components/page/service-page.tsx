@@ -5,6 +5,7 @@ import { Section } from "@/components/ui/section";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/reveal";
 import { LogoWall } from "@/components/logo-wall";
+import { MuxVideo } from "@/components/mux-video";
 
 export type ServicePoint = { title: string; body: string };
 export type ServiceSection = { heading?: string; body: string[] };
@@ -18,6 +19,7 @@ export type ServiceContent = {
   lead?: string[];
   points?: ServicePoint[];
   badges?: { src: string; alt: string }[];
+  videos?: { playbackId: string; title: string }[];
   sections?: ServiceSection[];
   cta?: { heading?: string; label?: string; href?: string };
 };
@@ -96,6 +98,24 @@ export function ServicePage({ content }: { content: ServiceContent }) {
               ))}
             </div>
           </Reveal>
+        </Section>
+      )}
+
+      {content.videos && content.videos.length > 0 && (
+        <Section tone="navy">
+          <Reveal>
+            <h2 className="display text-3xl sm:text-4xl">Selected films</h2>
+          </Reveal>
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {content.videos.map((v) => (
+              <Reveal key={v.playbackId}>
+                <MuxVideo playbackId={v.playbackId} title={v.title} />
+                <p className="mt-3 font-display text-sm font-bold uppercase">
+                  {v.title}
+                </p>
+              </Reveal>
+            ))}
+          </div>
         </Section>
       )}
 

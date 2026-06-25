@@ -76,6 +76,11 @@ export const services: Record<string, ServiceContent> = {
       { title: "Actionable creative", body: "Creative built for the realities of the media plan." },
       { title: "Production & delivery", body: "Production and delivery that ships, fast." },
     ],
+    videos: [
+      { playbackId: "rYVmEAY3ehb3qb7BFwV2CC02cxycAyveBF00OG02Lm1wgw", title: "It's Pizza Time" },
+      { playbackId: "xHko9c1quS23ZMmPjCC9biYdk7YPg2133gk1Yd6D5kQ", title: "Your Pizza Cure" },
+      { playbackId: "lgen6YzncYzRah00uAZmeAE02Vyly5CZL01rjND4ePZZ7s", title: "You Need Pizza" },
+    ],
   },
 
   ripple: {
