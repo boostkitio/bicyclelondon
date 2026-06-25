@@ -1,6 +1,39 @@
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ScrollToTop } from "@/components/scroll-to-top";
+import { JsonLd } from "@/components/seo/json-ld";
+import { SITE } from "@/lib/site";
+
+const organisationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: SITE.name,
+  url: SITE.url,
+  description: SITE.description,
+  email: SITE.email,
+  telephone: SITE.phone,
+  foundingDate: String(SITE.foundedYear),
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: SITE.address.line1,
+    addressLocality: SITE.address.city,
+    postalCode: SITE.address.postcode,
+    addressCountry: "GB",
+  },
+  sameAs: [
+    SITE.social.linkedin,
+    SITE.social.x,
+    SITE.social.instagram,
+    SITE.social.substack,
+  ],
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE.name,
+  url: SITE.url,
+};
 
 export default function SiteLayout({
   children,
@@ -9,6 +42,8 @@ export default function SiteLayout({
 }) {
   return (
     <>
+      <JsonLd data={organisationSchema} />
+      <JsonLd data={websiteSchema} />
       <ScrollToTop />
       <SiteHeader />
       <main className="flex-1">{children}</main>

@@ -1,7 +1,7 @@
-import imageUrlBuilder from "@sanity/image-url";
-import { client } from "./client";
+import createImageUrlBuilder from "@sanity/image-url";
+import { dataset, projectId } from "../env";
 
-const builder = imageUrlBuilder(client);
+const builder = createImageUrlBuilder({ projectId, dataset });
 
 type ImageSource = Parameters<typeof builder.image>[0];
 
