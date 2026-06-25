@@ -18,7 +18,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About us"
         title="How it started"
-        image="https://static.wixstatic.com/media/5f4cac_d376e74ab3ce4a7a9cdffa6e5c038d4ef000.jpg/v1/fill/w_1905,h_993,al_c,q_85,enc_avif,quality_auto/5f4cac_d376e74ab3ce4a7a9cdffa6e5c038d4ef000.jpg"
+        image="/images/heroes/about.jpg"
       />
 
       <Section>

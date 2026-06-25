@@ -17,7 +17,7 @@ export default function PurposePage() {
       <PageHero
         eyebrow="Purpose"
         title="We’re proud to be a B Corp"
-        image="https://static.wixstatic.com/media/5f4cac_6a1b40bdf2124ab0bdee5ef3eeb3bf42~mv2.png/v1/fill/w_1905,h_993,al_c,q_90,enc_avif,quality_auto/5f4cac_6a1b40bdf2124ab0bdee5ef3eeb3bf42~mv2.png"
+        image="/images/heroes/purpose.jpg"
       />
 
       <Section>

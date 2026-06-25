@@ -28,7 +28,7 @@ export default async function CareersPage() {
         eyebrow="Careers"
         title="Ride on the Peloton"
         lead="Welcome to the fastest-growing agency in the UK."
-        image="https://static.wixstatic.com/media/5f4cac_f47fcab6745345659ac0fe2a00cda470f000.jpg/v1/fill/w_1905,h_993,al_c,q_85,enc_avif,quality_auto/5f4cac_f47fcab6745345659ac0fe2a00cda470f000.jpg"
+        image="/images/heroes/peloton.jpg"
       />
 
       <Section>

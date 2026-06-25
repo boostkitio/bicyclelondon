@@ -79,9 +79,26 @@ h4 {
   animation: floaty 1.8s ease-in-out infinite;
 }
 
+/* Page transition: runs on every navigation via the route template. */
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.page-enter {
+  animation: page-enter 0.45s ease both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .marquee-track,
-  .animate-floaty {
+  .animate-floaty,
+  .page-enter {
     animation: none;
   }
 }

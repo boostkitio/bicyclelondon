@@ -87,19 +87,28 @@ export default async function CaseStudyPage({ params }: Props) {
         </div>
 
         {cs.gallery && cs.gallery.length > 0 && (
-          <div className="mx-auto mt-12 grid max-w-5xl gap-6 sm:grid-cols-2">
-            {cs.gallery.map((img, i) =>
-              img.asset ? (
-                <Image
-                  key={i}
-                  src={urlFor(img).width(1000).height(700).url()}
-                  alt={img.alt || cs.title}
-                  width={1000}
-                  height={700}
-                  className="h-auto w-full rounded-2xl"
-                />
-              ) : null,
-            )}
+          <div className="mx-auto mt-16 max-w-5xl">
+            <p className="mb-6 text-center font-display text-sm font-semibold uppercase tracking-widest text-black/40">
+              The work
+            </p>
+            <div className="grid gap-5 sm:grid-cols-2">
+              {cs.gallery.map((img, i) =>
+                img.asset ? (
+                  <div
+                    key={i}
+                    className="group overflow-hidden rounded-2xl bg-paper"
+                  >
+                    <Image
+                      src={urlFor(img).width(1000).height(700).url()}
+                      alt={img.alt || cs.title}
+                      width={1000}
+                      height={700}
+                      className="h-auto w-full transition duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                ) : null,
+              )}
+            </div>
           </div>
         )}
       </Section>

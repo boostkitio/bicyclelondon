@@ -18,7 +18,7 @@ export default function PelotonPage() {
         eyebrow="Our people"
         title="The Peloton"
         lead="The curious, intelligent and lovely people who make Bicycle."
-        image="https://static.wixstatic.com/media/5f4cac_f47fcab6745345659ac0fe2a00cda470f000.jpg/v1/fill/w_1905,h_993,al_c,q_85,enc_avif,quality_auto/5f4cac_f47fcab6745345659ac0fe2a00cda470f000.jpg"
+        image="/images/heroes/peloton.jpg"
       />
       <Section>
         <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4">
