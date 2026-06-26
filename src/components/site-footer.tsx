@@ -1,19 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Container } from "./ui/container";
+import { SocialIcons } from "./social-icons";
 import {
   SITE,
   SERVICES,
   FOOTER_EXPLORE,
   LEGAL_NAV,
 } from "@/lib/site";
-
-const socials: { label: string; href: string }[] = [
-  { label: "LinkedIn", href: SITE.social.linkedin },
-  { label: "X", href: SITE.social.x },
-  { label: "Instagram", href: SITE.social.instagram },
-  { label: "Substack", href: SITE.social.substack },
-];
 
 export function SiteFooter() {
   return (
@@ -34,9 +28,22 @@ export function SiteFooter() {
               The independent, integrated media and creative agency built on the
               power of &lsquo;and&rsquo;.
             </p>
-            <p className="mt-6 text-xs uppercase tracking-widest text-white/50">
-              Certified B Corporation
-            </p>
+            <div className="mt-6 flex items-center gap-5">
+              <Image
+                src="/images/bcorp-white.png"
+                alt="Certified B Corporation"
+                width={56}
+                height={94}
+                className="h-16 w-auto"
+              />
+              <Image
+                src="/images/royal-charter.png"
+                alt="Incorporated by Royal Charter"
+                width={122}
+                height={59}
+                className="h-11 w-auto"
+              />
+            </div>
           </div>
 
           <div>
@@ -99,20 +106,7 @@ export function SiteFooter() {
                 </a>
               </p>
             </address>
-            <ul className="mt-5 flex flex-wrap gap-4 text-xs uppercase tracking-wide">
-              {socials.map((s) => (
-                <li key={s.label}>
-                  <a
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-brand"
-                  >
-                    {s.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <SocialIcons className="mt-5" />
           </div>
         </div>
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { PageHero } from "@/components/page/page-hero";
 import { CtaBand } from "@/components/page/cta-band";
 import { Section } from "@/components/ui/section";
@@ -89,15 +90,24 @@ export default async function CareersPage() {
 
       <Section tone="paper">
         <h2 className="display text-3xl sm:text-4xl">Why work with us?</h2>
-        <div className="mt-8 flex flex-wrap gap-3">
-          {awards.map((a) => (
-            <span
-              key={a}
-              className="rounded-full bg-white px-5 py-2 font-display text-sm font-semibold uppercase tracking-wide ring-1 ring-black/5"
-            >
-              {a}
-            </span>
-          ))}
+        <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-5">
+          <Image
+            src="/images/bcorp.png"
+            alt="Certified B Corporation"
+            width={70}
+            height={116}
+            className="h-20 w-auto"
+          />
+          <div className="flex flex-wrap gap-3">
+            {awards.map((a) => (
+              <span
+                key={a}
+                className="rounded-full bg-white px-5 py-2 font-display text-sm font-semibold uppercase tracking-wide text-navy ring-1 ring-black/5"
+              >
+                {a}
+              </span>
+            ))}
+          </div>
         </div>
         <blockquote className="mt-10 max-w-3xl border-l-4 border-brand pl-6 text-lg italic text-black/75">
           “Bicycle London’s IPA Gold submission is a testament to their visionary
