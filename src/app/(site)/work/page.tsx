@@ -4,6 +4,7 @@ import Image from "next/image";
 import { PageHero } from "@/components/page/page-hero";
 import { CtaBand } from "@/components/page/cta-band";
 import { Section } from "@/components/ui/section";
+import { Reveal } from "@/components/reveal";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { allCaseStudiesQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
@@ -36,39 +37,43 @@ export default async function WorkPage() {
           </p>
         ) : (
           <div className="grid gap-8 md:grid-cols-2">
-            {studies.map((cs) => (
-              <Link
-                key={cs._id}
-                href={`/work/${cs.slug}`}
-                className="group block overflow-hidden rounded-3xl bg-paper ring-1 ring-black/5 transition hover:ring-brand"
-              >
-                <div className="relative aspect-[16/10] overflow-hidden bg-navy">
-                  {cs.heroImage?.asset && (
-                    <Image
-                      src={urlFor(cs.heroImage).width(900).height(560).url()}
-                      alt={cs.heroImage.alt || cs.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      className="object-cover transition duration-500 group-hover:scale-105"
-                    />
-                  )}
-                </div>
-                <div className="p-6">
-                  {cs.clientName && (
-                    <p className="text-xs font-semibold uppercase tracking-widest text-brand-ink">
-                      {cs.clientName}
-                    </p>
-                  )}
-                  <h2 className="mt-1 font-display text-2xl font-bold uppercase">
-                    {cs.title}
-                  </h2>
-                  {cs.standfirst && (
-                    <p className="mt-2 line-clamp-2 text-black/60">
-                      {cs.standfirst}
-                    </p>
-                  )}
-                </div>
-              </Link>
+            {studies.map((cs, i) => (
+              <Reveal key={cs._id} delay={(i % 2) * 90}>
+                <Link
+                  href={`/work/${cs.slug}`}
+                  className="group block h-full overflow-hidden rounded-3xl bg-paper ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/10 hover:ring-brand"
+                >
+                  <div className="relative aspect-[16/10] overflow-hidden bg-navy">
+                    {cs.heroImage?.asset && (
+                      <Image
+                        src={urlFor(cs.heroImage).width(900).height(560).url()}
+                        alt={cs.heroImage.alt || cs.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover transition duration-500 group-hover:scale-105"
+                      />
+                    )}
+                  </div>
+                  <div className="p-6">
+                    {cs.clientName && (
+                      <p className="text-xs font-semibold uppercase tracking-widest text-brand-ink">
+                        {cs.clientName}
+                      </p>
+                    )}
+                    <h2 className="mt-1 font-display text-2xl font-bold uppercase">
+                      {cs.title}
+                    </h2>
+                    {cs.standfirst && (
+                      <p className="mt-2 line-clamp-2 text-black/60">
+                        {cs.standfirst}
+                      </p>
+                    )}
+                    <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold uppercase tracking-wide text-moss transition-all group-hover:gap-2 group-hover:text-brand-ink">
+                      View case →
+                    </span>
+                  </div>
+                </Link>
+              </Reveal>
             ))}
           </div>
         )}

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { PageHero } from "@/components/page/page-hero";
 import { MuxVideo } from "@/components/mux-video";
 import { CtaBand } from "@/components/page/cta-band";
+import { Parallax } from "@/components/scroll/parallax";
 import { Section } from "@/components/ui/section";
 import { ButtonLink } from "@/components/ui/button";
 
@@ -61,13 +62,15 @@ export default function PurposePage() {
             </p>
           </div>
           <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
-            <Image
-              src="/images/purpose-people.jpg"
-              alt="Bicycle people"
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover"
-            />
+            <Parallax speed={0.12} className="absolute inset-x-0 -inset-y-[10%]">
+              <Image
+                src="/images/purpose-people.jpg"
+                alt="Bicycle people"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </Parallax>
           </div>
         </div>
       </Section>
@@ -99,7 +102,7 @@ export default function PurposePage() {
               back on the road in the process. As XO founder Stef Jones puts it,
               it’s not a bike business, it’s a bloke business.
             </p>
-            <blockquote className="border-l-4 border-brand pl-6 font-display text-xl font-bold uppercase leading-snug">
+            <blockquote className="my-2 border-l-4 border-brand pl-6 font-display text-2xl font-bold uppercase leading-[1.15] text-navy sm:text-3xl">
               It’s a genuinely lovely organisation, run by amazing people, that is
               trying to change a system that’s broken.
             </blockquote>

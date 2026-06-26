@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { PageHero } from "@/components/page/page-hero";
 import { Section } from "@/components/ui/section";
+import { Reveal } from "@/components/reveal";
 import { NewsletterSignup } from "@/components/forms/newsletter-signup";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { allArticlesQuery } from "@/sanity/lib/queries";
@@ -79,12 +80,12 @@ export default async function SlipstreamPage({ searchParams }: Props) {
             New thinking is on its way. Check back soon.
           </p>
         ) : (
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {filtered.map((a) => (
+          <div className="grid items-stretch gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {filtered.map((a, i) => (
+              <Reveal key={a._id} delay={(i % 3) * 80} className="flex">
               <Link
-                key={a._id}
                 href={`/slipstream/${a.slug}`}
-                className="group flex flex-col overflow-hidden rounded-3xl bg-paper ring-1 ring-black/5 transition hover:ring-brand"
+                className="group flex flex-1 flex-col overflow-hidden rounded-3xl bg-paper ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/10 hover:ring-brand"
               >
                 <div className="relative aspect-[3/2] overflow-hidden bg-navy">
                   {a.heroImage?.asset ? (
@@ -119,6 +120,7 @@ export default async function SlipstreamPage({ searchParams }: Props) {
                   )}
                 </div>
               </Link>
+              </Reveal>
             ))}
           </div>
         )}

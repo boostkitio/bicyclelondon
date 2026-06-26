@@ -62,22 +62,25 @@ export default async function CareersPage() {
               .
             </p>
           ) : (
-            <ul className="mt-4 divide-y divide-black/10 border-y border-black/10">
+            <ul className="mt-6 border-t border-black/10">
               {jobs.map((job) => (
-                <li key={job._id}>
+                <li key={job._id} className="border-b border-black/10">
                   <Link
                     href={`/careers/${job.slug}`}
-                    className="group flex items-center justify-between gap-4 py-5"
+                    className="group flex items-center justify-between gap-4 px-2 py-6 transition-colors hover:bg-paper sm:px-4"
                   >
                     <span>
-                      <span className="font-display text-xl font-bold uppercase group-hover:text-brand-ink">
+                      <span className="block font-display text-2xl font-bold uppercase leading-tight transition-colors group-hover:text-brand-ink sm:text-3xl">
                         {job.title}
                       </span>
-                      <span className="mt-1 block text-sm text-black/55">
+                      <span className="mt-1.5 block text-sm font-semibold uppercase tracking-wide text-black/45">
                         {[job.team, job.location].filter(Boolean).join(" · ")}
                       </span>
                     </span>
-                    <span aria-hidden="true" className="text-2xl text-brand-ink">
+                    <span
+                      aria-hidden="true"
+                      className="shrink-0 text-2xl text-brand-ink transition-transform duration-300 group-hover:translate-x-1.5"
+                    >
                       →
                     </span>
                   </Link>
