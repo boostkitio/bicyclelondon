@@ -6,6 +6,7 @@ import { Section } from "@/components/ui/section";
 import { CtaBand } from "@/components/page/cta-band";
 import { Reveal } from "@/components/reveal";
 import { LogoWall } from "@/components/logo-wall";
+import { MuxBg } from "@/components/mux-bg";
 import { SERVICES } from "@/lib/site";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { featuredCaseStudiesQuery } from "@/sanity/lib/queries";
@@ -30,14 +31,12 @@ export default async function HomePage() {
     <>
       {/* Hero */}
       <section className="relative isolate flex min-h-[92vh] items-center overflow-hidden bg-navy text-white">
-        <Image
-          src="/images/hero.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center opacity-55"
-        />
+        <div className="absolute inset-0 opacity-55">
+          <MuxBg
+            playbackId="gfa01575PqXznaj7ADl84pYVnD6SkVZdwKRwg83regoQ"
+            poster="/images/hero.jpg"
+          />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-tr from-navy via-navy/85 to-electric/20" />
         <Container className="relative z-10 pb-24 pt-36">
           <Reveal>

@@ -112,6 +112,12 @@ function mdToBlocks(md) {
   return blocks;
 }
 
+function dateForIssue(issue, idx) {
+  const months = ((issue || 1) - 1) * 2;
+  const day = Math.min(3 + idx * 4, 27);
+  return new Date(Date.UTC(2024, months, day)).toISOString();
+}
+
 function summaryFromBlocks(blocks) {
   const para = blocks.find(
     (b) =>
@@ -318,12 +324,14 @@ async function migrateJobs() {
 }
 
 async function migrateArticles() {
+  const issueCounters = {};
   for (const a of articles) {
     const slug = slugify(a.title);
     try {
       const { markdown } = await scrape(a.url);
       const categoryRef = await ensureCategory(a.category);
       const blocks = mdToBlocks(markdown);
+      const idx = (issueCounters[a.issue] = (issueCounters[a.issue] ?? -1) + 1);
       await client.createOrReplace({
         _id: `article-${slug}`,
         _type: "slipstreamArticle",
@@ -332,7 +340,7 @@ async function migrateArticles() {
         standfirst: summaryFromBlocks(blocks),
         category: categoryRef,
         issue: a.issue,
-        publishedAt: new Date(2024, 0, 1).toISOString(),
+        publishedAt: dateForIssue(a.issue, idx),
         body: blocks,
       });
       console.log(`✓ article: ${a.title}`);
