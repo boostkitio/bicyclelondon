@@ -34,7 +34,13 @@ export function MaskReveal({
         duration: 0.8,
         ease: "power3.out",
         stagger,
-        scrollTrigger: { trigger: ref.current, start: "top 82%", once: true },
+        scrollTrigger: {
+          trigger: ref.current,
+          start: "top 82%",
+          end: "bottom top",
+          // Replay on every enter, reset on every leave (both scroll directions).
+          toggleActions: "play reverse play reverse",
+        },
       });
     },
     { scope: ref },

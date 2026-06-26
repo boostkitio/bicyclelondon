@@ -116,34 +116,51 @@ export default async function HomePage() {
       </section>
 
       {/* Meet Bicycle */}
-      <Section>
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          <Reveal>
-            <div>
-              <h2 className="display text-4xl sm:text-5xl">Meet Bicycle</h2>
-              <p className="mt-6 text-lg leading-relaxed text-black/70">
-                Media planning and buying is in our DNA, but we like to think of
-                ourselves as &lsquo;the newest version of the oldest model&rsquo;.
-                We provide integrated solutions for the modern media world,
-                traversing brand &amp; performance and creative &amp; media,
-                driving sustainable growth for our clients.
-              </p>
-              <div className="mt-8">
-                <ButtonLink href="/bicycle" variant="outline">
-                  Read more
-                </ButtonLink>
-              </div>
+      <Section className="overflow-hidden">
+        <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-16">
+          <Reveal className="lg:col-span-5">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-ink">
+              Meet Bicycle
+            </p>
+            <h2 className="display mt-4 text-4xl leading-[0.95] sm:text-5xl lg:text-6xl">
+              The newest version of the{" "}
+              <span className="text-brand-ink">oldest model</span>
+            </h2>
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-black/70">
+              Media planning and buying is in our DNA. We provide integrated
+              solutions for the modern media world, traversing brand &amp;
+              performance and creative &amp; media, driving sustainable growth
+              for our clients.
+            </p>
+            <div className="mt-8">
+              <ButtonLink href="/bicycle" variant="outline">
+                Read more
+              </ButtonLink>
             </div>
           </Reveal>
-          <Reveal delay={120}>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
-              <Image
-                src="/images/meet-bicycle.jpg"
-                alt="Inside Bicycle London"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
+
+          <Reveal delay={120} className="lg:col-span-7">
+            <div className="relative">
+              {/* offset green accent block peeking behind the image */}
+              <div
+                className="absolute -right-3 -top-3 hidden h-full w-full rounded-[2rem] bg-brand sm:block"
+                aria-hidden
               />
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] ring-1 ring-black/5">
+                <Parallax speed={0.1} className="absolute inset-x-0 -inset-y-[10%]">
+                  <Image
+                    src="/images/meet-bicycle.jpg"
+                    alt="Inside Bicycle London"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 60vw"
+                    className="object-cover"
+                  />
+                </Parallax>
+              </div>
+              {/* playful rotated badge breaking the frame */}
+              <div className="absolute -bottom-5 left-6 rotate-[-5deg] rounded-full bg-navy px-5 py-2.5 font-display text-sm font-bold uppercase tracking-wide text-brand shadow-xl">
+                Independent since 2021
+              </div>
             </div>
           </Reveal>
         </div>
