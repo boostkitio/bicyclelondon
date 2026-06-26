@@ -9,6 +9,7 @@ import { LogoWall } from "@/components/logo-wall";
 import { MuxBg } from "@/components/mux-bg";
 import { StatsBand } from "@/components/stats";
 import { TeamStrip } from "@/components/team-strip";
+import { GsapHeroHeading } from "@/components/gsap-hero-heading";
 import { SERVICES } from "@/lib/site";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { featuredCaseStudiesQuery } from "@/sanity/lib/queries";
@@ -54,13 +55,7 @@ export default async function HomePage() {
               Independent integrated media and creative agency
             </p>
           </Reveal>
-          <Reveal delay={80}>
-            <h1 className="display text-6xl sm:text-7xl lg:text-[7.5rem]">
-              Built on the
-              <br />
-              power of <span className="text-brand">and</span>
-            </h1>
-          </Reveal>
+          <GsapHeroHeading />
           <Reveal delay={160}>
             <div className="mt-10 flex flex-wrap gap-4">
               <ButtonLink href="/work" variant="primary" size="lg">
