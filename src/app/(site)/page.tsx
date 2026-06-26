@@ -7,6 +7,7 @@ import { CtaBand } from "@/components/page/cta-band";
 import { Reveal } from "@/components/reveal";
 import { LogoWall } from "@/components/logo-wall";
 import { MuxBg } from "@/components/mux-bg";
+import { StatsBand } from "@/components/stats";
 import { SERVICES } from "@/lib/site";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { featuredCaseStudiesQuery } from "@/sanity/lib/queries";
@@ -128,6 +129,18 @@ export default async function HomePage() {
         </div>
       </Section>
 
+      {/* Stats */}
+      <Section tone="navy">
+        <StatsBand
+          stats={[
+            { value: 40, label: "People in the Peloton" },
+            { value: 40, prefix: "$", suffix: "m+", label: "International media handled" },
+            { value: 100, suffix: "%", label: "Independent" },
+            { value: 2021, count: false, label: "Founded" },
+          ]}
+        />
+      </Section>
+
       {/* Logo wall */}
       <Section tone="paper">
         <Reveal>
@@ -154,15 +167,23 @@ export default async function HomePage() {
             <Reveal key={s.href} delay={i * 70}>
               <Link
                 href={s.href}
-                className="group flex h-full flex-col rounded-3xl bg-paper p-8 ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-xl hover:ring-brand"
+                className="group flex h-full flex-col overflow-hidden rounded-3xl bg-paper ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:ring-brand"
               >
-                <h3 className="font-display text-2xl font-extrabold uppercase">
-                  {s.label}
-                </h3>
-                <p className="mt-3 flex-1 text-black/60">{s.blurb}</p>
-                <span className="mt-6 inline-flex items-center gap-1 text-sm font-semibold uppercase tracking-wide text-moss transition group-hover:gap-2 group-hover:text-brand-ink">
-                  Read more →
-                </span>
+                <div className="flex h-32 items-center justify-center bg-navy px-8">
+                  <Image
+                    src={s.logo}
+                    alt={s.label}
+                    width={240}
+                    height={64}
+                    className="max-h-12 w-auto object-contain transition duration-300 group-hover:scale-105"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-8">
+                  <p className="flex-1 text-black/70">{s.blurb}</p>
+                  <span className="mt-6 inline-flex items-center gap-1 text-sm font-semibold uppercase tracking-wide text-moss transition group-hover:gap-2 group-hover:text-brand-ink">
+                    Read more →
+                  </span>
+                </div>
               </Link>
             </Reveal>
           ))}

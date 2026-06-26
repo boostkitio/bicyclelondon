@@ -5,6 +5,7 @@ import { CtaBand } from "@/components/page/cta-band";
 import { Section } from "@/components/ui/section";
 import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button";
+import { StatsBand } from "@/components/stats";
 
 export const metadata: Metadata = {
   title: "About",
@@ -91,6 +92,17 @@ export default function AboutPage() {
             </ButtonLink>
           </div>
         </div>
+      </Section>
+
+      <Section tone="navy">
+        <StatsBand
+          stats={[
+            { value: 40, label: "People in the Peloton" },
+            { value: 40, prefix: "$", suffix: "m+", label: "International media handled" },
+            { value: 100, suffix: "%", label: "Independent" },
+            { value: 2021, count: false, label: "Founded" },
+          ]}
+        />
       </Section>
 
       <CtaBand />

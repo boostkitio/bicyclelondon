@@ -29,12 +29,17 @@ export const SITE = {
 export type NavItem = { label: string; href: string };
 
 // The "Power of And" service units.
-export const SERVICES: { label: string; href: string; blurb: string }[] = [
-  { label: "Bicycle", href: "/bicycle", blurb: "Integrated media planning & buying" },
-  { label: "Blade", href: "/bicycle-blade", blurb: "Performance marketing" },
-  { label: "Studio", href: "/bicycle-studio", blurb: "Creative, brand to response" },
-  { label: "Ripple", href: "/bicycle-ripple", blurb: "Influencer marketing" },
-  { label: "International", href: "/international", blurb: "Global media, one HQ" },
+export const SERVICES: {
+  label: string;
+  href: string;
+  blurb: string;
+  logo: string;
+}[] = [
+  { label: "Bicycle", href: "/bicycle", blurb: "Integrated media planning & buying", logo: "/images/logo-bicycle-white.png" },
+  { label: "Blade", href: "/bicycle-blade", blurb: "Performance marketing", logo: "/images/logo-blade.png" },
+  { label: "Studio", href: "/bicycle-studio", blurb: "Creative, brand to response", logo: "/images/logo-studio.png" },
+  { label: "Ripple", href: "/bicycle-ripple", blurb: "Influencer marketing", logo: "/images/logo-ripple.png" },
+  { label: "International", href: "/international", blurb: "Global media, one HQ", logo: "/images/logo-international.png" },
 ];
 
 export const PRIMARY_NAV: NavItem[] = [
