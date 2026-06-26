@@ -86,7 +86,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* And marquee — velocity-reactive */}
+      {/* And marquee — steady, constant-speed scroll */}
       <Marquee
         direction={-1}
         className="bg-brand py-5 text-black"
