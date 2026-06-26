@@ -2,7 +2,6 @@ import Image from "next/image";
 import { PageHero } from "./page-hero";
 import { CtaBand } from "./cta-band";
 import { Section } from "@/components/ui/section";
-import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/reveal";
 import { LogoWall } from "@/components/logo-wall";
 import { MuxVideo } from "@/components/mux-video";
@@ -34,32 +33,35 @@ export function ServicePage({ content }: { content: ServiceContent }) {
         logo={content.logo}
       />
 
-      {content.lead && content.lead.length > 0 && (
+      {(content.lead?.length || content.featureImage) && (
         <Section tone="white">
-          <Reveal>
-            <div className="mx-auto max-w-3xl space-y-6 text-lg leading-relaxed text-black/75">
-              {content.lead.map((p, i) => (
-                <p key={i}>{p}</p>
-              ))}
-            </div>
-          </Reveal>
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            {content.lead?.length ? (
+              <Reveal>
+                <div className="space-y-6 text-lg leading-relaxed text-black/75">
+                  {content.lead.map((p, i) => (
+                    <p key={i}>{p}</p>
+                  ))}
+                </div>
+              </Reveal>
+            ) : (
+              <div />
+            )}
+            {content.featureImage && (
+              <Reveal delay={120}>
+                <div className="group relative aspect-[4/3] overflow-hidden rounded-3xl">
+                  <Image
+                    src={content.featureImage}
+                    alt=""
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover transition duration-700 group-hover:scale-105"
+                  />
+                </div>
+              </Reveal>
+            )}
+          </div>
         </Section>
-      )}
-
-      {content.featureImage && (
-        <Container className="pb-4">
-          <Reveal>
-            <div className="relative aspect-[16/9] overflow-hidden rounded-3xl">
-              <Image
-                src={content.featureImage}
-                alt=""
-                fill
-                sizes="(max-width: 1280px) 100vw, 1200px"
-                className="object-cover"
-              />
-            </div>
-          </Reveal>
-        </Container>
       )}
 
       {content.points && content.points.length > 0 && (

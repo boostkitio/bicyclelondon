@@ -8,6 +8,7 @@ import { Reveal } from "@/components/reveal";
 import { LogoWall } from "@/components/logo-wall";
 import { MuxBg } from "@/components/mux-bg";
 import { StatsBand } from "@/components/stats";
+import { TeamStrip } from "@/components/team-strip";
 import { SERVICES } from "@/lib/site";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { featuredCaseStudiesQuery } from "@/sanity/lib/queries";
@@ -39,6 +40,14 @@ export default async function HomePage() {
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-tr from-navy via-navy/85 to-electric/20" />
+        {/* Playful thought-bubble, a nod to the original hero */}
+        <div className="animate-floaty pointer-events-none absolute right-[7%] top-28 z-10 hidden lg:block">
+          <div className="flex h-24 w-24 items-center justify-center rounded-full bg-white text-4xl shadow-2xl">
+            🍕
+          </div>
+          <div className="ml-2 mt-2 h-3.5 w-3.5 rounded-full bg-white/90" />
+          <div className="ml-0.5 mt-1.5 h-2.5 w-2.5 rounded-full bg-white/70" />
+        </div>
         <Container className="relative z-10 pb-24 pt-36">
           <Reveal>
             <p className="mb-6 max-w-xl text-sm font-semibold uppercase tracking-[0.2em] text-white/80">
@@ -139,6 +148,30 @@ export default async function HomePage() {
             { value: 2021, count: false, label: "Founded" },
           ]}
         />
+      </Section>
+
+      {/* Culture */}
+      <Section tone="white">
+        <Reveal>
+          <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+            <div>
+              <h2 className="display text-3xl sm:text-4xl">The Peloton</h2>
+              <p className="mt-3 max-w-xl text-black/60">
+                Curious, intelligent and lovely people who want to create
+                incredible work on interesting brands.
+              </p>
+            </div>
+            <Link
+              href="/the-peloton"
+              className="shrink-0 text-sm font-semibold uppercase tracking-wide text-moss hover:text-brand-ink"
+            >
+              Meet the team →
+            </Link>
+          </div>
+        </Reveal>
+        <div className="mt-10">
+          <TeamStrip />
+        </div>
       </Section>
 
       {/* Logo wall */}

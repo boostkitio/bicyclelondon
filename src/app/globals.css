@@ -101,6 +101,20 @@ h4 {
   animation: floaty 1.8s ease-in-out infinite;
 }
 
+/* Slow Ken Burns zoom for hero imagery. */
+@keyframes kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.09);
+  }
+}
+
+.animate-kenburns {
+  animation: kenburns 20s ease-out forwards;
+}
+
 /* Page transition: runs on every navigation via the route template. */
 @keyframes page-enter {
   from {
@@ -120,7 +134,8 @@ h4 {
 @media (prefers-reduced-motion: reduce) {
   .marquee-track,
   .animate-floaty,
-  .page-enter {
+  .page-enter,
+  .animate-kenburns {
     animation: none;
   }
 }
