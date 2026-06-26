@@ -11,10 +11,7 @@ import { TeamStrip } from "@/components/team-strip";
 import { GsapHeroHeading } from "@/components/gsap-hero-heading";
 import { Parallax } from "@/components/scroll/parallax";
 import { Marquee } from "@/components/scroll/marquee";
-import { KineticPairs } from "@/components/scroll/kinetic-pairs";
 import { MaskReveal } from "@/components/scroll/mask-reveal";
-import { StickyServices } from "@/components/scroll/sticky-services";
-import { HorizontalGallery } from "@/components/scroll/horizontal-gallery";
 import { MagneticButton } from "@/components/scroll/magnetic-button";
 import { SERVICES } from "@/lib/site";
 import { sanityFetch } from "@/sanity/lib/fetch";
@@ -106,8 +103,17 @@ export default async function HomePage() {
         ])}
       />
 
-      {/* Power of AND — pinned showpiece */}
-      <KineticPairs pairs={ANDS} />
+      {/* Power of AND — static stacked statement (no scroll hijack) */}
+      <section className="bg-navy px-5 py-24 text-center text-white sm:px-8 sm:py-32">
+        <MaskReveal
+          className="display text-center text-[clamp(34px,7vw,92px)] leading-[1.08]"
+          lines={ANDS.map(([a, b]) => (
+            <>
+              {a} <span className="text-brand">&amp;</span> {b}
+            </>
+          ))}
+        />
+      </section>
 
       {/* Meet Bicycle */}
       <Section>
@@ -155,20 +161,6 @@ export default async function HomePage() {
         />
       </Section>
 
-      {/* Manifesto — line-by-line mask reveal */}
-      <section className="bg-deep px-5 py-28 text-white sm:px-8 sm:py-36">
-        <div className="mx-auto max-w-5xl">
-          <MaskReveal
-            lines={[
-              <>We don&rsquo;t pick</>,
-              <>data <span className="font-normal text-brand">or</span> instinct.</>,
-              <>media <span className="font-normal text-brand">or</span> creative.</>,
-              <>We choose <span className="text-brand">and.</span></>,
-            ]}
-          />
-        </div>
-      </section>
-
       {/* Culture */}
       <Section tone="white">
         <Reveal>
@@ -205,53 +197,56 @@ export default async function HomePage() {
         </div>
       </Section>
 
-      {/* What we do — heading + pinned sticky services */}
-      <section className="bg-navy px-5 pt-20 text-white sm:px-8">
-        <div className="mx-auto max-w-7xl">
+      {/* What we do — alternating image/text rows (no pin) */}
+      <Section tone="navy">
+        <Reveal>
           <h2 className="display text-4xl sm:text-5xl">What we do</h2>
           <p className="mt-4 max-w-2xl text-lg text-white/60">
             We don&rsquo;t have to do everything for every client. But when it all
             comes together, something special happens.
           </p>
+        </Reveal>
+        <div className="mt-12 space-y-8 lg:space-y-10">
+          {SERVICES.map((s, i) => (
+            <Reveal key={s.href} delay={i * 60}>
+              <Link
+                href={s.href}
+                className="group grid items-stretch gap-6 overflow-hidden rounded-3xl ring-1 ring-white/10 transition hover:ring-brand lg:grid-cols-2"
+              >
+                <div
+                  className={`relative flex aspect-[16/10] items-center justify-center bg-gradient-to-tr from-deep via-navy to-electric/40 p-10 lg:aspect-auto ${
+                    i % 2 ? "lg:order-2" : ""
+                  }`}
+                >
+                  <Image
+                    src={s.logo}
+                    alt={s.label}
+                    width={280}
+                    height={84}
+                    className="max-h-16 w-auto object-contain transition duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="flex flex-col justify-center px-8 pb-8 lg:py-12">
+                  <div className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-brand">
+                    {String(i + 1).padStart(2, "0")}
+                  </div>
+                  <h3 className="display text-3xl sm:text-4xl">{s.label}</h3>
+                  <p className="mt-3 max-w-md text-lg text-white/70">{s.blurb}</p>
+                  <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold uppercase tracking-wide text-brand transition group-hover:gap-2">
+                    Read more →
+                  </span>
+                </div>
+              </Link>
+            </Reveal>
+          ))}
         </div>
-      </section>
-      <StickyServices
-        media={SERVICES.map((s) => (
-          <div
-            key={s.href}
-            className="absolute inset-0 flex items-center justify-center bg-gradient-to-tr from-navy via-navy to-electric/40 p-12"
-          >
-            <Image
-              src={s.logo}
-              alt={s.label}
-              width={320}
-              height={96}
-              className="max-h-20 w-auto object-contain"
-            />
-          </div>
-        ))}
-        blocks={SERVICES.map((s, i) => (
-          <div key={s.href}>
-            <div className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-brand">
-              {String(i + 1).padStart(2, "0")}
-            </div>
-            <h3 className="display text-4xl sm:text-5xl">{s.label}</h3>
-            <p className="mt-4 max-w-md text-lg text-white/70">{s.blurb}</p>
-            <Link
-              href={s.href}
-              className="mt-6 inline-flex items-center gap-1 text-sm font-semibold uppercase tracking-wide text-brand transition hover:gap-2"
-            >
-              Read more →
-            </Link>
-          </div>
-        ))}
-      />
+      </Section>
 
-      {/* Selected work — pinned horizontal gallery */}
+      {/* Selected work — grid (no pin) */}
       {featured.length > 0 && (
-        <HorizontalGallery
-          heading={
-            <div className="mx-auto flex max-w-7xl items-end justify-between gap-6">
+        <Section tone="navy" className="!pt-0">
+          <Reveal>
+            <div className="flex items-end justify-between gap-6">
               <h2 className="display text-4xl sm:text-5xl">Selected work</h2>
               <Link
                 href="/work"
@@ -260,37 +255,35 @@ export default async function HomePage() {
                 All work →
               </Link>
             </div>
-          }
-        >
-          {featured.map((cs) => (
-            <article
-              key={cs._id}
-              className="w-[82vw] shrink-0 snap-start sm:w-[60vw] md:w-[42vw] md:min-w-[420px]"
-            >
-              <Link href={`/work/${cs.slug}`} className="group block">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white/5">
-                  {cs.heroImage?.asset && (
-                    <Image
-                      src={urlFor(cs.heroImage).width(840).height(630).url()}
-                      alt={cs.heroImage.alt || cs.title}
-                      fill
-                      sizes="(max-width: 768px) 82vw, 42vw"
-                      className="object-cover transition duration-500 group-hover:scale-105"
-                    />
+          </Reveal>
+          <div className="mt-10 grid gap-8 md:grid-cols-3">
+            {featured.map((cs, i) => (
+              <Reveal key={cs._id} delay={i * 70}>
+                <Link href={`/work/${cs.slug}`} className="group block">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white/5">
+                    {cs.heroImage?.asset && (
+                      <Image
+                        src={urlFor(cs.heroImage).width(700).height(525).url()}
+                        alt={cs.heroImage.alt || cs.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-cover transition duration-500 group-hover:scale-105"
+                      />
+                    )}
+                  </div>
+                  {cs.clientName && (
+                    <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-brand">
+                      {cs.clientName}
+                    </p>
                   )}
-                </div>
-                {cs.clientName && (
-                  <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-brand">
-                    {cs.clientName}
-                  </p>
-                )}
-                <h3 className="mt-1 font-display text-xl font-bold uppercase text-white">
-                  {cs.title}
-                </h3>
-              </Link>
-            </article>
-          ))}
-        </HorizontalGallery>
+                  <h3 className="mt-1 font-display text-xl font-bold uppercase">
+                    {cs.title}
+                  </h3>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+        </Section>
       )}
 
       {/* CTA — magnetic */}

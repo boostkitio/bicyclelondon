@@ -6,6 +6,8 @@ import { Section } from "@/components/ui/section";
 import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button";
 import { StatsBand } from "@/components/stats";
+import { Reveal } from "@/components/reveal";
+import { Parallax } from "@/components/scroll/parallax";
 
 export const metadata: Metadata = {
   title: "About",
@@ -49,27 +51,31 @@ export default function AboutPage() {
 
       <Container className="pb-4">
         <div className="relative aspect-[16/9] overflow-hidden rounded-3xl">
-          <Image
-            src="/images/about-team.jpg"
-            alt="The Bicycle team"
-            fill
-            sizes="(max-width: 1280px) 100vw, 1200px"
-            className="object-cover"
-          />
+          <Parallax speed={0.16} className="absolute inset-x-0 -inset-y-[10%]">
+            <Image
+              src="/images/about-team.jpg"
+              alt="The Bicycle team"
+              fill
+              sizes="(max-width: 1280px) 100vw, 1200px"
+              className="object-cover"
+            />
+          </Parallax>
         </div>
       </Container>
 
       <Section tone="paper">
-        <div className="mx-auto max-w-3xl">
-          <h2 className="display text-3xl sm:text-4xl">
-            We believe that the bigger the gaps, the worse the work
-          </h2>
-          <p className="mt-6 text-lg leading-relaxed text-black/75">
-            That’s why we’re built on the power of ‘and’: creative &amp; media,
-            brand strategy and performance, art and science, data and creativity,
-            man and machine.
-          </p>
-        </div>
+        <Reveal>
+          <div className="mx-auto max-w-3xl">
+            <h2 className="display text-3xl sm:text-4xl">
+              We believe that the bigger the gaps, the worse the work
+            </h2>
+            <p className="mt-6 text-lg leading-relaxed text-black/75">
+              That’s why we’re built on the power of ‘and’: creative &amp; media,
+              brand strategy and performance, art and science, data and
+              creativity, man and machine.
+            </p>
+          </div>
+        </Reveal>
       </Section>
 
       <Section>

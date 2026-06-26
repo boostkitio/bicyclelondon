@@ -6,6 +6,7 @@ import { CtaBand } from "@/components/page/cta-band";
 import { Section } from "@/components/ui/section";
 import { PortableText } from "@/components/portable-text";
 import { MuxVideo } from "@/components/mux-video";
+import { CountUp } from "@/components/count-up";
 import { JsonLd } from "@/components/seo/json-ld";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { caseStudyBySlugQuery, caseStudySlugsQuery } from "@/sanity/lib/queries";
@@ -90,14 +91,27 @@ export default async function CaseStudyPage({ params }: Props) {
 
           {cs.results && cs.results.length > 0 && (
             <div className="mb-12 grid gap-6 rounded-3xl bg-navy p-8 text-white sm:grid-cols-3">
-              {cs.results.map((r, i) => (
-                <div key={i}>
-                  <p className="font-display text-4xl font-extrabold text-brand">
-                    {r.metric}
-                  </p>
-                  <p className="mt-1 text-sm text-white/70">{r.label}</p>
-                </div>
-              ))}
+              {cs.results.map((r, i) => {
+                // Parse a leading integer out of the metric so it can count up.
+                // Any decimals/units stay in the suffix and render correctly.
+                const m = /^([^\d]*)(\d[\d,]*)(.*)$/.exec(r.metric ?? "");
+                return (
+                  <div key={i}>
+                    <p className="font-display text-4xl font-extrabold text-brand">
+                      {m ? (
+                        <CountUp
+                          to={parseInt(m[2].replace(/,/g, ""), 10)}
+                          prefix={m[1]}
+                          suffix={m[3]}
+                        />
+                      ) : (
+                        r.metric
+                      )}
+                    </p>
+                    <p className="mt-1 text-sm text-white/70">{r.label}</p>
+                  </div>
+                );
+              })}
             </div>
           )}
 

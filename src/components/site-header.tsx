@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Logo } from "./logo";
 import { ButtonLink } from "./ui/button";
@@ -53,12 +54,13 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
         <Logo />
 
-        <nav className="hidden items-center gap-7 lg:flex">
+        <div className="flex items-center gap-4 sm:gap-6">
+          <nav className="hidden items-center gap-8 lg:flex">
           <div className="group relative">
             <button
               type="button"
               className={cn(
-                "flex items-center gap-1 text-sm font-semibold uppercase tracking-wide",
+                "flex items-center gap-1 text-[13px] font-medium uppercase tracking-[0.15em]",
                 servicesActive ? "text-brand" : "hover:text-brand",
               )}
             >
@@ -104,7 +106,7 @@ export function SiteHeader() {
               href={item.href}
               aria-current={isActive(item.href) ? "page" : undefined}
               className={cn(
-                "text-sm font-semibold uppercase tracking-wide",
+                "text-[13px] font-medium uppercase tracking-[0.15em]",
                 isActive(item.href) ? "text-brand" : "hover:text-brand",
               )}
             >
@@ -115,11 +117,25 @@ export function SiteHeader() {
           <ButtonLink href="/contact-us" variant="primary" size="md">
             Contact
           </ButtonLink>
-        </nav>
+          </nav>
 
-        <button
-          type="button"
-          onClick={() => setOpen((o) => !o)}
+          <Link
+            href="/purpose"
+            aria-label="Certified B Corporation"
+            className="shrink-0 transition-opacity hover:opacity-80"
+          >
+            <Image
+              src="/images/bcorp-white.png"
+              alt="Certified B Corporation"
+              width={56}
+              height={94}
+              className="h-9 w-auto sm:h-10"
+            />
+          </Link>
+
+          <button
+            type="button"
+            onClick={() => setOpen((o) => !o)}
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           className="lg:hidden"
@@ -144,7 +160,8 @@ export function SiteHeader() {
               />
             </svg>
           )}
-        </button>
+          </button>
+        </div>
       </div>
 
       {open && (

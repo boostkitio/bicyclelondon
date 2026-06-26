@@ -33,10 +33,10 @@ export function Logo({ className }: { className?: string }) {
       <Image
         src="/images/logo-bicycle-white.png"
         alt="Bicycle London"
-        width={150}
-        height={49}
+        width={300}
+        height={98}
         priority
-        className="h-7 w-auto sm:h-8"
+        className="h-10 w-auto sm:h-12"
       />
     </Link>
   );

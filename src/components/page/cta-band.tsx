@@ -1,5 +1,5 @@
 import { Section } from "@/components/ui/section";
-import { ButtonLink } from "@/components/ui/button";
+import { MagneticButton } from "@/components/scroll/magnetic-button";
 
 export function CtaBand({
   heading = "Want to understand how the power of ‘and’ can revolutionise your marketing?",
@@ -12,11 +12,14 @@ export function CtaBand({
 }) {
   return (
     <Section tone="navy">
-      <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
+      <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center">
         <h2 className="display max-w-2xl text-3xl sm:text-4xl">{heading}</h2>
-        <ButtonLink href={href} variant="primary" size="lg" className="shrink-0">
+        <MagneticButton
+          href={href}
+          className="shrink-0 rounded-full bg-brand px-10 py-4 text-base font-bold uppercase tracking-wide text-black"
+        >
           {label}
-        </ButtonLink>
+        </MagneticButton>
       </div>
     </Section>
   );

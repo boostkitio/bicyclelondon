@@ -40,13 +40,21 @@ export function MagneticButton({
   };
 
   const shared = `inline-block cursor-pointer border-none text-center transition-transform duration-200 ease-[cubic-bezier(.16,1,.3,1)] motion-reduce:transition-none ${className}`;
+  const external =
+    !!href && (/^https?:|^mailto:|^tel:/.test(href));
 
   return (
     <div ref={areaRef} onMouseMove={onMove} onMouseLeave={reset} className="inline-flex p-6">
       {href ? (
-        <Link href={href} onClick={onClick} className={shared}>
-          {children}
-        </Link>
+        external ? (
+          <a href={href} onClick={onClick} className={shared}>
+            {children}
+          </a>
+        ) : (
+          <Link href={href} onClick={onClick} className={shared}>
+            {children}
+          </Link>
+        )
       ) : (
         <button type="button" onClick={onClick} className={shared}>
           {children}
