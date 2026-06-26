@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { PageHero } from "@/components/page/page-hero";
+import { MuxVideo } from "@/components/mux-video";
 import { CtaBand } from "@/components/page/cta-band";
 import { Section } from "@/components/ui/section";
 import { ButtonLink } from "@/components/ui/button";
@@ -79,13 +80,10 @@ export default function PurposePage() {
           <h2 className="mt-3 display text-3xl sm:text-4xl">
             Partnering with purpose
           </h2>
-          <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-3xl">
-            <Image
-              src="/images/purpose-xo.jpg"
-              alt="XO Bikes"
-              fill
-              sizes="(max-width: 768px) 100vw, 768px"
-              className="object-cover"
+          <div className="mt-8">
+            <MuxVideo
+              playbackId="3kub5N1MsStvEnTNLQ0002TXTbcMWI6XTdQo01FbwWJbXU"
+              title="XO Bikes"
             />
           </div>
           <div className="mt-6 space-y-6 text-lg leading-relaxed text-black/75">

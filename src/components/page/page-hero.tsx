@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
+import { MuxBg } from "@/components/mux-bg";
 
 export function PageHero({
   eyebrow,
@@ -7,16 +8,25 @@ export function PageHero({
   lead,
   image,
   logo,
+  videoPlaybackId,
 }: {
   eyebrow?: string;
   title: string;
   lead?: string;
   image?: string;
   logo?: string;
+  videoPlaybackId?: string;
 }) {
   return (
     <section className="relative isolate overflow-hidden bg-navy text-white">
-      {image && (
+      {videoPlaybackId ? (
+        <>
+          <div className="absolute inset-0 opacity-45">
+            <MuxBg playbackId={videoPlaybackId} poster={image} />
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/75 to-navy/50" />
+        </>
+      ) : image ? (
         <>
           <Image
             src={image}
@@ -28,7 +38,7 @@ export function PageHero({
           />
           <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/70 to-navy/40" />
         </>
-      )}
+      ) : null}
       <Container className="relative z-10 pb-16 pt-36 sm:pb-20">
         {logo && (
           <Image

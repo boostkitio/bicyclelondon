@@ -27,9 +27,9 @@ const auth = "Basic " + Buffer.from(`${TOKEN_ID}:${TOKEN_SECRET}`).toString("bas
 const dir = "C:/Users/itswe/AppData/Local/Temp/bike-videos";
 
 const videos = [
-  { file: "its-pizza-time.mp4", title: "It's Pizza Time" },
-  { file: "your-pizza-cure.mp4", title: "Your Pizza Cure" },
-  { file: "you-need-pizza.mp4", title: "You Need Pizza" },
+  { file: "about-brandfilm.mp4", title: "Bicycle brand film" },
+  { file: "purpose-xo.mp4", title: "XO Bikes" },
+  { file: "about-film.mp4", title: "Bicycle hero film" },
 ];
 
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));

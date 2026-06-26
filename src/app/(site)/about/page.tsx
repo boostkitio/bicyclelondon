@@ -19,6 +19,7 @@ export default function AboutPage() {
         eyebrow="About us"
         title="How it started"
         image="/images/heroes/about.jpg"
+        videoPlaybackId="qXNeM1PbOwPYNR1uNZlaO01yGv5t2BJpYosjXoPHNkNk"
       />
 
       <Section>
