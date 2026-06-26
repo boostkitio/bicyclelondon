@@ -37,13 +37,15 @@ export default async function HomePage() {
     <>
       {/* Hero */}
       <section className="relative isolate flex min-h-[92vh] items-center overflow-hidden bg-navy text-white">
-        <div className="absolute inset-0 opacity-55">
+        <div className="absolute inset-0 opacity-90">
           <MuxBg
             playbackId="gfa01575PqXznaj7ADl84pYVnD6SkVZdwKRwg83regoQ"
             poster="/images/hero.jpg"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-tr from-navy via-navy/85 to-electric/20" />
+        {/* Gradient keeps the headline readable while letting the film show through. */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-navy via-navy/70 to-electric/15" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy/80 via-transparent to-transparent" />
         {/* Playful thought-bubble, a nod to the original hero */}
         <div className="animate-floaty pointer-events-none absolute right-[7%] top-28 z-10 hidden lg:block">
           <div className="flex h-24 w-24 items-center justify-center rounded-full bg-white text-4xl shadow-2xl">

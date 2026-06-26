@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { PageHero } from "@/components/page/page-hero";
 import { CtaBand } from "@/components/page/cta-band";
+import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
 import { PortableText } from "@/components/portable-text";
 import { MuxVideo } from "@/components/mux-video";
 import { CountUp } from "@/components/count-up";
+import { MaskReveal } from "@/components/scroll/mask-reveal";
+import { Reveal } from "@/components/reveal";
 import { JsonLd } from "@/components/seo/json-ld";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { caseStudyBySlugQuery, caseStudySlugsQuery } from "@/sanity/lib/queries";
@@ -55,8 +58,9 @@ export default async function CaseStudyPage({ params }: Props) {
   if (!cs) notFound();
 
   const heroUrl = cs.heroImage?.asset
-    ? urlFor(cs.heroImage).width(1905).height(900).url()
+    ? urlFor(cs.heroImage).width(2000).height(1120).url()
     : undefined;
+  const client = cs.client?.name || cs.clientName;
 
   return (
     <>
@@ -67,37 +71,68 @@ export default async function CaseStudyPage({ params }: Props) {
           { name: cs.title, path: `/work/${cs.slug}` },
         ])}
       />
-      <PageHero
-        eyebrow={cs.client?.name || cs.clientName}
-        title={cs.title}
-        lead={cs.standfirst}
-        image={heroUrl}
-      />
 
-      <Section>
-        <div className="mx-auto max-w-3xl">
+      {/* Hero — image-led, the campaign does the talking */}
+      <section className="relative isolate flex min-h-[80vh] items-end overflow-hidden bg-navy text-white">
+        {heroUrl ? (
+          <>
+            <Image
+              src={heroUrl}
+              alt={cs.heroImage?.alt || cs.title}
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/65 to-navy/15" />
+            <div className="absolute inset-0 bg-gradient-to-r from-navy/70 via-transparent to-transparent" />
+          </>
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-tr from-navy to-electric/30" />
+        )}
+        <Container className="relative z-10 pb-16 pt-44">
+          {client && client !== cs.title && (
+            <p className="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-brand">
+              {client}
+            </p>
+          )}
+          <MaskReveal
+            as="h1"
+            className="display max-w-4xl text-5xl sm:text-6xl lg:text-7xl"
+            lines={[cs.title]}
+          />
+          {cs.standfirst && (
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/85">
+              {cs.standfirst}
+            </p>
+          )}
           {cs.services && cs.services.length > 0 && (
-            <ul className="mb-10 flex flex-wrap gap-2">
+            <ul className="mt-8 flex flex-wrap gap-2.5">
               {cs.services.map((s) => (
                 <li
                   key={s}
-                  className="rounded-full bg-paper px-4 py-1.5 text-sm font-semibold uppercase tracking-wide text-black/70"
+                  className="rounded-full border border-white/30 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.1em] text-white/85"
                 >
                   {s}
                 </li>
               ))}
             </ul>
           )}
+        </Container>
+      </section>
 
-          {cs.results && cs.results.length > 0 && (
-            <div className="mb-12 grid gap-6 rounded-3xl bg-navy p-8 text-white sm:grid-cols-3">
+      {/* Results — bold proof, the first thing after the campaign */}
+      {cs.results && cs.results.length > 0 && (
+        <section className="bg-brand text-black">
+          <Container className="py-12 sm:py-16">
+            <div className="grid gap-10 sm:grid-cols-3">
               {cs.results.map((r, i) => {
-                // Parse a leading integer out of the metric so it can count up.
-                // Any decimals/units stay in the suffix and render correctly.
+                // Pull a leading integer out so it can count up; decimals/units
+                // ride along in the suffix and still render correctly.
                 const m = /^([^\d]*)(\d[\d,]*)(.*)$/.exec(r.metric ?? "");
                 return (
-                  <div key={i}>
-                    <p className="font-display text-4xl font-extrabold text-brand">
+                  <div key={i} className="border-t-2 border-black/20 pt-5">
+                    <p className="display text-5xl leading-none sm:text-6xl">
                       {m ? (
                         <CountUp
                           to={parseInt(m[2].replace(/,/g, ""), 10)}
@@ -108,47 +143,60 @@ export default async function CaseStudyPage({ params }: Props) {
                         r.metric
                       )}
                     </p>
-                    <p className="mt-1 text-sm text-white/70">{r.label}</p>
+                    <p className="mt-3 text-sm font-semibold uppercase tracking-wide text-black/70">
+                      {r.label}
+                    </p>
                   </div>
                 );
               })}
             </div>
-          )}
+          </Container>
+        </section>
+      )}
 
+      {/* The story — editorial long-read */}
+      <Section>
+        <div className="mx-auto max-w-2xl">
           <PortableText value={cs.body} />
         </div>
 
         {cs.videoPlaybackId && (
-          <div className="mx-auto mt-14 max-w-5xl">
+          <Reveal className="mx-auto mt-16 max-w-5xl">
             <MuxVideo playbackId={cs.videoPlaybackId} title={cs.title} />
-          </div>
+          </Reveal>
         )}
 
         {cs.gallery && cs.gallery.length > 0 && (
-          <div className="mx-auto mt-16 max-w-5xl">
-            <p className="mb-6 text-center font-display text-sm font-semibold uppercase tracking-widest text-black/40">
-              The work
-            </p>
+          <div className="mx-auto mt-20 max-w-5xl">
+            <h2 className="display mb-8 text-2xl sm:text-3xl">The work</h2>
             <div className="grid gap-5 sm:grid-cols-2">
               {cs.gallery.map((img, i) =>
                 img.asset ? (
-                  <div
-                    key={i}
-                    className="group overflow-hidden rounded-2xl bg-paper"
-                  >
-                    <Image
-                      src={urlFor(img).width(1000).height(700).url()}
-                      alt={img.alt || cs.title}
-                      width={1000}
-                      height={700}
-                      className="h-auto w-full transition duration-500 group-hover:scale-105"
-                    />
-                  </div>
+                  <Reveal key={i} delay={(i % 2) * 80}>
+                    <div className="group overflow-hidden rounded-2xl bg-paper">
+                      <Image
+                        src={urlFor(img).width(1000).height(700).url()}
+                        alt={img.alt || cs.title}
+                        width={1000}
+                        height={700}
+                        className="h-auto w-full transition duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                  </Reveal>
                 ) : null,
               )}
             </div>
           </div>
         )}
+
+        <div className="mx-auto mt-16 max-w-5xl">
+          <Link
+            href="/work"
+            className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-moss transition hover:gap-3 hover:text-brand-ink"
+          >
+            ← All work
+          </Link>
+        </div>
       </Section>
 
       <CtaBand label="Start a project" />
