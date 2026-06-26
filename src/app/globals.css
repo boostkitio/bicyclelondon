@@ -1,9 +1,11 @@
 @import "tailwindcss";
+@import "lenis/dist/lenis.css";
 
 @theme {
   --color-brand: #00ff00;
   --color-brand-ink: #00d400;
   --color-navy: #08124d;
+  --color-deep: #050a36;
   --color-electric: #0100ff;
   --color-moss: #3f7652;
   --color-ink: #000000;
@@ -16,6 +18,10 @@
 /* Per global UX conventions: no global smooth-scroll (it breaks router scroll reset). */
 html {
   scroll-behavior: auto;
+  /* Clip horizontal at the viewport too: Lenis scrolls the documentElement, so
+     clipping only on body leaves a stray horizontal scroll region from the
+     marquee/gallery tracks. Vertical scroll is unaffected. */
+  overflow-x: clip;
 }
 
 body {
@@ -24,6 +30,9 @@ body {
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* clip (not hidden) keeps the marquee/parallax from forcing a horizontal
+     scrollbar without turning the page into a scroll container. */
+  overflow-x: clip;
 }
 
 ::selection {
@@ -115,15 +124,15 @@ h4 {
   animation: kenburns 20s ease-out forwards;
 }
 
-/* Page transition: runs on every navigation via the route template. */
+/* Page transition: runs on every navigation via the route template.
+   Opacity-only on purpose: a transform on this ancestor would become the
+   containing block for position:fixed and break GSAP ScrollTrigger pinning. */
 @keyframes page-enter {
   from {
     opacity: 0;
-    transform: translateY(10px);
   }
   to {
     opacity: 1;
-    transform: none;
   }
 }
 

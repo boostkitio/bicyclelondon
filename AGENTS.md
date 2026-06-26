@@ -29,6 +29,8 @@ npm run start    # serve the production build
 - `src/app/(site)/` — public pages (route group; gets header/footer)
 - `src/app/studio/` — embedded Sanity Studio (no site chrome)
 - `src/components/` — UI, page, form, SEO components
+- `src/components/scroll/` — GSAP + Lenis scroll effects (pinned, parallax, marquee, magnetic, mask reveal)
+- `src/lib/gsap.ts` — single GSAP + ScrollTrigger registration point; always import GSAP from here
 - `src/content/` — hard-coded marketing copy (services, team)
 - `src/sanity/` — schema, client, queries, image helpers
 - `src/lib/site.ts` — site config (nav, contact, socials)
@@ -55,8 +57,10 @@ node scripts/fix-standfirst.mjs   # regenerate summaries from body
 ## Conventions
 
 - Clean human-readable slugs; old Wix URLs 301-redirect via `src/middleware.ts`
+- App-wide smooth scroll via Lenis (`SmoothScroll` in the root layout, driven off GSAP's ticker). Logo-to-top and route scroll-reset route through `useLenis().scrollTo`, falling back to `window.scrollTo` under reduced-motion (Lenis isn't mounted then)
+- Pinned/parallax/marquee effects fall back to static under `(max-width: 767px)` and reduced-motion via `gsap.matchMedia()`; `html`/`body` use `overflow-x: clip` so the tracks can't force horizontal scroll
 - Logo click returns to top of home; scroll resets on navigation
-- Scroll reveals (`Reveal`) fail open (visible without JS); respect reduced-motion
+- Scroll reveals: lightweight `Reveal` (fail open, body content) vs `scroll/MaskReveal` (GSAP line-mask, display headings); respect reduced-motion
 - UK English
 
 ## Not yet live (needs provisioning)

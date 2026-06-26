@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Raleway } from "next/font/google";
 import "./globals.css";
+import { SmoothScroll } from "@/components/scroll/smooth-scroll";
 import { SITE } from "@/lib/site";
 
 const raleway = Raleway({
@@ -32,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en-GB" className={`${raleway.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-white text-ink">
-        {children}
+        <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
   );
