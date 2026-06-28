@@ -57,7 +57,19 @@ function slugify(s) {
 }
 
 const JUNK =
-  /^(top of page|bottom of page|skip to main content|chat to us!?|play video|all videos|watch full video|read more|see our work|contact us|make a donation|meet the peloton)$/i;
+  /^(top of page|bottom of page|skip to main content|back to all|subscribe to our newsletter|email ?\*?|submit|chat to us!?|play video|all videos|watch full video|read more|see our work|contact us|make a donation|meet the peloton|thanks for reading bicycle slipstream.*)$/i;
+
+// A line is junk even when it arrives as a heading/list item — strip the
+// markdown markers before testing so "## Subscribe to our Newsletter" is caught.
+function isJunkLine(line) {
+  const bare = line
+    .replace(/^#{1,6}\s+/, "")
+    .replace(/^[-*]\s+/, "")
+    .replace(/\*\*/g, "")
+    .replace(/\\(.)/g, "$1")
+    .trim();
+  return JUNK.test(bare);
+}
 
 function cleanInline(s) {
   return s
@@ -94,7 +106,7 @@ function mdToBlocks(md) {
   for (let raw of lines) {
     const line = raw.trim();
     if (!line) { flush(); continue; }
-    if (JUNK.test(line)) continue;
+    if (isJunkLine(line)) continue;
     if (/^!\[.*\]\(.*\)$/.test(line)) continue; // standalone image
     if (line.startsWith("#### ")) { flush(); blocks.push(block("h4", cleanInline(line.slice(5)))); continue; }
     if (line.startsWith("### ")) { flush(); blocks.push(block("h3", cleanInline(line.slice(4)))); continue; }

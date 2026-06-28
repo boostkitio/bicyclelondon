@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/page/page-hero";
 import { CtaBand } from "@/components/page/cta-band";
 import { Section } from "@/components/ui/section";
 import { PortableText } from "@/components/portable-text";
+import { NewsletterSignup } from "@/components/forms/newsletter-signup";
 import { JsonLd } from "@/components/seo/json-ld";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { articleBySlugQuery, articleSlugsQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
-import { SITE } from "@/lib/site";
 import { articleSchema, breadcrumb } from "@/lib/schema";
 import type { Article } from "@/sanity/lib/types";
 
@@ -93,6 +94,18 @@ export default async function ArticlePage({ params }: Props) {
 
       <Section>
         <article className="mx-auto max-w-3xl">
+          <Link
+            href="/slipstream"
+            className="group mb-8 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-brand-ink transition hover:text-ink"
+          >
+            <span
+              aria-hidden
+              className="transition-transform group-hover:-translate-x-1"
+            >
+              ←
+            </span>
+            Back to Slipstream
+          </Link>
           {(a.author?.name || date) && (
             <div className="mb-8 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-black/50">
               {a.author?.name && (
@@ -106,10 +119,16 @@ export default async function ArticlePage({ params }: Props) {
         </article>
       </Section>
 
+      <Section tone="paper">
+        <div className="mx-auto max-w-3xl">
+          <NewsletterSignup />
+        </div>
+      </Section>
+
       <CtaBand
-        heading="Enjoyed this? Get the Slipstream in your inbox."
-        label="Subscribe"
-        href={SITE.social.substack}
+        heading="Got a brief, a question, or just want to chat?"
+        label="Chat to us"
+        href="/contact-us"
       />
     </>
   );
