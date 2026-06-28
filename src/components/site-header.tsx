@@ -70,7 +70,7 @@ export function SiteHeader() {
                 height="12"
                 viewBox="0 0 12 12"
                 aria-hidden="true"
-                className="mt-0.5"
+                className="mt-0.5 transition-transform duration-300 group-hover:rotate-180"
               >
                 <path
                   d="M2 4l4 4 4-4"
@@ -80,22 +80,65 @@ export function SiteHeader() {
                 />
               </svg>
             </button>
-            <div className="invisible absolute left-1/2 top-full w-72 -translate-x-1/2 pt-3 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-              <div className="rounded-2xl bg-white p-2 text-ink shadow-xl ring-1 ring-black/5">
-                {SERVICES.map((s) => (
-                  <Link
-                    key={s.href}
-                    href={s.href}
-                    className="block rounded-xl px-4 py-2.5 hover:bg-paper"
-                  >
-                    <span className="font-display text-sm font-bold uppercase">
-                      {s.label}
-                    </span>
-                    <span className="block text-xs text-black/60">
-                      {s.blurb}
-                    </span>
-                  </Link>
-                ))}
+            <div className="invisible absolute left-1/2 top-full z-50 w-[36rem] max-w-[calc(100vw-2rem)] -translate-x-1/2 translate-y-1 pt-3 opacity-0 transition duration-200 ease-out group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+              <div className="overflow-hidden rounded-2xl bg-gradient-to-br from-navy to-deep text-white shadow-2xl shadow-black/40 ring-1 ring-white/10">
+                <div className="flex">
+                  {/* Intro */}
+                  <div className="hidden w-48 shrink-0 flex-col justify-between border-r border-white/10 bg-white/[0.03] p-6 sm:flex">
+                    <div>
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
+                        The power of and
+                      </p>
+                      <p className="mt-3 font-display text-lg font-bold uppercase leading-[1.05] text-white">
+                        Five specialisms.
+                        <br />
+                        One roof.
+                      </p>
+                      <p className="mt-2 text-xs leading-relaxed text-white/50">
+                        Plug into one, or the whole peloton.
+                      </p>
+                    </div>
+                    <Link
+                      href="/about"
+                      className="mt-5 inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-brand transition-all hover:gap-2.5"
+                    >
+                      How we work
+                      <span aria-hidden>→</span>
+                    </Link>
+                  </div>
+
+                  {/* Services */}
+                  <ul className="flex-1 p-2.5">
+                    {SERVICES.map((s) => (
+                      <li key={s.href}>
+                        <Link
+                          href={s.href}
+                          className="group/svc relative flex items-center gap-4 rounded-xl py-3 pl-5 pr-4 transition-colors hover:bg-white/[0.06]"
+                        >
+                          <span className="absolute left-1.5 top-1/2 h-0 w-[3px] -translate-y-1/2 rounded-full bg-brand transition-all duration-300 group-hover/svc:h-8" />
+                          <span className="relative h-5 w-24 shrink-0">
+                            <Image
+                              src={s.logo}
+                              alt={s.label}
+                              fill
+                              sizes="96px"
+                              className="object-contain object-left opacity-80 transition group-hover/svc:opacity-100"
+                            />
+                          </span>
+                          <span className="min-w-0 flex-1 text-[13px] leading-snug text-white/55 transition-colors group-hover/svc:text-white/80">
+                            {s.blurb}
+                          </span>
+                          <span
+                            aria-hidden
+                            className="shrink-0 text-brand opacity-0 transition-all duration-300 -translate-x-1 group-hover/svc:translate-x-0 group-hover/svc:opacity-100"
+                          >
+                            →
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
           </div>

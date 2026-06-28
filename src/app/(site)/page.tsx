@@ -207,9 +207,15 @@ export default async function HomePage() {
       {/* Logo wall */}
       <Section tone="paper">
         <Reveal>
-          <h2 className="display mx-auto max-w-3xl text-center text-2xl sm:text-3xl">
-            Bringing things together for ambitious brands since 2021
-          </h2>
+          <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
+            <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-navy/60">
+              <span className="h-2 w-2 rounded-full bg-brand-ink animate-pulse-dot" />
+              In good company
+            </span>
+            <h2 className="display text-2xl sm:text-3xl">
+              Bringing things together for ambitious brands since 2021
+            </h2>
+          </div>
         </Reveal>
         <div className="mt-12">
           <LogoWall />

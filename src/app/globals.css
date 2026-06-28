@@ -92,8 +92,30 @@ h4 {
   animation: marquee var(--marquee-duration, 40s) linear infinite;
 }
 
+/* Second row runs the other way for a livelier, woven feel. */
+.marquee-track--reverse {
+  animation-direction: reverse;
+}
+
 .marquee:hover .marquee-track {
   animation-play-state: paused;
+}
+
+/* Live green status dot for eyebrows. */
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.78);
+  }
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 1.6s ease-in-out infinite;
 }
 
 @keyframes floaty {
@@ -144,7 +166,8 @@ h4 {
   .marquee-track,
   .animate-floaty,
   .page-enter,
-  .animate-kenburns {
+  .animate-kenburns,
+  .animate-pulse-dot {
     animation: none;
   }
 }

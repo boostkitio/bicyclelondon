@@ -17,26 +17,26 @@ export async function LogoWall() {
   const row = [...clients, ...clients];
 
   return (
-    <div className="marquee group relative overflow-hidden">
-      {/* edge fades */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent sm:w-24" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white to-transparent sm:w-24" />
+    <div className="marquee group relative overflow-hidden border-y border-black/10 py-7">
+      {/* edge fades (match the paper section background) */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-paper to-transparent sm:w-28" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-paper to-transparent sm:w-28" />
       <div
-        className="marquee-track flex w-max items-center gap-12 sm:gap-16"
-        style={{ ["--marquee-duration" as string]: "55s" }}
+        className="marquee-track flex w-max items-center gap-10 sm:gap-14"
+        style={{ ["--marquee-duration" as string]: "48s" }}
       >
         {row.map((c, i) => (
           <div
             key={`${c._id}-${i}`}
-            className="flex h-16 w-28 shrink-0 items-center justify-center sm:w-32"
+            className="group/logo flex h-16 w-32 shrink-0 items-center justify-center sm:w-40"
           >
             {c.logo?.asset && (
               <Image
-                src={urlFor(c.logo).height(96).fit("max").url()}
+                src={urlFor(c.logo).height(112).fit("max").url()}
                 alt={c.name}
-                width={128}
-                height={48}
-                className="max-h-12 w-auto object-contain opacity-50 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
+                width={160}
+                height={56}
+                className="max-h-14 w-auto object-contain opacity-45 grayscale transition duration-300 ease-out group-hover/logo:-translate-y-0.5 group-hover/logo:opacity-100 group-hover/logo:grayscale-0"
               />
             )}
           </div>
