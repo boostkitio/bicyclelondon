@@ -135,6 +135,15 @@ These assets can themselves be cited by the AI engines, and they earn links that
 - Founder and leadership thought leadership: guest articles, podcasts, panels, LinkedIn.
 - Authentic presence where relevant on Reddit, Quora and YouTube for agency-selection queries.
 
+### B5. Unlock the credibility Bicycle already holds
+
+Bicycle is not invisible to the trade press, but its best credentials are either locked or under-surfaced, so the models cannot use them:
+
+- **Campaign "School Reports 2026: Bicycle London"** exists (Campaign's analysis of 2025 performance), but it is behind Campaign's subscription wall and tagged `noarchive`. The LLMs see the headline and standfirst at most. As the reviewed agency, Bicycle has rights to its own report: obtain the text and republish or excerpt it, with attribution and a link to Campaign, as an ungated, schema-marked recognition piece on the new site. This converts a locked credential into a citable one.
+- **Campaign maintains a dedicated Bicycle London hub page**, and Bicycle is listed as a member of the **IAB** and the **IPA**. Surface these memberships on a press/recognition section with proper markup and link to them, rather than leaving them buried on third-party directories.
+
+Categorise every source as **absent**, **present-and-citable**, or **present-but-locked**. The Campaign School Report is "present-but-locked": real credibility that simply needs unlocking, which is faster than earning new coverage from scratch.
+
 ---
 
 ## 5. Track C — Measure it (the dashboard)
