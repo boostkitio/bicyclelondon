@@ -4,6 +4,8 @@ import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/reveal";
+import { Grain } from "@/components/grain";
+import { CardArrow } from "@/components/card-arrow";
 import { LogoWall } from "@/components/logo-wall";
 import { MuxBg } from "@/components/mux-bg";
 import { StatsBand } from "@/components/stats";
@@ -63,13 +65,20 @@ export default async function HomePage() {
             </Reveal>
             <GsapHeroHeading />
             <Reveal delay={160}>
-              <div className="mt-10 flex flex-wrap gap-4">
-                <ButtonLink href="/work" variant="primary" size="lg">
+              <div className="-ml-6 mt-4 flex flex-wrap items-center">
+                <MagneticButton
+                  href="/work"
+                  className="rounded-full bg-brand px-9 py-4 font-display text-base font-bold uppercase tracking-wide text-black"
+                >
                   See our work
-                </ButtonLink>
-                <ButtonLink href="/contact-us" variant="white" size="lg">
+                </MagneticButton>
+                <MagneticButton
+                  href="/contact-us"
+                  strength={0.3}
+                  className="rounded-full bg-white px-9 py-4 font-display text-base font-bold uppercase tracking-wide text-ink"
+                >
                   Contact us
-                </ButtonLink>
+                </MagneticButton>
               </div>
             </Reveal>
           </Container>
@@ -88,9 +97,10 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* And marquee — steady, constant-speed scroll */}
+      {/* And marquee — cruises steadily, surges with scroll velocity */}
       <Marquee
         direction={-1}
+        velocity
         className="bg-brand py-5 text-black"
         items={[...ANDS, ...ANDS, ...ANDS].flatMap(([a, b], i) => [
           <span
@@ -106,9 +116,10 @@ export default async function HomePage() {
       />
 
       {/* Power of AND — static stacked statement (no scroll hijack) */}
-      <section className="bg-navy px-5 py-24 text-center text-white sm:px-8 sm:py-32">
+      <section className="relative overflow-hidden bg-navy px-5 py-24 text-center text-white sm:px-8 sm:py-32">
+        <Grain />
         <MaskReveal
-          className="display text-center text-[clamp(34px,7vw,92px)] leading-[1.08]"
+          className="relative display text-center text-[clamp(34px,7vw,92px)] leading-[1.08]"
           lines={ANDS.map(([a, b]) => (
             <>
               {a} <span className="text-brand">&amp;</span> {b}
@@ -295,6 +306,7 @@ export default async function HomePage() {
                         className="object-cover transition duration-500 group-hover:scale-105"
                       />
                     )}
+                    <CardArrow />
                   </div>
                   {cs.clientName && (
                     <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-brand">

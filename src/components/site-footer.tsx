@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Container } from "./ui/container";
+import { Grain } from "./grain";
 import { SocialIcons } from "./social-icons";
 import {
   SITE,
@@ -11,8 +12,9 @@ import {
 
 export function SiteFooter() {
   return (
-    <footer className="bg-navy text-white">
-      <Container className="py-16">
+    <footer className="relative overflow-hidden bg-navy text-white">
+      <Grain />
+      <Container className="relative py-16">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <Link href="/" aria-label="Bicycle London, home" className="inline-block">

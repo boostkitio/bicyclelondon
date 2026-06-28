@@ -5,6 +5,7 @@ import { PageHero } from "@/components/page/page-hero";
 import { CtaBand } from "@/components/page/cta-band";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/reveal";
+import { CardArrow } from "@/components/card-arrow";
 import { JsonLd } from "@/components/seo/json-ld";
 import { collectionPageSchema } from "@/lib/schema";
 import { sanityFetch } from "@/sanity/lib/fetch";
@@ -68,6 +69,7 @@ export default async function WorkPage() {
                         className="object-cover transition duration-500 group-hover:scale-105"
                       />
                     )}
+                    <CardArrow />
                   </div>
                   <div className="p-6">
                     {cs.clientName && (

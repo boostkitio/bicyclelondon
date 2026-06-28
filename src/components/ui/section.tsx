@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Container } from "./container";
+import { Grain } from "../grain";
 
 type Tone = "white" | "paper" | "navy" | "brand";
 
@@ -23,12 +24,21 @@ export function Section({
   children: React.ReactNode;
   id?: string;
 }) {
+  const dark = tone === "navy";
   return (
     <section
       id={id}
-      className={cn("py-16 sm:py-24", tones[tone], className)}
+      className={cn(
+        "py-16 sm:py-24",
+        dark && "relative overflow-hidden",
+        tones[tone],
+        className,
+      )}
     >
-      <Container className={containerClassName}>{children}</Container>
+      {dark && <Grain />}
+      <Container className={cn(dark && "relative", containerClassName)}>
+        {children}
+      </Container>
     </section>
   );
 }
