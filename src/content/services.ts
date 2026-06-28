@@ -4,6 +4,7 @@ export const services: Record<string, ServiceContent> = {
   bicycle: {
     eyebrow: "Meet Bicycle",
     title: "Our ecosystem",
+    path: "/bicycle",
     logo: "/images/logo-bicycle-white.png",
     heroImage: "/images/heroes/bicycle.jpg",
     featureImage: "/images/feature-bicycle.jpg",
@@ -24,6 +25,7 @@ export const services: Record<string, ServiceContent> = {
   blade: {
     eyebrow: "Performance consultancy",
     title: "Meet Blade",
+    path: "/bicycle-blade",
     logo: "/images/logo-blade.png",
     heroImage: "/images/heroes/blade.jpg",
     featureImage: "/images/feature-blade.jpg",
@@ -63,6 +65,7 @@ export const services: Record<string, ServiceContent> = {
   studio: {
     eyebrow: "Creative studio",
     title: "Meet Studio",
+    path: "/bicycle-studio",
     logo: "/images/logo-studio.png",
     heroImage: "/images/heroes/studio.jpg",
     featureImage: "/images/feature-studio.jpg",
@@ -86,6 +89,7 @@ export const services: Record<string, ServiceContent> = {
   ripple: {
     eyebrow: "Influencer & social",
     title: "Meet Ripple",
+    path: "/bicycle-ripple",
     logo: "/images/logo-ripple.png",
     heroImage: "/images/heroes/ripple.jpg",
     featureImage: "/images/feature-ripple.jpg",
@@ -111,6 +115,7 @@ export const services: Record<string, ServiceContent> = {
   international: {
     eyebrow: "Bicycle International",
     title: "Are you a multi-market brand?",
+    path: "/international",
     logo: "/images/logo-international.png",
     heroImage: "/images/heroes/international.jpg",
     featureImage: "/images/feature-international.jpg",

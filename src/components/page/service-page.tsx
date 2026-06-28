@@ -5,6 +5,8 @@ import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/reveal";
 import { LogoWall } from "@/components/logo-wall";
 import { MuxVideo } from "@/components/mux-video";
+import { JsonLd } from "@/components/seo/json-ld";
+import { serviceSchema } from "@/lib/schema";
 
 export type ServicePoint = { title: string; body: string };
 export type ServiceSection = { heading?: string; body: string[] };
@@ -14,6 +16,7 @@ export type ServiceContent = {
   title: string;
   heroImage?: string;
   logo?: string;
+  path: string;
   featureImage?: string;
   lead?: string[];
   points?: ServicePoint[];
@@ -26,6 +29,13 @@ export type ServiceContent = {
 export function ServicePage({ content }: { content: ServiceContent }) {
   return (
     <>
+      <JsonLd
+        data={serviceSchema({
+          name: content.title,
+          path: content.path,
+          description: content.lead?.[0] || content.sections?.[0]?.body[0],
+        })}
+      />
       <PageHero
         eyebrow={content.eyebrow}
         title={content.title}

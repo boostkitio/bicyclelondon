@@ -5,6 +5,8 @@ import { PageHero } from "@/components/page/page-hero";
 import { CtaBand } from "@/components/page/cta-band";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/reveal";
+import { JsonLd } from "@/components/seo/json-ld";
+import { collectionPageSchema } from "@/lib/schema";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { allCaseStudiesQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
@@ -24,6 +26,19 @@ export default async function WorkPage() {
 
   return (
     <>
+      <JsonLd
+        data={collectionPageSchema({
+          name: "Bicycle London case studies",
+          path: "/work",
+          description:
+            "Selected case studies from Bicycle London covering media planning, creative strategy, performance marketing and integrated campaigns.",
+          items: studies.map((cs) => ({
+            name: cs.title,
+            path: `/work/${cs.slug}`,
+            description: cs.standfirst,
+          })),
+        })}
+      />
       <PageHero
         eyebrow="Case studies"
         title="Our work"

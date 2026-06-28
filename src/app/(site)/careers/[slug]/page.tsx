@@ -29,9 +29,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     params: { slug },
   });
   if (!job) return {};
+  const description =
+    job.seo?.metaDescription ||
+    job.summary ||
+    `Apply for the ${job.title} role at Bicycle London.`;
   return {
     title: job.seo?.metaTitle || `${job.title} | Careers`,
-    description: job.seo?.metaDescription || job.summary,
+    description,
   };
 }
 
@@ -45,6 +49,8 @@ export default async function JobPage({ params }: Props) {
   if (!job) notFound();
 
   const applyEmail = job.applyEmail || SITE.jobsEmail;
+  const description =
+    job.summary || `Apply for the ${job.title} role at Bicycle London.`;
   const meta = [
     job.location,
     job.employmentType?.replace("_", "-").toLowerCase(),
@@ -55,7 +61,7 @@ export default async function JobPage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "JobPosting",
     title: job.title,
-    description: job.summary || job.title,
+    description,
     datePosted: job.postedAt,
     employmentType: job.employmentType,
     directApply: true,

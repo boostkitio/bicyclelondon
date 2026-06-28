@@ -4,11 +4,13 @@ import Image from "next/image";
 import { PageHero } from "@/components/page/page-hero";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/reveal";
+import { JsonLd } from "@/components/seo/json-ld";
 import { NewsletterSignup } from "@/components/forms/newsletter-signup";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { allArticlesQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import { cn } from "@/lib/utils";
+import { collectionPageSchema } from "@/lib/schema";
 import type { ArticleCard } from "@/sanity/lib/types";
 
 export const metadata: Metadata = {
@@ -40,6 +42,19 @@ export default async function SlipstreamPage({ searchParams }: Props) {
 
   return (
     <>
+      <JsonLd
+        data={collectionPageSchema({
+          name: "Slipstream by Bicycle London",
+          path: "/slipstream",
+          description:
+            "Bicycle London's take on what is moving in media, marketing and culture.",
+          items: articles.map((article) => ({
+            name: article.title,
+            path: `/slipstream/${article.slug}`,
+            description: article.standfirst,
+          })),
+        })}
+      />
       <PageHero
         eyebrow="Insights"
         title="Slipstream"

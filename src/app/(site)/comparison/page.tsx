@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/page/page-hero";
 import { Section } from "@/components/ui/section";
 import { ButtonLink } from "@/components/ui/button";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumb, faqPageSchema, webPageSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Wix vs Next.js SEO comparison",
@@ -18,9 +20,32 @@ const scores = [
   },
   {
     label: "New Next.js/Vercel site",
-    score: "8.5",
+    score: "9.2",
     summary:
-      "Stronger technical foundation with dynamic sitemaps, schema, controlled redirects, cleaner metadata and explicit AI-search support.",
+      "Stronger technical foundation with dynamic sitemaps, richer schema, controlled redirects, cleaner metadata, AI-search support and agent-readable content.",
+  },
+];
+
+const faqs = [
+  {
+    question: "Has Bicycle's current Wix sitemap been mapped into the new site?",
+    answer:
+      "Yes. The current Wix sitemap was crawled, 51 live URLs were captured, and each URL has been mapped to a static Next.js route, a Sanity-powered content route, or a deliberate 301 redirect for legacy archive URLs.",
+  },
+  {
+    question: "Why does the new Next.js site score higher for SEO?",
+    answer:
+      "The new site gives Bicycle stronger control over metadata, generated sitemaps, redirects, structured data, robots policy, content modelling, page performance and AI-search readability than the current Wix implementation.",
+  },
+  {
+    question: "Is the new score a ranking guarantee?",
+    answer:
+      "No. The score is a technical SEO and AEO readiness score based on crawl and implementation evidence. Google Search Console, GA4 and ranking data are still needed to measure commercial search performance after launch.",
+  },
+  {
+    question: "What still prevents the rebuild from being a perfect 10?",
+    answer:
+      "The remaining gap is mostly data and content depth: live Search Console data, post-cutover index coverage, richer topic hub content, full Sanity SEO completion and ongoing monitoring after launch.",
   },
 ];
 
@@ -99,11 +124,27 @@ const completedWork = [
   "Made AI crawler access explicit in robots.txt while keeping /studio and /api blocked.",
   "Updated /llms.txt with agent-readable context and the canonical sitemap pointer.",
   "Added this /comparison page and included it in the generated sitemap.",
+  "Added richer schema for services, content collections, articles and this FAQ-style comparison page.",
 ];
 
 export default function ComparisonPage() {
   return (
     <>
+      <JsonLd
+        data={webPageSchema({
+          name: "Wix vs Next.js SEO comparison",
+          path: "/comparison",
+          description:
+            "A practical comparison of Bicycle London's current Wix site and the new Next.js/Vercel rebuild.",
+        })}
+      />
+      <JsonLd data={faqPageSchema(faqs)} />
+      <JsonLd
+        data={breadcrumb([
+          { name: "Home", path: "/" },
+          { name: "SEO/AEO comparison", path: "/comparison" },
+        ])}
+      />
       <PageHero
         eyebrow="SEO / AEO migration comparison"
         title="Wix vs Next.js"
@@ -249,7 +290,7 @@ export default function ComparisonPage() {
       <Section>
         <div className="max-w-3xl">
           <h2 className="font-display text-4xl uppercase sm:text-5xl">
-            What would move the new site closer to 10/10?
+            What would move the new site from 9.2 to 10/10?
           </h2>
           <ol className="mt-8 space-y-4 text-lg leading-relaxed text-black/70">
             <li>
@@ -282,6 +323,25 @@ export default function ComparisonPage() {
               Read Slipstream
             </ButtonLink>
           </div>
+        </div>
+      </Section>
+
+      <Section tone="paper">
+        <div className="max-w-3xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-ink">
+            Questions agents and search engines need answered
+          </p>
+          <h2 className="mt-3 font-display text-4xl uppercase sm:text-5xl">
+            Migration FAQ
+          </h2>
+        </div>
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
+          {faqs.map((item) => (
+            <article key={item.question} className="rounded-3xl bg-white p-6 ring-1 ring-black/5">
+              <h3 className="font-display text-2xl uppercase">{item.question}</h3>
+              <p className="mt-4 text-black/70">{item.answer}</p>
+            </article>
+          ))}
         </div>
       </Section>
     </>
