@@ -18,9 +18,21 @@ export default defineType({
     defineField({ name: "role", title: "Role / job title", type: "string" }),
     defineField({
       name: "image",
+      title: "Photo",
       type: "image",
       options: { hotspot: true },
       fields: [{ name: "alt", type: "string", title: "Alt text" }],
+    }),
+    defineField({
+      name: "linkedin",
+      title: "LinkedIn profile",
+      type: "url",
+      validation: (rule) =>
+        rule.uri({ scheme: ["https"] }).custom((url) =>
+          !url || url.includes("linkedin.com")
+            ? true
+            : "Must be a linkedin.com URL",
+        ),
     }),
     defineField({ name: "bio", type: "text", rows: 3 }),
   ],

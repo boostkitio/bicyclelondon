@@ -5,6 +5,7 @@ import { PageHero } from "@/components/page/page-hero";
 import { CtaBand } from "@/components/page/cta-band";
 import { Section } from "@/components/ui/section";
 import { PortableText } from "@/components/portable-text";
+import { ArticleByline } from "@/components/article-byline";
 import { NewsletterSignup } from "@/components/forms/newsletter-signup";
 import { JsonLd } from "@/components/seo/json-ld";
 import { sanityFetch } from "@/sanity/lib/fetch";
@@ -106,14 +107,10 @@ export default async function ArticlePage({ params }: Props) {
             </span>
             Back to Slipstream
           </Link>
-          {(a.author?.name || date) && (
-            <div className="mb-8 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-black/50">
-              {a.author?.name && (
-                <span className="font-semibold text-ink">{a.author.name}</span>
-              )}
-              {a.author?.role && <span>· {a.author.role}</span>}
-              {date && <span>· {date}</span>}
-            </div>
+          {a.author ? (
+            <ArticleByline author={a.author} date={date} />
+          ) : (
+            date && <p className="mb-8 text-sm text-black/50">{date}</p>
           )}
           <PortableText value={a.body} />
         </article>

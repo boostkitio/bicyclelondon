@@ -32,7 +32,7 @@ export const articleBySlugQuery = groq`
   *[_type == "slipstreamArticle" && slug.current == $slug][0]{
     _id, title, "slug": slug.current, standfirst, heroImage, issue, publishedAt, body,
     "category": category->{title, "slug": slug.current},
-    "author": author->{name, role, image},
+    "author": author->{name, role, image, linkedin, "slug": slug.current},
     seo
   }`;
 

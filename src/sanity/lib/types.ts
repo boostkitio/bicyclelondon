@@ -52,7 +52,13 @@ export type Article = {
   publishedAt?: string;
   body?: unknown[];
   category?: { title?: string; slug?: string };
-  author?: { name?: string; role?: string; image?: SanityImage };
+  author?: {
+    name?: string;
+    role?: string;
+    image?: SanityImage;
+    linkedin?: string;
+    slug?: string;
+  };
   seo?: Seo;
 };
 
