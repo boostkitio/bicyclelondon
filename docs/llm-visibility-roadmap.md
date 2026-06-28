@@ -19,6 +19,10 @@ The decisive detail is **what it cited**. The entire answer is built from just t
 
 The lesson: for "who are the best X" questions, the models do not read agency websites and rank them. They lift the answer from third-party rosters, directories and listicles, then cite those. If Bicycle is not in those sources, there is nothing for the model to pull, regardless of how good bicyclelondon.com is.
 
+**Second query, even sharper.** I then ran the exact phrasing a prospective client uses: "give me a list of 10 independent media agencies in the UK I should consider running my business with." ChatGPT returned ten agencies — the7stars, Total Media, Bountiful Cow, Crossmedia, Republic of Media, Mostly Media, The Specialist Works, December19, AMS Media Group, Pashn — and cited almost every one of them to a **single source**: a December19 press release, "December19 joins Alliance of Media Independents." In other words, the list is essentially the **AMI roster**, assembled from the press coverage of membership. Each agency's own homepage appears only as the link destination once it has already been selected. This is the clearest possible evidence that AMI membership plus its press coverage is the dominant lever for this exact question.
+
+**What this means for the rebuild.** A better site has two distinct jobs. Getting *selected* for the list is won off-site, in these rosters and the press around them — a great site outside those sources is not picked, which is exactly why Bicycle's homepage did not appear. Being the *destination* once selected is where the new site matters: the models link to and cite the chosen agency's site, and a fast, crawlable, schema-rich site with a clean `Organization` + `sameAs` entity is a far stronger destination than the live Wix site. So the rebuild is necessary and a real multiplier, but it is the foundation, not the trigger. It earns recognition and gives you a citable home and a publishing platform; the roster and press work is what gets Bicycle named.
+
 ---
 
 ## 2. Why Bicycle is invisible — two stacked layers
@@ -106,7 +110,7 @@ Ordered by leverage.
 ### B1. Get into the rosters the models cite
 
 - **The Drum Independent Agency Census** — the census ChatGPT cited directly. Make sure Bicycle is entered in the current edition. This is the most direct lever for this exact query.
-- **Alliance of Media Independents (AMI)** — launched January 2025; founding members include the7stars, Total Media, Crossmedia, The Specialist Works and others, collectively £800m+ in billings. This is the closest thing to an "official" roster of serious UK independents, and it is exactly the kind of source LLMs will increasingly cite. Explore membership; on scale, Bicycle would qualify.
+- **Alliance of Media Independents (AMI) — the single highest-leverage move.** The second query above proved it: ChatGPT's "ten agencies to consider" list was the AMI roster, cited to a member's "we joined AMI" press release. Launched January 2025, founding members (the7stars, Total Media, Crossmedia, The Specialist Works, December19, Bountiful Cow, Republic of Media, Pashn, AMS Media Group and more) represent £800m+ in billings. On scale Bicycle would qualify. Joining, and announcing it on a citable page (the new site) plus trade press, is the most direct path to appearing in this exact answer.
 - **Agency directories** — claim and fully complete profiles on Clutch, Sortlist, DesignRush and Agency Spotter. These rank for agency queries and feed AI answers.
 - **Campaign** — get into Campaign's indie coverage, School Reports and agency rankings.
 
