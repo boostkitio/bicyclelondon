@@ -4,7 +4,20 @@ import { TEAM, photoSlug } from "@/content/team";
 // Two woven rows of headshots that drift in opposite directions. At rest the
 // faces sit in greyscale; on hover one lights up to full colour with an
 // acid-green ring and its name + role, so the strip rewards a closer look.
-const PEOPLE = TEAM.filter((m) => !["Baxter", "Luna", "Nelly"].includes(m.name));
+const DOG_NAMES = ["Baxter", "Luna", "Nelly"];
+const DOGS = TEAM.filter((m) => DOG_NAMES.includes(m.name));
+const PEOPLE = TEAM.filter((m) => !DOG_NAMES.includes(m.name));
+
+// Sprinkle the office dogs (Chief Barking Officer & co.) in among the team so
+// they're a small delight to discover on hover.
+function sprinkle(people: typeof PEOPLE, dogs: typeof DOGS, at: number[]) {
+  const r = [...people];
+  at.forEach((pos, i) => dogs[i] && r.splice(pos, 0, dogs[i]));
+  return r;
+}
+
+const ROW_A = sprinkle(PEOPLE.slice(0, 15), [DOGS[0]], [6]);
+const ROW_B = sprinkle(PEOPLE.slice(15, 28), [DOGS[1], DOGS[2]], [4, 10]);
 
 function Face({ name, role }: { name: string; role: string }) {
   return (
@@ -57,8 +70,8 @@ function Row({
 export function TeamStrip() {
   return (
     <div className="space-y-8 sm:space-y-10">
-      <Row people={PEOPLE.slice(0, 16)} duration="54s" />
-      <Row people={PEOPLE.slice(16, 32)} duration="64s" reverse />
+      <Row people={ROW_A} duration="54s" />
+      <Row people={ROW_B} duration="64s" reverse />
     </div>
   );
 }
