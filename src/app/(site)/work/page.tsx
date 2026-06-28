@@ -83,7 +83,7 @@ export default async function WorkPage() {
                         {cs.standfirst}
                       </p>
                     )}
-                    <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold uppercase tracking-wide text-moss transition-all group-hover:gap-2 group-hover:text-brand-ink">
+                    <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold uppercase tracking-wide text-navy transition-all group-hover:gap-2 group-hover:text-brand-ink">
                       View case →
                     </span>
                   </div>

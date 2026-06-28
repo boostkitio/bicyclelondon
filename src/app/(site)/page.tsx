@@ -193,7 +193,7 @@ export default async function HomePage() {
             </div>
             <Link
               href="/the-peloton"
-              className="shrink-0 text-sm font-semibold uppercase tracking-wide text-moss hover:text-brand-ink"
+              className="shrink-0 text-sm font-semibold uppercase tracking-wide text-navy hover:text-brand-ink"
             >
               Meet the team →
             </Link>

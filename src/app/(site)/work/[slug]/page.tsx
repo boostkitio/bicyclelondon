@@ -192,7 +192,7 @@ export default async function CaseStudyPage({ params }: Props) {
         <div className="mx-auto mt-16 max-w-5xl">
           <Link
             href="/work"
-            className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-moss transition hover:gap-3 hover:text-brand-ink"
+            className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-navy transition hover:gap-3 hover:text-brand-ink"
           >
             ← All work
           </Link>

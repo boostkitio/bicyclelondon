@@ -15,7 +15,7 @@ const sizes: Record<Size, string> = {
 const variants: Record<Variant, string> = {
   primary: "bg-brand text-black hover:bg-brand-ink",
   dark: "bg-navy text-white hover:bg-navy/90",
-  outline: "border-2 border-moss text-ink hover:bg-moss hover:text-white",
+  outline: "border-2 border-navy text-navy hover:bg-navy hover:text-white",
   white: "bg-white text-ink hover:bg-paper",
 };
 
