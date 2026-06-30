@@ -531,11 +531,11 @@ export default function ComparisonPage() {
               technical base for SEO, AEO and future reporting.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <ButtonLink href="/work" variant="primary">
-                View work
+              <ButtonLink href="/visibility" variant="primary">
+                See the visibility audit
               </ButtonLink>
-              <ButtonLink href="/slipstream" variant="outline">
-                Read Slipstream
+              <ButtonLink href="/work" variant="outline">
+                View work
               </ButtonLink>
             </div>
           </div>
