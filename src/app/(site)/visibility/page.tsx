@@ -615,6 +615,12 @@ export default function VisibilityPage() {
             </article>
           ))}
         </div>
+
+        <div className="mt-8">
+          <ButtonLink href="/visibility/get-listed" variant="dark">
+            Open the month-one checklist
+          </ButtonLink>
+        </div>
       </Section>
 
       <Section tone="navy">
