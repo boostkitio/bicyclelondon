@@ -58,7 +58,7 @@ const today = [
     metric: "~30",
     label: "ranking keywords (UK)",
     detail:
-      "The current site ranks for roughly 30 keywords in the UK index. Every independent below ranks for 71 to 113. That is the gap in plain numbers.",
+      "The current site ranks for around 30 keywords in the UK index, among the smallest footprints of any agency here and the only one that AI assistants do not recommend.",
     source: "DataForSEO",
   },
   {
@@ -113,6 +113,7 @@ const keywordBars = [
   { label: "Medialab", value: 73 },
   { label: "Republic of Media", value: 72 },
   { label: "Mostly Media", value: 71 },
+  { label: "Goodstuff", value: 38 },
   { label: "Bicycle London", value: 30, highlight: true },
 ];
 
@@ -120,6 +121,7 @@ const refDomainBars = [
   { label: "Republic of Media", value: 827 },
   { label: "The Kite Factory", value: 644 },
   { label: "the7stars", value: 635 },
+  { label: "Goodstuff", value: 426 },
   { label: "Medialab", value: 416 },
   { label: "Mostly Media", value: 215 },
   { label: "Bicycle London", value: 166, highlight: true },
@@ -131,6 +133,7 @@ const benchmarkRows = [
   { agency: "Medialab", keywords: "73", authority: "26", refs: "416", llm: "Yes, all three" },
   { agency: "Republic of Media", keywords: "72", authority: "24", refs: "827", llm: "Yes" },
   { agency: "Mostly Media", keywords: "71", authority: "18", refs: "215", llm: "Yes" },
+  { agency: "Goodstuff", keywords: "38", authority: "29", refs: "426", llm: "Yes" },
   {
     agency: "Bicycle London",
     keywords: "30",
@@ -424,10 +427,11 @@ export default function VisibilityPage() {
             Bicycle vs the agencies it is up against
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-black/70">
-            These are the independents the AI assistants actually recommend. Even
-            the smaller ones rank for more than twice as many keywords as Bicycle,
-            and they carry more of the authority signals that search and AI rely
-            on.
+            These are the independents the AI assistants actually recommend.
+            Bicycle is the only one missing from those answers. Underneath that,
+            it trails on the two things that earn the recommendation: a broad
+            non-branded footprint and the authority signals that search and AI
+            lean on.
           </p>
         </div>
 
@@ -485,11 +489,33 @@ export default function VisibilityPage() {
           </table>
         </div>
         <p className="mt-4 text-sm text-black/55">
-          Authority score is Semrush&apos;s 0 to 100 measure of a domain&apos;s
-          backlink strength. Bicycle is mid-table on authority but bottom on
-          keywords and referring domains, and the only agency here absent from the
-          AI answers.
+          Authority score is Semrush&apos;s 0 to 100 measure of backlink strength.
+          Goodstuff is worth a note: it ranks for a similar number of keywords to
+          Bicycle, but far more authority and brand presence is why it gets
+          recommended and Bicycle does not. On the measure that matters most for
+          this brief, being recommended by AI, Bicycle is the only agency here
+          absent.
         </p>
+
+        <div className="mt-8 rounded-3xl bg-navy p-8 text-white">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand">
+            The Total Media lesson
+          </p>
+          <h3 className="mt-3 font-display text-3xl uppercase">
+            Reputation outlasts a website
+          </h3>
+          <p className="mt-4 max-w-3xl leading-relaxed text-white/80">
+            Total Media is an established independent that has moved into Above
+            Agency. Its new home, total.above.agency, now ranks for just 9
+            keywords with no measurable backlink profile of its own. Yet ChatGPT
+            still recommends Total Media, purely on the strength of its reputation
+            and the directories and press that already mention it. That is the
+            clearest proof of the point: AI recommendations are built on off-site
+            reputation, not just your own website. It is also a sharp reminder of
+            how much visibility a migration can cost if equity is not protected,
+            which is exactly what Bicycle&apos;s rebuild is designed to avoid.
+          </p>
+        </div>
       </Section>
 
       <Section tone="navy">
