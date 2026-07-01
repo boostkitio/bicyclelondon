@@ -9,6 +9,12 @@ import { allJobsQuery } from "@/sanity/lib/queries";
 import { SITE } from "@/lib/site";
 import type { JobCard } from "@/sanity/lib/types";
 
+const moreLinks = [
+  { href: "/careers/benefits", title: "Benefits", detail: "Pension, private healthcare, 26 days holiday and more." },
+  { href: "/careers/values", title: "Mission & values", detail: "Drive, Balance and Freedom: what makes us Bicycle." },
+  { href: "/careers/diversity", title: "Diversity & inclusion", detail: "An equal-opportunity employer committed to belonging." },
+];
+
 export const metadata: Metadata = {
   title: "Careers",
   description:
@@ -88,6 +94,23 @@ export default async function CareersPage() {
               ))}
             </ul>
           )}
+        </div>
+      </Section>
+
+      <Section>
+        <div className="grid gap-4 sm:grid-cols-3">
+          {moreLinks.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="group block rounded-2xl bg-paper p-6 ring-1 ring-black/5 transition-colors hover:bg-white hover:ring-black/10"
+            >
+              <span className="font-display text-lg font-bold uppercase text-navy transition-colors group-hover:text-brand-ink">
+                {item.title}
+              </span>
+              <p className="mt-2 text-sm text-black/65">{item.detail}</p>
+            </Link>
+          ))}
         </div>
       </Section>
 
