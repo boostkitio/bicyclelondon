@@ -114,18 +114,32 @@ export default async function JobPage({ params }: Props) {
           <div className="mt-12 rounded-3xl bg-paper p-8">
             <h2 className="display text-2xl">How to apply</h2>
             <p className="mt-2 text-black/65">
-              Send your CV and a few lines on why you’re a fit.
+              {job.teamtailorUrl
+                ? "Apply through our careers portal and we'll be in touch."
+                : "Send your CV and a few lines on why you’re a fit."}
             </p>
             <div className="mt-5">
-              <ButtonLink
-                href={`mailto:${applyEmail}?subject=${encodeURIComponent(
-                  `Application: ${job.title}`,
-                )}`}
-                variant="primary"
-                size="lg"
-              >
-                Apply for this role
-              </ButtonLink>
+              {job.teamtailorUrl ? (
+                <ButtonLink
+                  href={job.teamtailorUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant="primary"
+                  size="lg"
+                >
+                  Apply for this role
+                </ButtonLink>
+              ) : (
+                <ButtonLink
+                  href={`mailto:${applyEmail}?subject=${encodeURIComponent(
+                    `Application: ${job.title}`,
+                  )}`}
+                  variant="primary"
+                  size="lg"
+                >
+                  Apply for this role
+                </ButtonLink>
+              )}
             </div>
           </div>
         </div>

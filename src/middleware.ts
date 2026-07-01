@@ -55,6 +55,14 @@ export function middleware(req: NextRequest) {
   if (!match) return NextResponse.next();
 
   const [, section, rawSlug] = match;
+
+  // Legacy Wix slugs were always a single path segment. A raw slug containing
+  // its own slash (e.g. /careers/team/mark-pavlika) is a genuine modern
+  // multi-segment route, not a legacy slug needing normalisation - slugify()
+  // would otherwise collapse the slash into a hyphen and redirect it to a
+  // page that doesn't exist.
+  if (rawSlug.includes("/")) return NextResponse.next();
+
   let decoded = rawSlug;
   try {
     decoded = decodeURIComponent(rawSlug);

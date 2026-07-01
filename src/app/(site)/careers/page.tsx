@@ -4,6 +4,7 @@ import Image from "next/image";
 import { PageHero } from "@/components/page/page-hero";
 import { CtaBand } from "@/components/page/cta-band";
 import { Section } from "@/components/ui/section";
+import { Avatar } from "@/components/avatar";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { allJobsQuery } from "@/sanity/lib/queries";
 import { SITE } from "@/lib/site";
@@ -13,6 +14,47 @@ const moreLinks = [
   { href: "/careers/benefits", title: "Benefits", detail: "Pension, private healthcare, 26 days holiday and more." },
   { href: "/careers/values", title: "Mission & values", detail: "Drive, Balance and Freedom: what makes us Bicycle." },
   { href: "/careers/diversity", title: "Diversity & inclusion", detail: "An equal-opportunity employer committed to belonging." },
+];
+
+const peloton = [
+  {
+    href: "/careers/team/mark-pavlika",
+    name: "Mark Pavlika",
+    role: "Chief People & Purpose Officer",
+    photo: "/team/mark-pavlika.png",
+  },
+  {
+    href: "/careers/team/valeria-perticucci",
+    name: "Valeria Perticucci",
+    role: "Peloton Success Manager",
+    photo: "/team/valeria-perticucci.png",
+  },
+];
+
+const testimonials = [
+  {
+    quote:
+      "As a grad, I was very nervous to come into my first full time role, all I can say is Bicycle has set the bar extremely high. So high that when I go home and talk about my work, my parents are jealous of the environment I get to call my office. The culture offers a warm, inclusive and ever changing atmosphere. Not a single day is the same and therefore there is plenty of space to learn and develop as an individual.",
+    name: "Izzy Nott",
+    role: "AV Account Executive",
+  },
+  {
+    quote:
+      "Bicycle is a co-operative, transparent place to work where everyone has visibility on our strategic and commercial goals. We're hugely ambitious, growing fast, and our breadth of services is seriously impressive for our age. Everyone learns a lot, as well as making friends for life!",
+    name: "Alex Wood",
+    role: "Business Director",
+  },
+  {
+    quote:
+      "Bicycle has a great work culture & vibrant environment which celebrates diversity and allows you to be yourself. It's great having the opportunity to work across an amazing mix of clients & alongside colleagues that inspire you every day.",
+    name: "Louis Aidam",
+    role: "Senior Account Executive",
+  },
+  {
+    quote: "A small thing but it's nice to zip around town on one of the company's Brompton Bicycles.",
+    name: "Bryan Hogg",
+    role: "Strategy Director",
+  },
 ];
 
 export const metadata: Metadata = {
@@ -146,6 +188,48 @@ export default async function CareersPage() {
             Judges, IPA CPD Gold
           </footer>
         </blockquote>
+      </Section>
+
+      <Section>
+        <h2 className="font-display text-sm font-semibold uppercase tracking-widest text-black/50">
+          What's life at Bicycle like?
+        </h2>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          {testimonials.map((t) => (
+            <blockquote
+              key={t.name}
+              className="rounded-2xl bg-paper p-6 text-black/75 ring-1 ring-black/5"
+            >
+              <p className="italic leading-relaxed">“{t.quote}”</p>
+              <footer className="mt-4 text-sm font-semibold not-italic text-black/60">
+                {t.name}, {t.role}
+              </footer>
+            </blockquote>
+          ))}
+        </div>
+
+        <h2 className="mt-14 font-display text-sm font-semibold uppercase tracking-widest text-black/50">
+          Meet the Peloton
+        </h2>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          {peloton.map((person) => (
+            <Link
+              key={person.href}
+              href={person.href}
+              className="group flex items-center gap-5 rounded-2xl bg-paper p-5 ring-1 ring-black/5 transition-colors hover:bg-white hover:ring-black/10"
+            >
+              <div className="w-16 shrink-0">
+                <Avatar src={person.photo} name={person.name} initials={person.name[0]} />
+              </div>
+              <div>
+                <span className="font-display text-lg font-bold text-navy transition-colors group-hover:text-brand-ink">
+                  {person.name}
+                </span>
+                <p className="mt-1 text-sm text-black/65">{person.role}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
       </Section>
 
       <CtaBand

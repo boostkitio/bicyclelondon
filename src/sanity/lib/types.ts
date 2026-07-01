@@ -76,6 +76,7 @@ export type Job = JobCard & {
   salary?: string;
   body?: unknown[];
   applyEmail?: string;
+  teamtailorUrl?: string;
   postedAt?: string;
   seo?: Seo;
 };

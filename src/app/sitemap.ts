@@ -24,6 +24,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/careers/benefits",
     "/careers/values",
     "/careers/diversity",
+    "/careers/team/mark-pavlika",
+    "/careers/team/valeria-perticucci",
     "/bicycle",
     "/bicycle-blade",
     "/bicycle-studio",

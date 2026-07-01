@@ -48,7 +48,7 @@ export const jobSlugsQuery = groq`
 export const jobBySlugQuery = groq`
   *[_type == "job" && slug.current == $slug][0]{
     _id, title, "slug": slug.current, team, location, employmentType, salary, summary,
-    body, applyEmail, postedAt, seo
+    body, applyEmail, teamtailorUrl, postedAt, seo
   }`;
 
 export const siteSettingsQuery = groq`*[_type == "siteSettings"][0]`;

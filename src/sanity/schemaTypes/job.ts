@@ -84,6 +84,20 @@ export default defineType({
       initialValue: "jobs@bicyclelondon.com",
     }),
     defineField({
+      name: "teamtailorUrl",
+      title: "Teamtailor application URL (optional)",
+      description:
+        "If set, the 'Apply' button links here instead of a mailto, so the application flows into Teamtailor's ATS/candidate pipeline.",
+      type: "url",
+      group: "content",
+      validation: (rule) =>
+        rule.uri({ scheme: ["https"] }).custom((url) =>
+          !url || url.includes("teamtailor.com") || url.includes("bicyclelondon.com/jobs")
+            ? true
+            : "Should be a Teamtailor application URL",
+        ),
+    }),
+    defineField({
       name: "postedAt",
       title: "Posted at",
       type: "datetime",
