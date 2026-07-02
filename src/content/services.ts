@@ -96,7 +96,20 @@ export const services: Record<string, ServiceContent> = {
     path: "/bicycle-ripple",
     logo: "/images/logo-ripple.png",
     heroImage: "/images/heroes/ripple.jpg",
+    heroVideoPlaybackId: "hB02XErDlQ8cF1gipkWOBl9Te4JuJLK6xh7feHohNCIw",
     featureImage: "/images/feature-ripple.jpg",
+    brands: {
+      heading:
+        "Our partnership with Hypetap brings experience with the following brands",
+      logos: [
+        { src: "/images/ripple-brands/brand-1.png", alt: "Brand Ripple has worked with" },
+        { src: "/images/ripple-brands/brand-2.png", alt: "Brand Ripple has worked with" },
+        { src: "/images/ripple-brands/brand-3.png", alt: "Brand Ripple has worked with" },
+        { src: "/images/ripple-brands/brand-4.png", alt: "Brand Ripple has worked with" },
+        { src: "/images/ripple-brands/brand-5.png", alt: "Brand Ripple has worked with" },
+        { src: "/images/ripple-brands/brand-6.png", alt: "Brand Ripple has worked with" },
+      ],
+    },
     lead: [
       "Our integrated, social-first solution. Ripple combines our own organic social hub with an influencer offering powered by our partnership with Hypetap.",
     ],

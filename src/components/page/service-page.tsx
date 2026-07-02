@@ -5,6 +5,7 @@ import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/reveal";
 import { LogoWall } from "@/components/logo-wall";
 import { MuxVideo } from "@/components/mux-video";
+import { MuxBg } from "@/components/mux-bg";
 import { JsonLd } from "@/components/seo/json-ld";
 import { serviceSchema } from "@/lib/schema";
 
@@ -17,12 +18,14 @@ export type ServiceContent = {
   // Sub-brand accent. Approximate values pending the exact brand hexes.
   accent?: string;
   heroImage?: string;
+  heroVideoPlaybackId?: string;
   logo?: string;
   path: string;
   featureImage?: string;
   lead?: string[];
   points?: ServicePoint[];
   badges?: { src: string; alt: string }[];
+  brands?: { heading: string; logos: { src: string; alt: string }[] };
   videos?: { playbackId: string; title: string }[];
   sections?: ServiceSection[];
   cta?: { heading?: string; label?: string; href?: string };
@@ -42,7 +45,14 @@ export function ServicePage({ content }: { content: ServiceContent }) {
       {/* Cinematic, colour-led hero: full-bleed film-still, the unit's colour
           glowing in, its logo lockup as the identity. */}
       <section className="relative flex min-h-[80vh] items-end overflow-hidden bg-deep text-white">
-        {content.heroImage && (
+        {content.heroVideoPlaybackId ? (
+          <div className="absolute inset-0 opacity-90">
+            <MuxBg
+              playbackId={content.heroVideoPlaybackId}
+              poster={content.heroImage}
+            />
+          </div>
+        ) : content.heroImage ? (
           <Image
             src={content.heroImage}
             alt=""
@@ -51,7 +61,7 @@ export function ServicePage({ content }: { content: ServiceContent }) {
             sizes="100vw"
             className="object-cover opacity-90"
           />
-        )}
+        ) : null}
         <div className="absolute inset-0 bg-gradient-to-t from-deep via-deep/55 to-deep/25" />
         <div className="absolute inset-0 bg-gradient-to-r from-deep/90 via-deep/25 to-transparent" />
         <div
@@ -161,6 +171,29 @@ export function ServicePage({ content }: { content: ServiceContent }) {
               ))}
             </div>
           </Reveal>
+        </Section>
+      )}
+
+      {content.brands && content.brands.logos.length > 0 && (
+        <Section tone="paper">
+          <Reveal>
+            <p className="mx-auto max-w-2xl text-center text-base font-medium text-black/55">
+              {content.brands.heading}
+            </p>
+          </Reveal>
+          <div className="mt-12 grid grid-cols-2 items-center gap-x-8 gap-y-12 sm:grid-cols-3 lg:grid-cols-6">
+            {content.brands.logos.map((b) => (
+              <div key={b.src} className="group flex items-center justify-center">
+                <Image
+                  src={b.src}
+                  alt={b.alt}
+                  width={220}
+                  height={120}
+                  className="h-20 w-auto max-w-full object-contain transition duration-300 ease-out group-hover:scale-105 sm:h-24"
+                />
+              </div>
+            ))}
+          </div>
         </Section>
       )}
 
