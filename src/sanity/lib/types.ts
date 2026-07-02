@@ -62,6 +62,17 @@ export type Article = {
   seo?: Seo;
 };
 
+export type PelotonMember = {
+  _id: string;
+  name: string;
+  role?: string;
+  slug?: string;
+  photo?: SanityImage;
+  hoverPhoto?: SanityImage;
+  linkedin?: string;
+  isPet?: boolean;
+};
+
 export type JobCard = {
   _id: string;
   title: string;

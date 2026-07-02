@@ -53,6 +53,11 @@ export const jobBySlugQuery = groq`
 
 export const siteSettingsQuery = groq`*[_type == "siteSettings"][0]`;
 
+export const pelotonQuery = groq`
+  *[_type == "pelotonMember"] | order(order asc){
+    _id, name, role, "slug": slug.current, photo, hoverPhoto, linkedin, isPet
+  }`;
+
 export const clientsWallQuery = groq`
   *[_type == "client" && showOnLogoWall == true && defined(logo.asset)]
     | order(order asc){ _id, name, logo }`;
