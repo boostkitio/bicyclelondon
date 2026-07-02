@@ -165,9 +165,11 @@ export function SiteHeader() {
           </ButtonLink>
           </nav>
 
-          <Link
-            href="/purpose"
-            aria-label="Certified B Corporation"
+          <a
+            href="https://www.bcorporation.net/en-us/find-a-b-corp/company/bicycle-london-limited/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Certified B Corporation profile (opens in a new tab)"
             className="shrink-0 transition-opacity hover:opacity-80"
           >
             <Image
@@ -177,7 +179,7 @@ export function SiteHeader() {
               height={94}
               className="h-9 w-auto sm:h-10"
             />
-          </Link>
+          </a>
 
           <button
             type="button"

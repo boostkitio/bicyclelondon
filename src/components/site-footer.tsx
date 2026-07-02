@@ -31,13 +31,21 @@ export function SiteFooter() {
               power of &lsquo;and&rsquo;.
             </p>
             <div className="mt-6 flex items-center gap-5">
-              <Image
-                src="/images/bcorp-white.png"
-                alt="Certified B Corporation"
-                width={56}
-                height={94}
-                className="h-16 w-auto"
-              />
+              <a
+                href="https://www.bcorporation.net/en-us/find-a-b-corp/company/bicycle-london-limited/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Certified B Corporation profile (opens in a new tab)"
+                className="transition-opacity hover:opacity-80"
+              >
+                <Image
+                  src="/images/bcorp-white.png"
+                  alt="Certified B Corporation"
+                  width={56}
+                  height={94}
+                  className="h-16 w-auto"
+                />
+              </a>
               <Image
                 src="/images/royal-charter.png"
                 alt="Incorporated by Royal Charter"
