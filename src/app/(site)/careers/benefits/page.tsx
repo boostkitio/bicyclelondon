@@ -77,7 +77,7 @@ export default function BenefitsPage() {
         <div className="grid gap-10 sm:grid-cols-2">
           {groups.map((group) => (
             <div key={group.title}>
-              <h2 className="font-display text-sm font-semibold uppercase tracking-widest text-black/50">
+              <h2 className="label text-black/45">
                 {group.title}
               </h2>
               <ul className="mt-4 space-y-3">

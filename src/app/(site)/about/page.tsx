@@ -32,7 +32,7 @@ export default function AboutPage() {
             Bicycle was founded in 2021 by four people who believed that a better
             type of media and comms agency wasn’t just possible, but needed.
           </p>
-          <p className="mt-8 font-display text-sm font-semibold uppercase tracking-widest text-brand-ink">
+          <p className="mt-8 label text-brand-ink">
             We set out:
           </p>
           <ul className="mt-4 space-y-4 text-lg text-black/75">

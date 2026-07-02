@@ -78,7 +78,7 @@ export default function PurposePage() {
 
       <Section>
         <div className="mx-auto max-w-3xl">
-          <p className="font-display text-sm font-semibold uppercase tracking-widest text-brand-ink">
+          <p className="label text-brand-ink">
             XO Bikes
           </p>
           <h2 className="mt-3 display text-3xl sm:text-4xl">

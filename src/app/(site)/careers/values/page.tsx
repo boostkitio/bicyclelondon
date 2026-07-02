@@ -39,7 +39,7 @@ export default function ValuesPage() {
 
       <Section>
         <div className="max-w-3xl">
-          <h2 className="font-display text-sm font-semibold uppercase tracking-widest text-black/50">
+          <h2 className="label text-black/45">
             Our mission
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-black/75">
@@ -51,7 +51,7 @@ export default function ValuesPage() {
       </Section>
 
       <Section tone="paper">
-        <h2 className="font-display text-sm font-semibold uppercase tracking-widest text-black/50">
+        <h2 className="label text-black/45">
           Bicycle values
         </h2>
         <div className="mt-8 grid gap-8 md:grid-cols-3">

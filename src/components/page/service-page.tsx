@@ -14,6 +14,8 @@ export type ServiceSection = { heading?: string; body: string[] };
 export type ServiceContent = {
   eyebrow: string;
   title: string;
+  // Sub-brand accent. Approximate values pending the exact brand hexes.
+  accent?: string;
   heroImage?: string;
   logo?: string;
   path: string;
@@ -27,8 +29,9 @@ export type ServiceContent = {
 };
 
 export function ServicePage({ content }: { content: ServiceContent }) {
+  const accent = content.accent ?? "#00d400";
   return (
-    <>
+    <div style={{ ["--accent" as string]: accent }}>
       <JsonLd
         data={serviceSchema({
           name: content.title,
@@ -79,11 +82,12 @@ export function ServicePage({ content }: { content: ServiceContent }) {
           <div className="grid gap-6 md:grid-cols-3">
             {content.points.map((pt, i) => (
               <Reveal key={i} delay={i * 70}>
-                <div className="h-full rounded-3xl bg-white p-8 ring-1 ring-black/5">
-                  <span className="font-display text-4xl font-extrabold text-brand-ink">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="mt-4 font-display text-xl font-bold uppercase">
+                <div className="h-full rounded-3xl bg-white p-8 ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/5">
+                  <span
+                    className="block h-1.5 w-10 rounded-full"
+                    style={{ background: "var(--accent)" }}
+                  />
+                  <h3 className="mt-6 font-display text-xl font-bold uppercase">
                     {pt.title}
                   </h3>
                   <p className="mt-3 text-black/65">{pt.body}</p>
@@ -116,7 +120,13 @@ export function ServicePage({ content }: { content: ServiceContent }) {
       {content.videos && content.videos.length > 0 && (
         <Section tone="navy">
           <Reveal>
-            <h2 className="display text-3xl sm:text-4xl">Selected films</h2>
+            <h2 className="display inline-block text-3xl sm:text-4xl">
+              Selected films
+              <span
+                className="mt-3 block h-1 w-16 rounded-full"
+                style={{ background: "var(--accent)" }}
+              />
+            </h2>
           </Reveal>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {content.videos.map((v) => (
@@ -150,7 +160,7 @@ export function ServicePage({ content }: { content: ServiceContent }) {
 
       <Section tone="white">
         <Reveal>
-          <p className="text-center text-sm font-semibold uppercase tracking-widest text-black/40">
+          <p className="label text-center text-black/40">
             Trusted by ambitious brands
           </p>
         </Reveal>
@@ -164,6 +174,6 @@ export function ServicePage({ content }: { content: ServiceContent }) {
         label={content.cta?.label}
         href={content.cta?.href}
       />
-    </>
+    </div>
   );
 }

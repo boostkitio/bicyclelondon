@@ -3,6 +3,7 @@ import type { ServiceContent } from "@/components/page/service-page";
 export const services: Record<string, ServiceContent> = {
   bicycle: {
     eyebrow: "Meet Bicycle",
+    accent: "#00d400",
     title: "Our ecosystem",
     path: "/bicycle",
     logo: "/images/logo-bicycle-white.png",
@@ -24,6 +25,7 @@ export const services: Record<string, ServiceContent> = {
 
   blade: {
     eyebrow: "Performance consultancy",
+    accent: "#ff5c49",
     title: "Meet Blade",
     path: "/bicycle-blade",
     logo: "/images/logo-blade.png",
@@ -64,6 +66,7 @@ export const services: Record<string, ServiceContent> = {
 
   studio: {
     eyebrow: "Creative studio",
+    accent: "#ff9500",
     title: "Meet Studio",
     path: "/bicycle-studio",
     logo: "/images/logo-studio.png",
@@ -88,6 +91,7 @@ export const services: Record<string, ServiceContent> = {
 
   ripple: {
     eyebrow: "Influencer & social",
+    accent: "#8b5cf6",
     title: "Meet Ripple",
     path: "/bicycle-ripple",
     logo: "/images/logo-ripple.png",
@@ -114,6 +118,7 @@ export const services: Record<string, ServiceContent> = {
 
   international: {
     eyebrow: "Bicycle International",
+    accent: "#0100ff",
     title: "Are you a multi-market brand?",
     path: "/international",
     logo: "/images/logo-international.png",

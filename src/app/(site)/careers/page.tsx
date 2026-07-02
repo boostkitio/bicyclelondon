@@ -95,7 +95,7 @@ export default async function CareersPage() {
         </div>
 
         <div className="mx-auto mt-12 max-w-3xl">
-          <h2 className="font-display text-sm font-semibold uppercase tracking-widest text-black/50">
+          <h2 className="label text-black/45">
             Open roles
           </h2>
           {jobs.length === 0 ? (
@@ -122,7 +122,7 @@ export default async function CareersPage() {
                       <span className="block font-display text-2xl font-bold uppercase leading-tight transition-colors group-hover:text-brand-ink sm:text-3xl">
                         {job.title}
                       </span>
-                      <span className="mt-1.5 block text-sm font-semibold uppercase tracking-wide text-black/45">
+                      <span className="label mt-2 block text-black/45">
                         {[job.team, job.location].filter(Boolean).join(" · ")}
                       </span>
                     </span>
@@ -171,7 +171,7 @@ export default async function CareersPage() {
             {awards.map((a) => (
               <span
                 key={a}
-                className="rounded-full bg-white px-5 py-2 font-display text-sm font-semibold uppercase tracking-wide text-navy ring-1 ring-black/5"
+                className="label rounded-full bg-white px-5 py-2.5 text-navy ring-1 ring-black/5"
               >
                 {a}
               </span>
@@ -192,7 +192,7 @@ export default async function CareersPage() {
       </Section>
 
       <Section>
-        <h2 className="font-display text-sm font-semibold uppercase tracking-widest text-black/50">
+        <h2 className="label text-black/45">
           What’s life at Bicycle like?
         </h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -209,7 +209,7 @@ export default async function CareersPage() {
           ))}
         </div>
 
-        <h2 className="mt-14 font-display text-sm font-semibold uppercase tracking-widest text-black/50">
+        <h2 className="mt-14 label text-black/45">
           Meet the Peloton
         </h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">

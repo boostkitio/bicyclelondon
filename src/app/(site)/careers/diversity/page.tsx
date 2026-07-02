@@ -22,7 +22,7 @@ export default function DiversityPage() {
 
       <Section>
         <div className="max-w-3xl space-y-6 text-lg leading-relaxed text-black/75">
-          <h2 className="font-display text-sm font-semibold uppercase tracking-widest text-black/50">
+          <h2 className="label text-black/45">
             Diversity &amp; representation
           </h2>
           <p>

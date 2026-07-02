@@ -98,7 +98,8 @@ export default async function CaseStudyPage({ params }: Props) {
         )}
         <Container className="relative z-10 pb-16 pt-44">
           {client && client !== cs.title && (
-            <p className="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-brand">
+            <p className="label mb-5 flex items-center gap-2.5 text-brand">
+              <span className="animate-pulse-dot inline-block h-1.5 w-1.5 rounded-full bg-brand" />
               {client}
             </p>
           )}
@@ -117,7 +118,7 @@ export default async function CaseStudyPage({ params }: Props) {
               {cs.services.map((s) => (
                 <li
                   key={s}
-                  className="rounded-full border border-white/30 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.1em] text-white/85"
+                  className="label rounded-full border border-white/30 px-4 py-1.5 text-white/85"
                 >
                   {s}
                 </li>
@@ -137,8 +138,8 @@ export default async function CaseStudyPage({ params }: Props) {
                 // ride along in the suffix and still render correctly.
                 const m = /^([^\d]*)(\d[\d,]*)(.*)$/.exec(r.metric ?? "");
                 return (
-                  <div key={i} className="border-t-2 border-black/20 pt-5">
-                    <p className="display text-5xl leading-none sm:text-6xl">
+                  <div key={i} className="border-t-2 border-black/25 pt-5">
+                    <p className="display text-5xl leading-none sm:text-6xl lg:text-7xl">
                       {m ? (
                         <CountUp
                           to={parseInt(m[2].replace(/,/g, ""), 10)}
@@ -149,9 +150,7 @@ export default async function CaseStudyPage({ params }: Props) {
                         r.metric
                       )}
                     </p>
-                    <p className="mt-3 text-sm font-semibold uppercase tracking-wide text-black/70">
-                      {r.label}
-                    </p>
+                    <p className="label mt-4 text-black/70">{r.label}</p>
                   </div>
                 );
               })}
@@ -185,9 +184,9 @@ export default async function CaseStudyPage({ params }: Props) {
         <div className="mx-auto mt-16 max-w-5xl">
           <Link
             href="/work"
-            className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-navy transition hover:gap-3 hover:text-brand-ink"
+            className="label inline-flex items-center gap-2 text-navy transition hover:gap-3 hover:text-brand-ink"
           >
-            ← All work
+            <span aria-hidden>←</span> All work
           </Link>
         </div>
       </Section>

@@ -109,7 +109,7 @@ export default async function JobPage({ params }: Props) {
               {meta.map((m) => (
                 <li
                   key={m}
-                  className="rounded-full bg-paper px-4 py-1.5 text-sm font-semibold uppercase tracking-wide text-black/70"
+                  className="rounded-full bg-paper px-4 py-1.5 label text-black/70"
                 >
                   {m}
                 </li>
