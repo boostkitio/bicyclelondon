@@ -4,23 +4,33 @@ import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 
+// A decelerating ease (easeOutExpo-ish) that settles softly, like the Wix reveal.
+const EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
+
 /**
- * Fades + slides content in as it scrolls into view, and back out as it leaves,
- * so the animation replays each time the element enters the viewport (either
- * direction), not just once.
+ * Reveals content as it scrolls into view, and hides again as it leaves, so the
+ * animation replays each time the element enters the viewport.
  *
- * Fails open: renders visible without JS, and seeds visibility from the
- * observer's first callback so above-the-fold content never flashes. Respects
+ * Two modes:
+ *  - default: a fade + rise (safe anywhere, never clips overflowing children).
+ *  - mask: the content slides up from behind a masked line (overflow-hidden
+ *    wrapper + full-height translate). Use for text / headings where nothing is
+ *    meant to break the frame.
+ *
+ * Fails open (renders visible without JS, seeds visibility from the observer's
+ * first callback so above-the-fold content never flashes) and respects
  * reduced-motion (stays visible, no toggling).
  */
 export function Reveal({
   children,
   className,
   delay = 0,
+  mask = false,
 }: {
   children: React.ReactNode;
   className?: string;
   delay?: number;
+  mask?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [shown, setShown] = useState(false);
@@ -31,9 +41,6 @@ export function Reveal({
     const el = ref.current;
     if (!el || reduced) return;
 
-    // The observer fires immediately on observe() with the initial
-    // intersection state, so it both seeds visibility (no above-the-fold
-    // flash) and drives subsequent reveals.
     const io = new IntersectionObserver(
       ([entry]) => {
         setArmed(true);
@@ -47,13 +54,29 @@ export function Reveal({
 
   const hidden = !reduced && armed && !shown;
 
+  if (mask) {
+    return (
+      <div ref={ref} className={cn("overflow-hidden", className)}>
+        <div
+          style={{ transitionDelay: `${delay}ms`, transitionTimingFunction: EASE }}
+          className={cn(
+            "transition-[transform,opacity] duration-[900ms] motion-reduce:transition-none",
+            hidden ? "translate-y-full opacity-0" : "translate-y-0 opacity-100",
+          )}
+        >
+          {children}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       ref={ref}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{ transitionDelay: `${delay}ms`, transitionTimingFunction: EASE }}
       className={cn(
-        "transition-all duration-700 ease-out motion-reduce:transition-none",
-        hidden ? "translate-y-6 opacity-0" : "translate-y-0 opacity-100",
+        "transition-[transform,opacity] duration-[820ms] motion-reduce:transition-none",
+        hidden ? "translate-y-8 opacity-0" : "translate-y-0 opacity-100",
         className,
       )}
     >

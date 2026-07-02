@@ -217,7 +217,7 @@ export default async function HomePage() {
 
       {/* Logo wall */}
       <Section tone="paper">
-        <Reveal>
+        <Reveal mask>
           <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
             <span className="label mb-4 inline-flex items-center gap-2.5 text-navy/55">
               <span className="h-1.5 w-1.5 rounded-full bg-brand-ink animate-pulse-dot" />
@@ -235,7 +235,7 @@ export default async function HomePage() {
 
       {/* What we do — big-type index, each unit in its own sub-brand colour */}
       <Section tone="navy">
-        <Reveal>
+        <Reveal mask>
           <h2 className="display text-4xl sm:text-5xl">What we do</h2>
           <p className="mt-4 max-w-2xl text-lg text-white/60">
             We don&rsquo;t have to do everything for every client. But when it all
@@ -292,7 +292,7 @@ export default async function HomePage() {
       {/* Selected work — grid (no pin) */}
       {featured.length > 0 && (
         <Section tone="navy" className="!pt-0">
-          <Reveal>
+          <Reveal mask>
             <div className="flex items-end justify-between gap-6">
               <h2 className="display text-4xl sm:text-5xl">Selected work</h2>
               <Link
@@ -337,7 +337,7 @@ export default async function HomePage() {
       {/* Testimonials — stacked cards */}
       {testimonials.length > 0 && (
         <Section tone="paper">
-          <Reveal className="mb-12 text-center">
+          <Reveal mask className="mb-12 text-center">
             <p className="label mb-4 justify-center text-brand-ink">
               In their words
             </p>
