@@ -25,7 +25,7 @@ export const services: Record<string, ServiceContent> = {
 
   blade: {
     eyebrow: "Performance consultancy",
-    accent: "#ff5c49",
+    accent: "#f06060",
     title: "Meet Blade",
     path: "/bicycle-blade",
     logo: "/images/logo-blade.png",
@@ -66,7 +66,7 @@ export const services: Record<string, ServiceContent> = {
 
   studio: {
     eyebrow: "Creative studio",
-    accent: "#ff9500",
+    accent: "#f08040",
     title: "Meet Studio",
     path: "/bicycle-studio",
     logo: "/images/logo-studio.png",
@@ -91,7 +91,7 @@ export const services: Record<string, ServiceContent> = {
 
   ripple: {
     eyebrow: "Influencer & social",
-    accent: "#9b7dff",
+    accent: "#00c0b0",
     title: "Meet Ripple",
     path: "/bicycle-ripple",
     logo: "/images/logo-ripple.png",
@@ -118,7 +118,7 @@ export const services: Record<string, ServiceContent> = {
 
   international: {
     eyebrow: "Bicycle International",
-    accent: "#3d6bff",
+    accent: "#3d5cff",
     title: "Are you a multi-market brand?",
     path: "/international",
     logo: "/images/logo-international.png",

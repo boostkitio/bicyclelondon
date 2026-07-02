@@ -38,10 +38,10 @@ export const SERVICES: {
   accent: string;
 }[] = [
   { label: "Bicycle", href: "/bicycle", blurb: "Integrated media planning & buying", logo: "/images/logo-bicycle-white.png", accent: "#00d400" },
-  { label: "Blade", href: "/bicycle-blade", blurb: "Performance marketing", logo: "/images/logo-blade.png", accent: "#ff5c49" },
-  { label: "Studio", href: "/bicycle-studio", blurb: "Creative, brand to response", logo: "/images/logo-studio.png", accent: "#ff9500" },
-  { label: "Ripple", href: "/bicycle-ripple", blurb: "Influencer marketing", logo: "/images/logo-ripple.png", accent: "#9b7dff" },
-  { label: "International", href: "/international", blurb: "Global media, one HQ", logo: "/images/logo-international.png", accent: "#3d6bff" },
+  { label: "Blade", href: "/bicycle-blade", blurb: "Performance marketing", logo: "/images/logo-blade.png", accent: "#f06060" },
+  { label: "Studio", href: "/bicycle-studio", blurb: "Creative, brand to response", logo: "/images/logo-studio.png", accent: "#f08040" },
+  { label: "Ripple", href: "/bicycle-ripple", blurb: "Influencer marketing", logo: "/images/logo-ripple.png", accent: "#00c0b0" },
+  { label: "International", href: "/international", blurb: "Global media, one HQ", logo: "/images/logo-international.png", accent: "#3d5cff" },
 ];
 
 export const PRIMARY_NAV: NavItem[] = [

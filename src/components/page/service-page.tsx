@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { PageHero } from "./page-hero";
 import { CtaBand } from "./cta-band";
+import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/reveal";
 import { LogoWall } from "@/components/logo-wall";
@@ -39,12 +39,59 @@ export function ServicePage({ content }: { content: ServiceContent }) {
           description: content.lead?.[0] || content.sections?.[0]?.body[0],
         })}
       />
-      <PageHero
-        eyebrow={content.eyebrow}
-        title={content.title}
-        image={content.heroImage}
-        logo={content.logo}
-      />
+      {/* Cinematic, colour-led hero: full-bleed film-still, the unit's colour
+          glowing in, its logo lockup as the identity. */}
+      <section className="relative flex min-h-[80vh] items-end overflow-hidden bg-deep text-white">
+        {content.heroImage && (
+          <Image
+            src={content.heroImage}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-90"
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-deep via-deep/55 to-deep/25" />
+        <div className="absolute inset-0 bg-gradient-to-r from-deep/90 via-deep/25 to-transparent" />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -left-32 bottom-[-6rem] h-[28rem] w-[28rem] rounded-full opacity-25 blur-[130px]"
+          style={{ background: "var(--accent)" }}
+        />
+        <Container className="relative z-10 pb-20 pt-40 sm:pb-24">
+          <p
+            className="label mb-7 flex items-center gap-2.5"
+            style={{ color: "var(--accent)" }}
+          >
+            <span
+              className="animate-pulse-dot inline-block h-1.5 w-1.5 rounded-full"
+              style={{ background: "var(--accent)" }}
+            />
+            {content.eyebrow}
+          </p>
+          {content.logo ? (
+            <>
+              <Image
+                src={content.logo}
+                alt={content.title}
+                width={560}
+                height={168}
+                priority
+                className="h-24 w-auto max-w-[80vw] object-contain sm:h-32 lg:h-36"
+              />
+              <h1 className="sr-only">{content.title}</h1>
+            </>
+          ) : (
+            <h1
+              className="display text-5xl sm:text-6xl lg:text-7xl"
+              style={{ color: "var(--accent)" }}
+            >
+              {content.title}
+            </h1>
+          )}
+        </Container>
+      </section>
 
       {(content.lead?.length || content.featureImage) && (
         <Section tone="white">
@@ -78,19 +125,19 @@ export function ServicePage({ content }: { content: ServiceContent }) {
       )}
 
       {content.points && content.points.length > 0 && (
-        <Section tone="paper">
+        <Section tone="navy">
           <div className="grid gap-6 md:grid-cols-3">
             {content.points.map((pt, i) => (
               <Reveal key={i} delay={i * 70}>
-                <div className="h-full rounded-3xl bg-white p-8 ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/5">
+                <div className="h-full rounded-3xl bg-white/[0.04] p-8 ring-1 ring-white/10 transition duration-300 hover:-translate-y-1 hover:bg-white/[0.07]">
                   <span
                     className="block h-1.5 w-10 rounded-full"
                     style={{ background: "var(--accent)" }}
                   />
-                  <h3 className="mt-6 font-display text-xl font-bold uppercase">
+                  <h3 className="mt-6 font-display text-xl font-bold uppercase text-white">
                     {pt.title}
                   </h3>
-                  <p className="mt-3 text-black/65">{pt.body}</p>
+                  <p className="mt-3 text-white/65">{pt.body}</p>
                 </div>
               </Reveal>
             ))}
