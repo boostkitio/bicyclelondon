@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/container";
 import { MuxBg } from "@/components/mux-bg";
 import { Parallax } from "@/components/scroll/parallax";
 import { MaskReveal } from "@/components/scroll/mask-reveal";
+import { cn } from "@/lib/utils";
 
 export function PageHero({
   eyebrow,
@@ -20,13 +21,18 @@ export function PageHero({
   videoPlaybackId?: string;
 }) {
   return (
-    <section className="relative isolate overflow-hidden bg-navy text-white">
+    <section
+      className={cn(
+        "relative isolate overflow-hidden bg-navy text-white",
+        videoPlaybackId && "flex min-h-[74vh] items-end",
+      )}
+    >
       {videoPlaybackId ? (
         <>
-          <div className="absolute inset-0 opacity-45">
+          <div className="absolute inset-0 opacity-80">
             <MuxBg playbackId={videoPlaybackId} poster={image} />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/75 to-navy/50" />
+          <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/50 to-navy/20" />
         </>
       ) : image ? (
         <>
