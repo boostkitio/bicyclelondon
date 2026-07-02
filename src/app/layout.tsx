@@ -4,9 +4,11 @@ import "./globals.css";
 import { SmoothScroll } from "@/components/scroll/smooth-scroll";
 import { SITE } from "@/lib/site";
 
+// Raleway only renders in display/heading contexts, which use 600/700/800;
+// body copy is the system stack, so the lighter weights never paint.
 const raleway = Raleway({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["600", "700", "800"],
   variable: "--font-raleway",
   display: "swap",
 });

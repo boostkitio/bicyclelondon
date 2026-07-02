@@ -184,6 +184,7 @@ export default async function CaseStudyPage({ params }: Props) {
                         alt={img.alt || cs.title}
                         width={1000}
                         height={700}
+                        sizes="(max-width: 640px) 100vw, 512px"
                         className="h-auto w-full transition duration-500 group-hover:scale-105"
                       />
                     </div>

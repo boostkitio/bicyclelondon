@@ -68,6 +68,7 @@ const components: PortableTextComponents = {
             alt={value.alt || ""}
             width={1400}
             height={900}
+            sizes="(max-width: 800px) 100vw, 768px"
             className="h-auto w-full rounded-2xl"
           />
           {value.caption && (
