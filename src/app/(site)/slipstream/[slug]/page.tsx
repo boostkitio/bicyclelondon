@@ -31,14 +31,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     params: { slug },
   });
   if (!a) return {};
-  const img = a.heroImage?.asset
-    ? urlFor(a.heroImage).width(1200).height(630).url()
-    : undefined;
+  const img = a.seo?.ogImage?.asset
+    ? urlFor(a.seo.ogImage).width(1200).height(630).url()
+    : a.heroImage?.asset
+      ? urlFor(a.heroImage).width(1200).height(630).url()
+      : undefined;
   return {
     title: a.seo?.metaTitle || a.title,
     description: a.seo?.metaDescription || a.standfirst,
+    alternates: { canonical: `/slipstream/${a.slug}` },
+    ...(a.seo?.noIndex ? { robots: { index: false, follow: false } } : {}),
     openGraph: {
       type: "article",
+      url: `/slipstream/${a.slug}`,
       title: a.title,
       description: a.standfirst,
       images: img ? [img] : undefined,

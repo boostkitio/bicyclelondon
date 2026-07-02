@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { LegalPage } from "@/components/page/legal-page";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/modern-slavery" },
   title: "Modern Slavery Statement",
   description:
     "Bicycle London’s statement on the steps taken to prevent modern slavery and human trafficking.",

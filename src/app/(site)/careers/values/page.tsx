@@ -4,6 +4,7 @@ import { CtaBand } from "@/components/page/cta-band";
 import { Section } from "@/components/ui/section";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/careers/values" },
   title: "Mission & Values",
   description:
     "Our mission is to leave the industry better than we found it. Our values, Drive, Balance and Freedom, are what makes us Bicycle.",

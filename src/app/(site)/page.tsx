@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { ButtonLink } from "@/components/ui/button";
@@ -20,6 +21,10 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 import { featuredCaseStudiesQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import type { CaseStudyCard } from "@/sanity/lib/types";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 const ANDS: [string, string][] = [
   ["Media", "Creative"],

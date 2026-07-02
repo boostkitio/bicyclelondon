@@ -5,6 +5,7 @@ import { Section } from "@/components/ui/section";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/careers/benefits" },
   title: "Benefits",
   description:
     "Pension, private healthcare, 26 days holiday plus a Christmas shutdown, a dog-friendly office, training budget and more. What it's like to work at Bicycle.",

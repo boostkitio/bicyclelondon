@@ -5,6 +5,7 @@ import { Section } from "@/components/ui/section";
 import { Avatar } from "@/components/avatar";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/careers/team/valeria-perticucci" },
   title: "Valeria Perticucci, Peloton Success Manager",
   description:
     "\"I'm an international mess\" - that's how I like to introduce myself. Valeria's story, from our People team.",

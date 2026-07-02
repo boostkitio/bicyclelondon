@@ -36,6 +36,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: job.seo?.metaTitle || `${job.title} | Careers`,
     description,
+    alternates: { canonical: `/careers/${job.slug}` },
+    ...(job.seo?.noIndex ? { robots: { index: false, follow: false } } : {}),
   };
 }
 

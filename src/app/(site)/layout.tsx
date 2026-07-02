@@ -8,7 +8,11 @@ const organisationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: SITE.name,
+  alternateName: "Bicycle",
   url: SITE.url,
+  // White-on-transparent is the only full mark to hand; swap for a
+  // dark/colour version when the client supplies one.
+  logo: `${SITE.url}/images/logo-bicycle-white.png`,
   description: SITE.description,
   email: SITE.email,
   telephone: SITE.phone,

@@ -22,7 +22,6 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "Bicycle London",
     locale: "en_GB",
-    url: SITE.url,
   },
   twitter: { card: "summary_large_image" },
 };

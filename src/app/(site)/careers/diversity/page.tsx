@@ -5,6 +5,7 @@ import { Section } from "@/components/ui/section";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/careers/diversity" },
   title: "Diversity & Inclusion",
   description:
     "Bicycle is an equal opportunity employer committed to a workplace where everyone can bring their whole self to work, with neurodiversity training and interview adjustments available.",

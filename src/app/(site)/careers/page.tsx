@@ -58,6 +58,7 @@ const testimonials = [
 ];
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/careers" },
   title: "Careers",
   description:
     "Ride on the Peloton. Bicycle is an open-minded, collaborative, ideas-driven agency where world-class creativity comes without prima donnas. See our open roles.",

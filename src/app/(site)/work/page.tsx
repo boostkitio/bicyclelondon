@@ -14,6 +14,7 @@ import { urlFor } from "@/sanity/lib/image";
 import type { CaseStudyCard } from "@/sanity/lib/types";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/work" },
   title: "Work",
   description:
     "Famous, effective work for ambitious brands, built on the power of ‘and’. Selected case studies from Bicycle London.",

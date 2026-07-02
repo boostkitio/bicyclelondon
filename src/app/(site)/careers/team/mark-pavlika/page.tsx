@@ -5,6 +5,7 @@ import { Section } from "@/components/ui/section";
 import { Avatar } from "@/components/avatar";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/careers/team/mark-pavlika" },
   title: "Mark Pavlika, Chief People & Purpose Officer",
   description:
     "Today I am Chief People & Purpose Officer of the agency I dreamed of working at Bicycle London. Mark's story, from our People team.",

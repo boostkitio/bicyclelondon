@@ -7,6 +7,7 @@ import { Avatar } from "@/components/avatar";
 import { TEAM, initials, photoSlug } from "@/content/team";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/the-peloton" },
   title: "The Peloton",
   description:
     "Meet the Peloton, the curious, intelligent and lovely people behind Bicycle. A fast-growing, 100% independent media and creative agency.",

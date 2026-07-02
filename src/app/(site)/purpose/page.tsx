@@ -8,6 +8,7 @@ import { Section } from "@/components/ui/section";
 import { ButtonLink } from "@/components/ui/button";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/purpose" },
   title: "Purpose",
   description:
     "Bicycle is a proud B Corp. From sustainable choices to our partnership with XO Bikes, we work with purpose-driven companies to make a meaningful impact.",

@@ -14,6 +14,7 @@ import { collectionPageSchema } from "@/lib/schema";
 import type { ArticleCard } from "@/sanity/lib/types";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/slipstream" },
   title: "Slipstream",
   description:
     "Slipstream is Bicycle’s take on what’s moving in media, marketing and culture. Insights, opinion and the occasional provocation.",

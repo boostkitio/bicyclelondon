@@ -34,13 +34,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     params: { slug },
   });
   if (!cs) return {};
-  const img = cs.heroImage?.asset
-    ? urlFor(cs.heroImage).width(1200).height(630).url()
-    : undefined;
+  const img = cs.seo?.ogImage?.asset
+    ? urlFor(cs.seo.ogImage).width(1200).height(630).url()
+    : cs.heroImage?.asset
+      ? urlFor(cs.heroImage).width(1200).height(630).url()
+      : undefined;
   return {
     title: cs.seo?.metaTitle || `${cs.title} | Work`,
     description: cs.seo?.metaDescription || cs.standfirst,
+    alternates: { canonical: `/work/${cs.slug}` },
+    ...(cs.seo?.noIndex ? { robots: { index: false, follow: false } } : {}),
     openGraph: {
+      url: `/work/${cs.slug}`,
       title: cs.title,
       description: cs.standfirst,
       images: img ? [img] : undefined,

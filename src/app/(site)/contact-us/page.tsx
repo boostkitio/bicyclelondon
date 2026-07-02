@@ -5,6 +5,7 @@ import { ContactForm } from "@/components/forms/contact-form";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/contact-us" },
   title: "Contact",
   description:
     "Get in touch with Bicycle. New business, general enquiries or careers, we’d love to hear from you.",

@@ -10,6 +10,7 @@ import { Reveal } from "@/components/reveal";
 import { Parallax } from "@/components/scroll/parallax";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/about" },
   title: "About",
   description:
     "Founded in 2021, Bicycle is a fast-growing, 100% independent media and creative agency on a mission to leave the industry better than we found it.",
