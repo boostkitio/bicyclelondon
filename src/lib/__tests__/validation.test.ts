@@ -45,6 +45,12 @@ describe("contactSchema", () => {
     ).toBe(false);
   });
 
+  it("rejects an oversized honeypot value", () => {
+    expect(
+      contactSchema.safeParse({ ...valid, website: "x".repeat(201) }).success,
+    ).toBe(false);
+  });
+
   it("defaults enquiryType to General enquiry", () => {
     const { enquiryType, ...rest } = valid;
     void enquiryType;

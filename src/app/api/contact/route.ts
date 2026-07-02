@@ -52,13 +52,17 @@ export async function POST(req: NextRequest) {
   }
 
   // Store in Convex when configured (additive; never blocks the email).
+  // The mutation requires the shared secret because the deployment URL is
+  // public; without both values set, storage is skipped.
   const convexUrl = process.env.NEXT_PUBLIC_CONVEX_URL;
-  if (convexUrl) {
+  const convexSecret = process.env.CONTACT_FORM_SECRET;
+  if (convexUrl && convexSecret) {
     try {
       const convex = new ConvexHttpClient(convexUrl);
       await convex.mutation(
         makeFunctionReference<"mutation">("submissions:create"),
         {
+          secret: convexSecret,
           type: "contact",
           name: data.name,
           email: data.email,

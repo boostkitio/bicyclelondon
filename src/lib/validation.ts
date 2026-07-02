@@ -9,7 +9,7 @@ export const contactSchema = z.object({
     .default("General enquiry"),
   message: z.string().trim().min(1, "Message is required").max(5000),
   // Honeypot. Real users never fill this in.
-  website: z.string().optional(),
+  website: z.string().max(200).optional(),
 });
 
 export type ContactInput = z.infer<typeof contactSchema>;
