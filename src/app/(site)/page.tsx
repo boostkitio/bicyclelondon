@@ -6,9 +6,9 @@ import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/reveal";
 import { Grain } from "@/components/grain";
+import { MuxBg } from "@/components/mux-bg";
 import { CardArrow } from "@/components/card-arrow";
 import { LogoWall } from "@/components/logo-wall";
-import { MuxBg } from "@/components/mux-bg";
 import { StatsBand } from "@/components/stats";
 import { TeamStrip } from "@/components/team-strip";
 import { HeroFusion } from "@/components/hero-fusion";
@@ -46,14 +46,14 @@ export default async function HomePage() {
       <section className="relative isolate flex min-h-[92vh] items-center overflow-hidden bg-navy text-white">
         <div className="absolute inset-0 opacity-90">
           <MuxBg
-            playbackId="gfa01575PqXznaj7ADl84pYVnD6SkVZdwKRwg83regoQ"
+            playbackId="LYb6h3tgB02iK4jDAAbbuQ7I00F00Vj018vNnxaML3EOR3I"
             poster="/images/hero.jpg"
           />
         </div>
-        {/* Gradient keeps the headline readable while letting the film show
-            through; the electric wash brings the second brand colour in. */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-navy via-navy/75 to-electric/25" />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy/85 via-navy/30 to-transparent" />
+        {/* Dark enough under the headline to stay readable, clear on the right
+            so the film shows through like the original. */}
+        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/60 to-navy/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent" />
         <Parallax speed={-0.1} className="relative z-10 w-full">
           <Container className="pb-24 pt-36">
             <p className="label mb-7 flex items-center gap-2.5 text-white/75">
@@ -155,16 +155,11 @@ export default async function HomePage() {
                 className="absolute -right-3 -top-3 hidden h-full w-full rounded-[2rem] bg-brand sm:block"
                 aria-hidden
               />
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] ring-1 ring-black/5">
-                <Parallax speed={0.1} className="absolute inset-x-0 -inset-y-[10%]">
-                  <Image
-                    src="/images/meet-bicycle.jpg"
-                    alt="Inside Bicycle London"
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 60vw"
-                    className="object-cover"
-                  />
-                </Parallax>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] bg-navy ring-1 ring-black/5">
+                <MuxBg
+                  playbackId="WDsLxmnXnnOWsnrHXkXDz8wyYCxOdLX9KcN8BuGGm1g"
+                  poster="/images/work-hero-poster.jpg"
+                />
               </div>
               {/* playful rotated badge breaking the frame */}
               <div className="absolute -bottom-5 left-6 rotate-[-5deg] rounded-full bg-navy px-5 py-2.5 font-display text-sm font-bold uppercase tracking-wide text-brand shadow-xl">
