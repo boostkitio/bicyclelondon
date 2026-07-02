@@ -4,7 +4,7 @@ import { CtaBand } from "@/components/page/cta-band";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/reveal";
 import { Avatar } from "@/components/avatar";
-import { TEAM, initials, photoSlug } from "@/content/team";
+import { TEAM, initials, photoSrc } from "@/content/team";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/the-peloton" },
@@ -28,7 +28,7 @@ export default function PelotonPage() {
             <Reveal key={m.name} delay={(i % 4) * 80}>
               <div className="group">
                 <Avatar
-                  src={`/team/${photoSlug(m.name)}.jpg`}
+                  src={photoSrc(m.name)}
                   name={m.name}
                   initials={initials(m.name)}
                 />

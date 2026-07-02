@@ -85,3 +85,11 @@ export function photoSlug(name: string): string {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 }
+
+// Almost every headshot is a .jpg; these two arrived as .png.
+const PNG_PHOTOS = new Set(["mark-pavlika", "valeria-perticucci"]);
+
+export function photoSrc(name: string): string {
+  const slug = photoSlug(name);
+  return `/team/${slug}.${PNG_PHOTOS.has(slug) ? "png" : "jpg"}`;
+}

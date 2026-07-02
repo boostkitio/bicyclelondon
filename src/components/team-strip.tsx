@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { TEAM, photoSlug } from "@/content/team";
+import { TEAM, photoSrc } from "@/content/team";
 
 // Two woven rows of headshots that drift in opposite directions. At rest the
 // faces sit in greyscale; on hover one lights up to full colour with an
@@ -24,7 +24,7 @@ function Face({ name, role }: { name: string; role: string }) {
     <figure className="group/face relative shrink-0">
       <div className="relative h-24 w-24 overflow-hidden rounded-full bg-navy ring-2 ring-transparent grayscale-0 transition duration-500 ease-out group-hover/face:-translate-y-1.5 group-hover/face:shadow-xl group-hover/face:shadow-black/20 group-hover/face:ring-brand sm:h-28 sm:w-28 sm:grayscale sm:group-hover/face:grayscale-0">
         <Image
-          src={`/team/${photoSlug(name)}.jpg`}
+          src={photoSrc(name)}
           alt={name}
           fill
           sizes="112px"
