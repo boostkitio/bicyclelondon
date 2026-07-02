@@ -11,7 +11,7 @@ import { LogoWall } from "@/components/logo-wall";
 import { MuxBg } from "@/components/mux-bg";
 import { StatsBand } from "@/components/stats";
 import { TeamStrip } from "@/components/team-strip";
-import { GsapHeroHeading } from "@/components/gsap-hero-heading";
+import { HeroFusion } from "@/components/hero-fusion";
 import { Parallax } from "@/components/scroll/parallax";
 import { Marquee } from "@/components/scroll/marquee";
 import { MaskReveal } from "@/components/scroll/mask-reveal";
@@ -50,42 +50,32 @@ export default async function HomePage() {
             poster="/images/hero.jpg"
           />
         </div>
-        {/* Gradient keeps the headline readable while letting the film show through. */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-navy via-navy/70 to-electric/15" />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy/80 via-transparent to-transparent" />
-        {/* Playful thought-bubble, a nod to the original hero */}
-        <div className="animate-floaty pointer-events-none absolute right-[7%] top-28 z-10 hidden lg:block">
-          <div className="flex h-24 w-24 items-center justify-center rounded-full bg-white text-4xl shadow-2xl">
-            🍕
-          </div>
-          <div className="ml-2 mt-2 h-3.5 w-3.5 rounded-full bg-white/90" />
-          <div className="ml-0.5 mt-1.5 h-2.5 w-2.5 rounded-full bg-white/70" />
-        </div>
+        {/* Gradient keeps the headline readable while letting the film show
+            through; the electric wash brings the second brand colour in. */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-navy via-navy/75 to-electric/25" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy/85 via-navy/30 to-transparent" />
         <Parallax speed={-0.1} className="relative z-10 w-full">
           <Container className="pb-24 pt-36">
-            <Reveal>
-              <p className="mb-6 max-w-xl text-sm font-semibold uppercase tracking-[0.2em] text-white/80">
-                Independent integrated media and creative agency
-              </p>
-            </Reveal>
-            <GsapHeroHeading />
-            <Reveal delay={160}>
-              <div className="-ml-6 mt-4 flex flex-wrap items-center">
-                <MagneticButton
-                  href="/work"
-                  className="rounded-full bg-brand px-9 py-4 font-display text-base font-bold uppercase tracking-wide text-black"
-                >
-                  See our work
-                </MagneticButton>
-                <MagneticButton
-                  href="/contact-us"
-                  strength={0.3}
-                  className="rounded-full bg-white px-9 py-4 font-display text-base font-bold uppercase tracking-wide text-ink"
-                >
-                  Contact us
-                </MagneticButton>
-              </div>
-            </Reveal>
+            <p className="label mb-7 flex items-center gap-2.5 text-white/75">
+              <span className="animate-pulse-dot inline-block h-2 w-2 rounded-full bg-brand" />
+              Independent · integrated · media &amp; creative
+            </p>
+            <HeroFusion />
+            <div className="-ml-6 mt-10 flex flex-wrap items-center">
+              <MagneticButton
+                href="/work"
+                className="rounded-full bg-brand px-9 py-4 font-display text-base font-bold uppercase tracking-wide text-black"
+              >
+                See our work
+              </MagneticButton>
+              <MagneticButton
+                href="/contact-us"
+                strength={0.3}
+                className="rounded-full bg-white px-9 py-4 font-display text-base font-bold uppercase tracking-wide text-ink"
+              >
+                Start a project
+              </MagneticButton>
+            </div>
           </Container>
         </Parallax>
         <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-brand">

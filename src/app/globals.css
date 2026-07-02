@@ -12,7 +12,8 @@
   --color-paper: #f7f7f7;
 
   --font-display: var(--font-raleway), "Raleway", system-ui, sans-serif;
-  --font-body: Arial, Helvetica, sans-serif;
+  --font-body: var(--font-hanken), "Hanken Grotesk", system-ui, sans-serif;
+  --font-mono: var(--font-space-mono), ui-monospace, "SF Mono", monospace;
 }
 
 /* Per global UX conventions: no global smooth-scroll (it breaks router scroll reset). */
@@ -76,6 +77,16 @@ h4 {
   font-weight: 800;
   line-height: 0.95;
   letter-spacing: -0.01em;
+}
+
+/* Utility label: mono voices the data/science half of the brand. Use on
+   eyebrows, stat captions, nav utility and section kickers. */
+.label {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
 }
 
 /* Tactile motion ---------------------------------------------------------- */
