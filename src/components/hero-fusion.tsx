@@ -91,8 +91,7 @@ export function HeroFusion() {
                 viewBox="0 0 100 100"
                 fill="none"
               >
-                <circle cx="50" cy="50" r="47" stroke="currentColor" strokeWidth="2" opacity="0.65" />
-                <circle cx="50" cy="50" r="47" stroke="var(--color-brand)" strokeWidth="2" strokeDasharray="8 292" opacity="0.9" />
+                <circle cx="50" cy="50" r="47" stroke="currentColor" strokeWidth="2" opacity="0.7" />
                 {[0, 45, 90, 135].map((deg) => (
                   <line
                     key={deg}

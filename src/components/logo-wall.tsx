@@ -17,7 +17,7 @@ export async function LogoWall() {
   const row = [...clients, ...clients];
 
   return (
-    <div className="marquee group relative overflow-hidden border-y border-black/10 py-7">
+    <div className="marquee group relative overflow-hidden py-7">
       {/* edge fades (match the paper section background) */}
       <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-paper to-transparent sm:w-28" />
       <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-paper to-transparent sm:w-28" />
@@ -36,7 +36,7 @@ export async function LogoWall() {
                 alt={c.name}
                 width={160}
                 height={56}
-                className="max-h-14 w-auto object-contain opacity-45 grayscale transition duration-300 ease-out group-hover/logo:-translate-y-0.5 group-hover/logo:opacity-100 group-hover/logo:grayscale-0"
+                className="max-h-14 w-auto object-contain opacity-60 grayscale transition duration-300 ease-out group-hover/logo:-translate-y-0.5 group-hover/logo:opacity-100 group-hover/logo:grayscale-0"
               />
             )}
           </div>

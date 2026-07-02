@@ -127,10 +127,11 @@ export default async function HomePage() {
       <Section className="overflow-hidden">
         <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-16">
           <Reveal className="lg:col-span-5">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-ink">
+            <p className="label flex items-center gap-2.5 text-brand-ink">
+              <span className="animate-pulse-dot inline-block h-1.5 w-1.5 rounded-full bg-brand-ink" />
               Meet Bicycle
             </p>
-            <h2 className="display mt-4 text-4xl leading-[0.95] sm:text-5xl lg:text-6xl">
+            <h2 className="display mt-5 text-4xl leading-[0.95] sm:text-5xl lg:text-6xl">
               The newest version of the{" "}
               <span className="text-brand-ink">oldest model</span>
             </h2>
@@ -214,8 +215,8 @@ export default async function HomePage() {
       <Section tone="paper">
         <Reveal>
           <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
-            <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-navy/60">
-              <span className="h-2 w-2 rounded-full bg-brand-ink animate-pulse-dot" />
+            <span className="label mb-4 inline-flex items-center gap-2.5 text-navy/55">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand-ink animate-pulse-dot" />
               In good company
             </span>
             <h2 className="display text-2xl sm:text-3xl">
@@ -258,13 +259,10 @@ export default async function HomePage() {
                   />
                 </div>
                 <div className="flex flex-col justify-center px-8 pb-8 lg:py-12">
-                  <div className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-brand">
-                    {String(i + 1).padStart(2, "0")}
-                  </div>
+                  <div className="label mb-3 text-brand">{s.blurb}</div>
                   <h3 className="display text-3xl sm:text-4xl">{s.label}</h3>
-                  <p className="mt-3 max-w-md text-lg text-white/70">{s.blurb}</p>
-                  <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold uppercase tracking-wide text-brand transition group-hover:gap-2">
-                    Read more →
+                  <span className="label mt-6 inline-flex items-center gap-1.5 text-brand transition group-hover:gap-3">
+                    Read more <span aria-hidden>→</span>
                   </span>
                 </div>
               </Link>

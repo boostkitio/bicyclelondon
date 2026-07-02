@@ -55,9 +55,7 @@ function StatItem({ stat }: { stat: Stat }) {
         {stat.count === false ? shown : shown.toLocaleString("en-GB")}
         {stat.suffix}
       </div>
-      <div className="mt-3 text-sm font-semibold uppercase tracking-widest text-white/60">
-        {stat.label}
-      </div>
+      <div className="label mt-4 text-white/55">{stat.label}</div>
     </div>
   );
 }

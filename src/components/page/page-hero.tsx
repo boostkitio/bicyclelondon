@@ -53,7 +53,8 @@ export function PageHero({
             />
           )}
           {eyebrow && (
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-brand">
+            <p className="label mb-5 flex items-center gap-2.5 text-brand">
+              <span className="animate-pulse-dot inline-block h-1.5 w-1.5 rounded-full bg-brand" />
               {eyebrow}
             </p>
           )}
