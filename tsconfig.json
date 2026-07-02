@@ -30,5 +30,5 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules", "convex", "design_handoff_scroll_effects"]
+  "exclude": ["node_modules", "convex"]
 }
