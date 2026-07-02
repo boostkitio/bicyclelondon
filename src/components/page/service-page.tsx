@@ -6,6 +6,7 @@ import { Reveal } from "@/components/reveal";
 import { LogoWall } from "@/components/logo-wall";
 import { MuxVideo } from "@/components/mux-video";
 import { MuxBg } from "@/components/mux-bg";
+import { BicycleEcosystem } from "@/components/bicycle-ecosystem";
 import { JsonLd } from "@/components/seo/json-ld";
 import { serviceSchema } from "@/lib/schema";
 
@@ -26,6 +27,7 @@ export type ServiceContent = {
   points?: ServicePoint[];
   badges?: { src: string; alt: string }[];
   brands?: { heading: string; logos: { src: string; alt: string }[] };
+  ecosystem?: boolean;
   videos?: { playbackId: string; title: string }[];
   sections?: ServiceSection[];
   cta?: { heading?: string; label?: string; href?: string };
@@ -173,6 +175,8 @@ export function ServicePage({ content }: { content: ServiceContent }) {
           </Reveal>
         </Section>
       )}
+
+      {content.ecosystem && <BicycleEcosystem />}
 
       {content.brands && content.brands.logos.length > 0 && (
         <Section tone="paper">

@@ -8,6 +8,7 @@ export const services: Record<string, ServiceContent> = {
     path: "/bicycle",
     logo: "/images/logo-bicycle-white.png",
     heroImage: "/images/heroes/bicycle.jpg",
+    ecosystem: true,
     featureImage: "/images/feature-bicycle.jpg",
     lead: [
       "Our ecosystem is free from muscle memory and typical legacy-driven thinking.",

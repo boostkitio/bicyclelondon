@@ -173,12 +173,35 @@ h4 {
   animation: page-enter 0.45s ease both;
 }
 
+/* Ecosystem Venn: each dashed ring slowly rotates around its own centre. */
+@keyframes eco-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.eco-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: eco-spin 90s linear infinite;
+}
+
+.eco-ring--slow {
+  animation-duration: 120s;
+}
+
+.eco-ring--rev {
+  animation-duration: 105s;
+  animation-direction: reverse;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .marquee-track,
   .animate-floaty,
   .page-enter,
   .animate-kenburns,
-  .animate-pulse-dot {
+  .animate-pulse-dot,
+  .eco-ring {
     animation: none;
   }
 }
