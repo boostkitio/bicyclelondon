@@ -21,9 +21,15 @@ export const create = mutation({
     ) {
       throw new Error("Unauthorised");
     }
-    const { secret: _secret, ...submission } = args;
+    // Insert explicitly so the secret can never be written to the table.
     return await ctx.db.insert("submissions", {
-      ...submission,
+      type: args.type,
+      name: args.name,
+      email: args.email,
+      company: args.company,
+      enquiryType: args.enquiryType,
+      jobSlug: args.jobSlug,
+      message: args.message,
       createdAt: Date.now(),
     });
   },
