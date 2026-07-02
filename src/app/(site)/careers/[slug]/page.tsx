@@ -64,7 +64,13 @@ export default async function JobPage({ params }: Props) {
     "@type": "JobPosting",
     title: job.title,
     description,
+    identifier: {
+      "@type": "PropertyValue",
+      name: SITE.name,
+      value: job.slug,
+    },
     datePosted: job.postedAt,
+    ...(job.validThrough ? { validThrough: job.validThrough } : {}),
     employmentType: job.employmentType,
     directApply: true,
     hiringOrganization: {

@@ -78,5 +78,6 @@ export type Job = JobCard & {
   applyEmail?: string;
   teamtailorUrl?: string;
   postedAt?: string;
+  validThrough?: string;
   seo?: Seo;
 };

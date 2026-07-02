@@ -46,9 +46,9 @@ export const jobSlugsQuery = groq`
   *[_type == "job" && active == true && defined(slug.current)]{ "slug": slug.current }`;
 
 export const jobBySlugQuery = groq`
-  *[_type == "job" && slug.current == $slug][0]{
+  *[_type == "job" && active == true && slug.current == $slug][0]{
     _id, title, "slug": slug.current, team, location, employmentType, salary, summary,
-    body, applyEmail, teamtailorUrl, postedAt, seo
+    body, applyEmail, teamtailorUrl, postedAt, validThrough, seo
   }`;
 
 export const siteSettingsQuery = groq`*[_type == "siteSettings"][0]`;

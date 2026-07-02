@@ -104,6 +104,14 @@ export default defineType({
       group: "content",
       initialValue: () => new Date().toISOString(),
     }),
+    defineField({
+      name: "validThrough",
+      title: "Closing date",
+      type: "datetime",
+      group: "content",
+      description:
+        "Optional. When set, search engines can expire the listing themselves.",
+    }),
     defineField({ name: "seo", type: "seo", group: "seo" }),
   ],
   preview: {
