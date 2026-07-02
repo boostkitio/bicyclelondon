@@ -91,7 +91,7 @@ export const services: Record<string, ServiceContent> = {
 
   ripple: {
     eyebrow: "Influencer & social",
-    accent: "#8b5cf6",
+    accent: "#9b7dff",
     title: "Meet Ripple",
     path: "/bicycle-ripple",
     logo: "/images/logo-ripple.png",
@@ -118,7 +118,7 @@ export const services: Record<string, ServiceContent> = {
 
   international: {
     eyebrow: "Bicycle International",
-    accent: "#0100ff",
+    accent: "#3d6bff",
     title: "Are you a multi-market brand?",
     path: "/international",
     logo: "/images/logo-international.png",

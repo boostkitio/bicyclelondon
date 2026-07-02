@@ -229,7 +229,7 @@ export default async function HomePage() {
         </div>
       </Section>
 
-      {/* What we do — alternating image/text rows (no pin) */}
+      {/* What we do — big-type index, each unit in its own sub-brand colour */}
       <Section tone="navy">
         <Reveal>
           <h2 className="display text-4xl sm:text-5xl">What we do</h2>
@@ -238,33 +238,47 @@ export default async function HomePage() {
             comes together, something special happens.
           </p>
         </Reveal>
-        <div className="mt-12 space-y-8 lg:space-y-10">
+        <div className="mt-14 border-t border-white/12">
           {SERVICES.map((s, i) => (
-            <Reveal key={s.href} delay={i * 60}>
+            <Reveal key={s.href} delay={i * 50}>
               <Link
                 href={s.href}
-                className="group grid items-stretch gap-6 overflow-hidden rounded-3xl ring-1 ring-white/10 transition hover:ring-brand lg:grid-cols-2"
+                className="group relative flex items-center gap-5 overflow-hidden border-b border-white/12 py-8 sm:gap-8 sm:py-11"
+                style={{ ["--accent" as string]: s.accent }}
               >
-                <div
-                  className={`relative flex aspect-[16/10] items-center justify-center bg-gradient-to-tr from-deep via-navy to-electric/40 p-10 lg:aspect-auto ${
-                    i % 2 ? "lg:order-2" : ""
-                  }`}
+                {/* the unit's colour washes in on hover */}
+                <span
+                  aria-hidden
+                  className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-[0.09]"
+                  style={{ background: "var(--accent)" }}
+                />
+                <span
+                  aria-hidden
+                  className="absolute left-0 top-0 h-full w-1.5 origin-top scale-y-0 transition-transform duration-500 ease-out group-hover:scale-y-100"
+                  style={{ background: "var(--accent)" }}
+                />
+                <div className="relative flex-1 pl-5 sm:pl-9">
+                  <div className="label mb-2.5" style={{ color: "var(--accent)" }}>
+                    {s.blurb}
+                  </div>
+                  <h3 className="display text-[clamp(1.75rem,7vw,2.5rem)] leading-[0.9] transition-colors duration-300 group-hover:[color:var(--accent)] sm:text-6xl lg:text-[5rem]">
+                    {s.label}
+                  </h3>
+                </div>
+                <Image
+                  src={s.logo}
+                  alt=""
+                  width={220}
+                  height={66}
+                  className="relative hidden h-9 w-auto max-w-[8.5rem] shrink-0 object-contain opacity-55 transition duration-500 group-hover:opacity-100 sm:block lg:h-11"
+                />
+                <span
+                  aria-hidden
+                  className="relative shrink-0 pr-1 text-3xl transition-transform duration-300 group-hover:translate-x-2 sm:text-4xl"
+                  style={{ color: "var(--accent)" }}
                 >
-                  <Image
-                    src={s.logo}
-                    alt={s.label}
-                    width={280}
-                    height={84}
-                    className="max-h-16 w-auto object-contain transition duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <div className="flex flex-col justify-center px-8 pb-8 lg:py-12">
-                  <div className="label mb-3 text-brand">{s.blurb}</div>
-                  <h3 className="display text-3xl sm:text-4xl">{s.label}</h3>
-                  <span className="label mt-6 inline-flex items-center gap-1.5 text-brand transition group-hover:gap-3">
-                    Read more <span aria-hidden>→</span>
-                  </span>
-                </div>
+                  →
+                </span>
               </Link>
             </Reveal>
           ))}
