@@ -21,6 +21,7 @@ export default function PelotonPage() {
         title="The Peloton"
         lead="The curious, intelligent and lovely people who make Bicycle."
         image="/images/heroes/peloton.jpg"
+        videoPlaybackId="tcxmmQH34tp5Y78V9XE4Gdq5AmIkQPEH00Pavn4FDJts"
       />
       <Section>
         <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4">
