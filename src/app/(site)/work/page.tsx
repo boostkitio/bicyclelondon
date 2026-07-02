@@ -5,7 +5,6 @@ import { PageHero } from "@/components/page/page-hero";
 import { CtaBand } from "@/components/page/cta-band";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/reveal";
-import { CardArrow } from "@/components/card-arrow";
 import { JsonLd } from "@/components/seo/json-ld";
 import { collectionPageSchema } from "@/lib/schema";
 import { sanityFetch } from "@/sanity/lib/fetch";
@@ -26,6 +25,8 @@ export default async function WorkPage() {
     tags: ["caseStudy"],
   });
 
+  const total = String(studies.length).padStart(2, "0");
+
   return (
     <>
       <JsonLd
@@ -42,9 +43,9 @@ export default async function WorkPage() {
         })}
       />
       <PageHero
-        eyebrow="Case studies"
-        title="Our work"
-        lead="Famous, effective work for ambitious brands. Built on the power of ‘and’."
+        eyebrow="Selected work · 2021–2026"
+        title="Famous, effective work"
+        lead="For ambitious brands. Built on the power of ‘and’."
       />
 
       <Section>
@@ -53,46 +54,81 @@ export default async function WorkPage() {
             Case studies are on their way. Check back soon.
           </p>
         ) : (
-          <div className="grid gap-8 md:grid-cols-2">
-            {studies.map((cs, i) => (
-              <Reveal key={cs._id} delay={(i % 2) * 90}>
-                <Link
-                  href={`/work/${cs.slug}`}
-                  className="group block h-full overflow-hidden rounded-3xl bg-paper ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/10 hover:ring-brand"
-                >
-                  <div className="relative aspect-[16/10] overflow-hidden bg-navy">
-                    {cs.heroImage?.asset && (
-                      <Image
-                        src={urlFor(cs.heroImage).width(900).height(560).url()}
-                        alt={cs.heroImage.alt || cs.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        className="object-cover transition duration-500 group-hover:scale-105"
-                      />
-                    )}
-                    <CardArrow />
-                  </div>
-                  <div className="p-6">
-                    {cs.clientName && (
-                      <p className="text-xs font-semibold uppercase tracking-widest text-brand-ink">
-                        {cs.clientName}
-                      </p>
-                    )}
-                    <h2 className="mt-1 font-display text-2xl font-bold uppercase">
-                      {cs.title}
-                    </h2>
-                    {cs.standfirst && (
-                      <p className="mt-2 line-clamp-2 text-black/60">
-                        {cs.standfirst}
-                      </p>
-                    )}
-                    <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold uppercase tracking-wide text-navy transition-all group-hover:gap-2 group-hover:text-brand-ink">
-                      View case →
-                    </span>
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
+          <div className="space-y-24 lg:space-y-32">
+            {studies.map((cs, i) => {
+              const flipped = i % 2 === 1;
+              return (
+                <Reveal key={cs._id}>
+                  <article className="group grid items-center gap-8 lg:grid-cols-12 lg:gap-16">
+                    <Link
+                      href={`/work/${cs.slug}`}
+                      className={`relative block overflow-hidden rounded-[2rem] bg-navy lg:col-span-7 ${
+                        flipped ? "lg:order-2" : ""
+                      }`}
+                    >
+                      <div className="relative aspect-[4/3] sm:aspect-[16/10]">
+                        {cs.heroImage?.asset && (
+                          <Image
+                            src={urlFor(cs.heroImage).width(1200).height(750).url()}
+                            alt={cs.heroImage.alt || cs.title}
+                            fill
+                            sizes="(max-width: 1024px) 100vw, 58vw"
+                            className="object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
+                          />
+                        )}
+                        {/* subtle wash so the label chip below stays legible on hover */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-navy/40 via-transparent to-transparent opacity-0 transition duration-500 group-hover:opacity-100" />
+                      </div>
+                    </Link>
+
+                    <div className="lg:col-span-5">
+                      <div className="label mb-5 flex items-center gap-3 text-black/45">
+                        <span className="text-brand-ink">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <span className="h-px w-8 bg-black/15" />
+                        <span>{total}</span>
+                        {cs.clientName && (
+                          <span className="text-black/70">· {cs.clientName}</span>
+                        )}
+                      </div>
+
+                      <Link href={`/work/${cs.slug}`}>
+                        <h2 className="display text-4xl leading-[0.95] transition-colors group-hover:text-brand-ink sm:text-5xl lg:text-[3.4rem]">
+                          {cs.title}
+                        </h2>
+                      </Link>
+
+                      {cs.standfirst && (
+                        <p className="mt-5 max-w-md text-lg leading-relaxed text-black/65">
+                          {cs.standfirst}
+                        </p>
+                      )}
+
+                      {cs.services && cs.services.length > 0 && (
+                        <ul className="mt-6 flex flex-wrap gap-2">
+                          {cs.services.map((s) => (
+                            <li
+                              key={s}
+                              className="label rounded-full bg-paper px-3.5 py-1.5 text-black/60 ring-1 ring-black/5"
+                            >
+                              {s}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+
+                      <Link
+                        href={`/work/${cs.slug}`}
+                        className="label mt-8 inline-flex items-center gap-1.5 text-navy transition-all group-hover:gap-3 group-hover:text-brand-ink"
+                      >
+                        View case <span aria-hidden>→</span>
+                      </Link>
+                    </div>
+                  </article>
+                </Reveal>
+              );
+            })}
           </div>
         )}
       </Section>
