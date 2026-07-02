@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/page/page-hero";
 import { CtaBand } from "@/components/page/cta-band";
 import { Section } from "@/components/ui/section";
-import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/careers/benefits" },

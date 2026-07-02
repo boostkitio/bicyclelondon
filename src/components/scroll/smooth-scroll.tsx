@@ -1,8 +1,9 @@
 "use client";
 import { ReactLenis } from "lenis/react";
 import type Lenis from "lenis";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 
 /**
  * App-wide smooth scroll (Lenis) synced with GSAP ScrollTrigger.
@@ -19,27 +20,19 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
  */
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<{ lenis?: Lenis } | null>(null);
-  const [enabled, setEnabled] = useState(true);
-
-  // Decide native vs smooth from the reduced-motion preference (and react to changes).
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setEnabled(!mq.matches);
-    const onChange = () => setEnabled(!mq.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
+  // Reduced-motion users get native scrolling (Lenis never mounts).
+  const enabled = !usePrefersReducedMotion();
 
   useEffect(() => {
     if (!enabled) return;
     const onLenisScroll = () => ScrollTrigger.update();
-    let scrollBound = false;
+    let bound: Lenis | undefined;
     const update = (time: number) => {
       const lenis = lenisRef.current?.lenis;
       if (!lenis) return;
-      if (!scrollBound) {
-        lenis.on("scroll", onLenisScroll); // bind once, as soon as it exists
-        scrollBound = true;
+      if (!bound) {
+        bound = lenis;
+        bound.on("scroll", onLenisScroll); // bind once, as soon as it exists
       }
       lenis.raf(time * 1000); // GSAP time is seconds
     };
@@ -49,7 +42,7 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     document.fonts?.ready.then(() => ScrollTrigger.refresh());
     return () => {
       gsap.ticker.remove(update);
-      lenisRef.current?.lenis?.off("scroll", onLenisScroll);
+      bound?.off("scroll", onLenisScroll);
     };
   }, [enabled]);
 

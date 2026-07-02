@@ -193,7 +193,7 @@ export default async function CareersPage() {
 
       <Section>
         <h2 className="font-display text-sm font-semibold uppercase tracking-widest text-black/50">
-          What's life at Bicycle like?
+          What’s life at Bicycle like?
         </h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
           {testimonials.map((t) => (

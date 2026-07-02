@@ -2,14 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 
 /**
- * Fades + slides content in as it scrolls into view, and back out as it leaves
- * — so the animation replays each time the element enters the viewport (either
+ * Fades + slides content in as it scrolls into view, and back out as it leaves,
+ * so the animation replays each time the element enters the viewport (either
  * direction), not just once.
  *
- * Fails open: renders visible without JS, and seeds from the element's real
- * position on mount so above-the-fold content never flashes. Respects
+ * Fails open: renders visible without JS, and seeds visibility from the
+ * observer's first callback so above-the-fold content never flashes. Respects
  * reduced-motion (stays visible, no toggling).
  */
 export function Reveal({
@@ -24,31 +25,27 @@ export function Reveal({
   const ref = useRef<HTMLDivElement>(null);
   const [shown, setShown] = useState(false);
   const [armed, setArmed] = useState(false);
+  const reduced = usePrefersReducedMotion();
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) {
-      setShown(true);
-      return;
-    }
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setShown(true);
-      return;
-    }
-    // Seed from the current position so above-the-fold content doesn't flash.
-    const r = el.getBoundingClientRect();
-    setShown(r.top < window.innerHeight && r.bottom > 0);
-    setArmed(true);
+    if (!el || reduced) return;
 
+    // The observer fires immediately on observe() with the initial
+    // intersection state, so it both seeds visibility (no above-the-fold
+    // flash) and drives subsequent reveals.
     const io = new IntersectionObserver(
-      ([entry]) => setShown(entry.isIntersecting),
+      ([entry]) => {
+        setArmed(true);
+        setShown(entry.isIntersecting);
+      },
       { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
-  }, []);
+  }, [reduced]);
 
-  const hidden = armed && !shown;
+  const hidden = !reduced && armed && !shown;
 
   return (
     <div

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 
 /**
  * Counts up from 0 to `to` once, when it scrolls into view. Pure
@@ -20,14 +21,11 @@ export function CountUp({
 }) {
   const ref = useRef<HTMLSpanElement>(null);
   const [n, setN] = useState(0);
+  const reduced = usePrefersReducedMotion();
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setN(to);
-      return;
-    }
+    if (!el || reduced) return;
     let raf = 0;
     const io = new IntersectionObserver(
       ([entry]) => {
@@ -52,12 +50,14 @@ export function CountUp({
       io.disconnect();
       cancelAnimationFrame(raf);
     };
-  }, [to, duration]);
+  }, [to, duration, reduced]);
+
+  const shown = reduced ? to : n;
 
   return (
     <span ref={ref}>
       {prefix}
-      {n.toLocaleString("en-GB")}
+      {shown.toLocaleString("en-GB")}
       {suffix}
     </span>
   );

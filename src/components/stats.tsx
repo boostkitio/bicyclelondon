@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 
 export type Stat = {
   value: number;
@@ -13,14 +14,11 @@ export type Stat = {
 function StatItem({ stat }: { stat: Stat }) {
   const ref = useRef<HTMLDivElement>(null);
   const [n, setN] = useState(stat.count === false ? stat.value : 0);
+  const reduced = usePrefersReducedMotion();
 
   useEffect(() => {
     const el = ref.current;
-    if (!el || stat.count === false) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setN(stat.value);
-      return;
-    }
+    if (!el || stat.count === false || reduced) return;
     let raf = 0;
     const duration = 1400;
     const io = new IntersectionObserver(
@@ -46,13 +44,15 @@ function StatItem({ stat }: { stat: Stat }) {
       io.disconnect();
       cancelAnimationFrame(raf);
     };
-  }, [stat]);
+  }, [stat, reduced]);
+
+  const shown = reduced && stat.count !== false ? stat.value : n;
 
   return (
     <div ref={ref}>
       <div className="display text-5xl sm:text-6xl">
         {stat.prefix}
-        {stat.count === false ? n : n.toLocaleString("en-GB")}
+        {stat.count === false ? shown : shown.toLocaleString("en-GB")}
         {stat.suffix}
       </div>
       <div className="mt-3 text-sm font-semibold uppercase tracking-widest text-white/60">

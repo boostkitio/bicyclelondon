@@ -21,7 +21,6 @@ const SP =
 const FORMATTED_DIR = `${SP}/formatted`;
 
 const key = () => randomBytes(6).toString("hex");
-const norm = (s) => (s || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
 
 function slugify(s) {
   return s

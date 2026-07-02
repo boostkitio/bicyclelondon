@@ -287,7 +287,7 @@ async function migrateCaseStudies() {
   let order = 1;
   for (const cs of caseStudies) {
     try {
-      const { markdown, metadata } = await scrape(cs.url);
+      const { markdown } = await scrape(cs.url);
       const clientRef = await ensureClient(cs.client);
       const hero = await uploadImage(firstContentImage(markdown), cs.title);
       const blocks = mdToBlocks(markdown);

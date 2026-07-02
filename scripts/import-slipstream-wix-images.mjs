@@ -2,11 +2,11 @@
  * Import Slipstream hero images from the current Wix site into Sanity.
  *
  * Usage:
- *   npx sanity exec scripts/import-slipstream-wix-images.js --with-user-token
- *   npx sanity exec scripts/import-slipstream-wix-images.js --with-user-token -- --dry-run
+ *   npx sanity exec scripts/import-slipstream-wix-images.mjs --with-user-token
+ *   npx sanity exec scripts/import-slipstream-wix-images.mjs --with-user-token -- --dry-run
  */
 
-const { getCliClient } = require("sanity/cli");
+import { getCliClient } from "sanity/cli";
 
 const WIX_SITEMAP = "https://www.bicyclelondon.com/sitemap.xml";
 const dryRun = process.argv.includes("--dry-run");

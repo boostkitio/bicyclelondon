@@ -21,11 +21,10 @@ export function GalleryLightbox({
   title: string;
 }) {
   const [open, setOpen] = useState<number | null>(null);
-  const [mounted, setMounted] = useState(false);
   const count = images.length;
-
-  // Portal target is only available in the browser.
-  useEffect(() => setMounted(true), []);
+  // The lightbox only opens on a user click, which cannot happen during SSR,
+  // so document.body is always available by the time we portal.
+  const canPortal = typeof document !== "undefined";
 
   const close = useCallback(() => setOpen(null), []);
   const step = useCallback(
@@ -75,7 +74,7 @@ export function GalleryLightbox({
         ))}
       </div>
 
-      {mounted &&
+      {canPortal &&
         current &&
         open !== null &&
         createPortal(
