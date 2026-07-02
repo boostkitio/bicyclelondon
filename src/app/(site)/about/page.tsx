@@ -87,7 +87,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-3xl">
           <p className="display text-2xl sm:text-3xl">
             Three years on, Bicycle is now one of the fastest-growing agencies in
-            the UK, with a headcount of 40.
+            the UK, with a headcount of 63 (and three dogs).
           </p>
           <p className="mt-6 text-lg leading-relaxed text-black/75">
             Our headquarters are in Clerkenwell, London and we have fully global
@@ -108,7 +108,7 @@ export default function AboutPage() {
       <Section tone="navy">
         <StatsBand
           stats={[
-            { value: 40, label: "People in the Peloton" },
+            { value: 63, label: "People in the Peloton (+ 3 dogs)" },
             { value: 40, prefix: "$", suffix: "m+", label: "International media handled" },
             { value: 100, suffix: "%", label: "Independent" },
             { value: 2021, count: false, label: "Founded" },

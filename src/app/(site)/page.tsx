@@ -183,7 +183,7 @@ export default async function HomePage() {
       <Section tone="navy">
         <StatsBand
           stats={[
-            { value: 40, label: "People in the Peloton" },
+            { value: 63, label: "People in the Peloton" },
             { value: 40, prefix: "$", suffix: "m+", label: "International media handled" },
             { value: 100, suffix: "%", label: "Independent" },
             { value: 2021, count: false, label: "Founded" },
