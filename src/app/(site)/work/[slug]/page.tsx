@@ -6,6 +6,7 @@ import { CtaBand } from "@/components/page/cta-band";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
 import { PortableText } from "@/components/portable-text";
+import { GalleryLightbox } from "@/components/gallery-lightbox";
 import { MuxVideo } from "@/components/mux-video";
 import { CountUp } from "@/components/count-up";
 import { MaskReveal } from "@/components/scroll/mask-reveal";
@@ -174,24 +175,10 @@ export default async function CaseStudyPage({ params }: Props) {
         {cs.gallery && cs.gallery.length > 0 && (
           <div className="mx-auto mt-20 max-w-5xl">
             <h2 className="display mb-8 text-2xl sm:text-3xl">The work</h2>
-            <div className="grid gap-5 sm:grid-cols-2">
-              {cs.gallery.map((img, i) =>
-                img.asset ? (
-                  <Reveal key={i} delay={(i % 2) * 80}>
-                    <div className="group overflow-hidden rounded-2xl bg-paper">
-                      <Image
-                        src={urlFor(img).width(1000).height(700).url()}
-                        alt={img.alt || cs.title}
-                        width={1000}
-                        height={700}
-                        sizes="(max-width: 640px) 100vw, 512px"
-                        className="h-auto w-full transition duration-500 group-hover:scale-105"
-                      />
-                    </div>
-                  </Reveal>
-                ) : null,
-              )}
-            </div>
+            <GalleryLightbox
+              images={cs.gallery.filter((img) => img.asset)}
+              title={cs.title}
+            />
           </div>
         )}
 
