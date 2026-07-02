@@ -11,12 +11,15 @@ type WallClient = { _id: string; name: string; logo: SanityImage };
 // renders them small. Give those more room so the wall reads evenly.
 function logoSize(name: string): string {
   const n = name.toLowerCase();
+  // Wide marks (OpenTable, Five Guys) are limited by the cell width, so let
+  // them run a little into the padding; tall marks grow via max-height.
   if (n.includes("opentable") || n.includes("open table"))
-    return "max-h-14 sm:max-h-[4.25rem]";
-  if (n.includes("warner")) return "max-h-16 sm:max-h-[5rem]";
-  if (n.includes("five guys")) return "max-h-12 sm:max-h-[3.75rem]";
-  if (n.includes("joe")) return "max-h-16 sm:max-h-[5rem]";
-  return "max-h-11 sm:max-h-14";
+    return "max-h-[4.5rem] max-w-[112%] sm:max-h-[5.25rem]";
+  if (n.includes("warner")) return "max-h-[4.5rem] max-w-full sm:max-h-[5.75rem]";
+  if (n.includes("five guys"))
+    return "max-h-16 max-w-[112%] sm:max-h-[4.75rem]";
+  if (n.includes("joe")) return "max-h-[4.5rem] max-w-full sm:max-h-[5.75rem]";
+  return "max-h-11 max-w-full sm:max-h-14";
 }
 
 export async function LogoWall() {
@@ -43,7 +46,7 @@ export async function LogoWall() {
               width={200}
               height={90}
               className={cn(
-                "w-auto max-w-full object-contain transition duration-300 ease-out group-hover:-translate-y-1 group-hover:scale-110",
+                "w-auto object-contain transition duration-300 ease-out group-hover:-translate-y-1 group-hover:scale-110",
                 logoSize(c.name),
               )}
             />
