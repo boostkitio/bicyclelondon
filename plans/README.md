@@ -10,20 +10,37 @@ or the other plans.
 
 ## Execution order and status
 
+All plans were executed and pushed to `main` on 2026-07-02 (commits
+`b1c7dee`..`79df5e7`). A follow-up request (case-study gallery lightbox) was
+also delivered in the same session (`8b87951`).
+
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
-| 001 | Verification baseline (Vitest, typecheck, first tests) | P1 | M | none | Todo |
-| 002 | Gate the Convex submissions functions | P1 | S | none | Todo |
-| 003 | Escape JSON-LD output | P1 | S | none | Todo |
-| 004 | Canonicals, noIndex/ogImage wiring, entity schema, robots host, llms.txt | P1 | M | none | Todo |
-| 005 | JobPosting: 404 inactive roles, add validThrough/identifier | P2 | S | none | Todo |
-| 006 | Defer the Mux player, optimise hero posters | P2 | M | none | Todo |
-| 007 | Runtime overhead trims (marquee, Sentry sampling, fonts, image sizes) | P2 | S | none | Todo |
-| 008 | Serve the Slipstream index statically | P2 | M | none | Todo |
-| 009 | Repo housekeeping (dead code, README, env drift, audit fix) | P3 | S | none | Todo |
-| 010 | Consolidate careers team pages, add Person schema | P3 | S | none | Todo |
-| 011 | Make `npm run lint` pass clean | P2 | S-M | 009 (soft) | Todo |
-| 012 | Security headers and CSP | P2 | M | 006, 007 (soft) | Todo |
+| 001 | Verification baseline (Vitest, typecheck, first tests) | P1 | M | none | Done |
+| 002 | Gate the Convex submissions functions | P1 | S | none | Done |
+| 003 | Escape JSON-LD output | P1 | S | none | Done |
+| 004 | Canonicals, noIndex/ogImage wiring, entity schema, robots host, llms.txt | P1 | M | none | Done |
+| 005 | JobPosting: 404 inactive roles, add validThrough/identifier | P2 | S | none | Done |
+| 006 | Defer the Mux player, optimise hero posters | P2 | M | none | Done |
+| 007 | Runtime overhead trims (marquee, Sentry sampling, fonts, image sizes) | P2 | S | none | Done |
+| 008 | Serve the Slipstream index statically | P2 | M | none | Done |
+| 009 | Repo housekeeping (dead code, README, env drift, audit fix) | P3 | S | none | Done |
+| 010 | Consolidate careers team pages, add Person schema | P3 | S | none | Done |
+| 011 | Make `npm run lint` pass clean | P2 | S-M | 009 (soft) | Done |
+| 012 | Security headers and CSP | P2 | M | 006, 007 (soft) | Done |
+
+Notes from execution:
+- 002: `create` now takes a `CONTACT_FORM_SECRET` (must be set in the Convex
+  deployment env and the site env at provisioning); `list` is `internalQuery`.
+- 004: Organization `logo` points at the white-on-transparent mark, the only
+  full logo available; swap for a dark/colour version when the client
+  supplies one. Awards still deferred pending confirmed names.
+- 005: inactive jobs 404 via `active == true` on the by-slug query plus
+  `dynamicParams = false` on the route.
+- 006: also fixed two team headshots (`.png`, not `.jpg`) that were 404ing.
+- 012: one residual console entry remains, Mux's benign Google Cast probe;
+  no CSP satisfies it without loosening script-src and it has no functional
+  impact on the muted background video.
 
 Status values: Todo | In progress | Done | Blocked (with one-line reason) |
 Rejected (with one-line rationale).
