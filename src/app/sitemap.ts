@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/site";
+import { TEAM_STORIES } from "@/content/team-stories";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import {
   articleSlugsQuery,
@@ -24,8 +25,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/careers/benefits",
     "/careers/values",
     "/careers/diversity",
-    "/careers/team/mark-pavlika",
-    "/careers/team/valeria-perticucci",
+    ...TEAM_STORIES.map((s) => `/careers/team/${s.slug}`),
     "/bicycle",
     "/bicycle-blade",
     "/bicycle-studio",
