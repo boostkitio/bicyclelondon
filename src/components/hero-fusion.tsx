@@ -114,25 +114,23 @@ export function HeroFusion() {
         </span>
       </h1>
 
-      <div className="hero-tick mt-7 flex h-6 items-center">
-        <span className="label mr-3 text-brand" aria-hidden>
-          ▸
-        </span>
-        <span className="relative block" aria-hidden>
+      <div className="hero-tick mt-7 flex items-center gap-3" aria-hidden>
+        <span className="label text-brand leading-none">▸</span>
+        <span className="relative block h-[1.4em] flex-1">
           {PAIRS.map(([a, b]) => (
             <span
               key={a}
-              className="hero-pair label whitespace-nowrap text-white/85 [font-size:0.85rem] [letter-spacing:0.14em]"
+              className="hero-pair label absolute left-0 top-1/2 -translate-y-1/2 whitespace-nowrap text-white/85 [font-size:0.85rem] [letter-spacing:0.14em]"
             >
               {a} <span className="text-brand">&amp;</span> {b}
             </span>
           ))}
         </span>
-        <span className="sr-only">
-          Media and creative, art and science, man and machine, brand and
-          performance, data and digital.
-        </span>
       </div>
+      <span className="sr-only">
+        Media and creative, art and science, man and machine, brand and
+        performance, data and digital.
+      </span>
     </div>
   );
 }
