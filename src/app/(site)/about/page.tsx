@@ -8,6 +8,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { StatsBand } from "@/components/stats";
 import { Reveal } from "@/components/reveal";
 import { Parallax } from "@/components/scroll/parallax";
+import { ScrollFillText } from "@/components/scroll/scroll-fill-text";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/about" },
@@ -28,10 +29,13 @@ export default function AboutPage() {
 
       <Section>
         <div className="mx-auto max-w-3xl">
-          <p className="text-xl leading-relaxed text-black/80">
+          <ScrollFillText
+            as="p"
+            className="text-2xl leading-snug text-navy sm:text-3xl"
+          >
             Bicycle was founded in 2021 by four people who believed that a better
             type of media and comms agency wasn’t just possible, but needed.
-          </p>
+          </ScrollFillText>
           <p className="mt-8 label text-brand-ink">
             We set out:
           </p>

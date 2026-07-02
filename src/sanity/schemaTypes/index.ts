@@ -6,6 +6,7 @@ import job from "./job";
 import client from "./client";
 import author from "./author";
 import pelotonMember from "./pelotonMember";
+import testimonial from "./testimonial";
 import category from "./category";
 import blockContent from "./blockContent";
 import seo from "./seo";
@@ -18,6 +19,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   client,
   author,
   pelotonMember,
+  testimonial,
   category,
   blockContent,
   seo,

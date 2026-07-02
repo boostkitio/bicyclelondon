@@ -73,6 +73,15 @@ export type PelotonMember = {
   isPet?: boolean;
 };
 
+export type Testimonial = {
+  _id: string;
+  quote: string;
+  authorName: string;
+  authorRole?: string;
+  company?: string;
+  photo?: SanityImage;
+};
+
 export type JobCard = {
   _id: string;
   title: string;

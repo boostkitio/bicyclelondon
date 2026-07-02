@@ -7,6 +7,7 @@ import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/reveal";
 import { Grain } from "@/components/grain";
 import { MuxBg } from "@/components/mux-bg";
+import { ScrollFillText } from "@/components/scroll/scroll-fill-text";
 import { CardArrow } from "@/components/card-arrow";
 import { LogoWall } from "@/components/logo-wall";
 import { StatsBand } from "@/components/stats";
@@ -18,9 +19,10 @@ import { MaskReveal } from "@/components/scroll/mask-reveal";
 import { MagneticButton } from "@/components/scroll/magnetic-button";
 import { SERVICES } from "@/lib/site";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { featuredCaseStudiesQuery } from "@/sanity/lib/queries";
+import { featuredCaseStudiesQuery, testimonialsQuery } from "@/sanity/lib/queries";
+import { Testimonials } from "@/components/testimonials";
 import { urlFor } from "@/sanity/lib/image";
-import type { CaseStudyCard } from "@/sanity/lib/types";
+import type { CaseStudyCard, Testimonial } from "@/sanity/lib/types";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -38,6 +40,10 @@ export default async function HomePage() {
   const featured = await sanityFetch<CaseStudyCard[]>({
     query: featuredCaseStudiesQuery,
     tags: ["caseStudy"],
+  });
+  const testimonials = await sanityFetch<Testimonial[]>({
+    query: testimonialsQuery,
+    tags: ["testimonial"],
   });
 
   return (
@@ -135,12 +141,15 @@ export default async function HomePage() {
               The newest version of the{" "}
               <span className="text-brand-ink">oldest model</span>
             </h2>
-            <p className="mt-6 max-w-md text-lg leading-relaxed text-black/70">
+            <ScrollFillText
+              as="p"
+              className="mt-6 max-w-md text-lg leading-relaxed text-navy"
+            >
               Media planning and buying is in our DNA. We provide integrated
-              solutions for the modern media world, traversing brand &amp;
-              performance and creative &amp; media, driving sustainable growth
-              for our clients.
-            </p>
+              solutions for the modern media world, traversing brand &
+              performance and creative & media, driving sustainable growth for
+              our clients.
+            </ScrollFillText>
             <div className="mt-8">
               <ButtonLink href="/bicycle" variant="outline">
                 Read more
@@ -322,6 +331,21 @@ export default async function HomePage() {
               </Reveal>
             ))}
           </div>
+        </Section>
+      )}
+
+      {/* Testimonials — stacked cards */}
+      {testimonials.length > 0 && (
+        <Section tone="paper">
+          <Reveal className="mb-12 text-center">
+            <p className="label mb-4 justify-center text-brand-ink">
+              In their words
+            </p>
+            <h2 className="display text-4xl sm:text-5xl">
+              The people we ride with
+            </h2>
+          </Reveal>
+          <Testimonials items={testimonials} />
         </Section>
       )}
 

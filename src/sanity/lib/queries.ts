@@ -58,6 +58,11 @@ export const pelotonQuery = groq`
     _id, name, role, "slug": slug.current, photo, hoverPhoto, linkedin, isPet
   }`;
 
+export const testimonialsQuery = groq`
+  *[_type == "testimonial"] | order(order asc, _createdAt asc){
+    _id, quote, authorName, authorRole, company, photo
+  }`;
+
 export const clientsWallQuery = groq`
   *[_type == "client" && showOnLogoWall == true && defined(logo.asset)]
     | order(order asc){ _id, name, logo }`;
