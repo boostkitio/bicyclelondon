@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import Image from "next/image";
-import { PageHero } from "@/components/page/page-hero";
-import { CtaBand } from "@/components/page/cta-band";
+import { Container } from "@/components/ui/container";
+import { Grain } from "@/components/grain";
 import { Section } from "@/components/ui/section";
-import { Reveal } from "@/components/reveal";
+import { CtaBand } from "@/components/page/cta-band";
+import { WorkGrid } from "@/components/work-grid";
+import { Parallax } from "@/components/scroll/parallax";
+import { MaskReveal } from "@/components/scroll/mask-reveal";
 import { JsonLd } from "@/components/seo/json-ld";
 import { collectionPageSchema } from "@/lib/schema";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { allCaseStudiesQuery } from "@/sanity/lib/queries";
-import { urlFor } from "@/sanity/lib/image";
 import type { CaseStudyCard } from "@/sanity/lib/types";
 
 export const metadata: Metadata = {
@@ -42,94 +42,45 @@ export default async function WorkPage() {
           })),
         })}
       />
-      <PageHero
-        eyebrow="Selected work · 2021–2026"
-        title="Famous, effective work"
-        lead="For ambitious brands. Built on the power of ‘and’."
-      />
 
-      <Section>
+      {/* Editorial hero — oversized, asymmetric, breaks to two lines */}
+      <section className="relative isolate overflow-hidden bg-navy text-white">
+        <Grain />
+        <Parallax speed={-0.06} className="relative z-10">
+          <Container className="pb-14 pt-36 sm:pb-20 sm:pt-40">
+            <p className="label mb-7 flex items-center gap-2.5 text-brand">
+              <span className="animate-pulse-dot inline-block h-1.5 w-1.5 rounded-full bg-brand" />
+              Selected work · 2021–2026
+            </p>
+            <MaskReveal
+              as="h1"
+              className="display text-[clamp(2.75rem,10vw,7.5rem)] leading-[0.86]"
+              lines={[
+                "Famous,",
+                <>
+                  effective <span className="text-brand">work</span>
+                </>,
+              ]}
+            />
+            <div className="mt-9 flex flex-col gap-6 border-t border-white/12 pt-8 sm:flex-row sm:items-end sm:justify-between">
+              <p className="max-w-md text-lg leading-relaxed text-white/75">
+                For ambitious brands. Built on the power of ‘and’.
+              </p>
+              <p className="label shrink-0 text-white/45">
+                {total} selected projects
+              </p>
+            </div>
+          </Container>
+        </Parallax>
+      </section>
+
+      <Section tone="white">
         {studies.length === 0 ? (
           <p className="py-12 text-center text-black/50">
             Case studies are on their way. Check back soon.
           </p>
         ) : (
-          <div className="space-y-24 lg:space-y-32">
-            {studies.map((cs, i) => {
-              const flipped = i % 2 === 1;
-              return (
-                <Reveal key={cs._id}>
-                  <article className="group grid items-center gap-8 lg:grid-cols-12 lg:gap-16">
-                    <Link
-                      href={`/work/${cs.slug}`}
-                      className={`relative block overflow-hidden rounded-[2rem] bg-navy lg:col-span-7 ${
-                        flipped ? "lg:order-2" : ""
-                      }`}
-                    >
-                      <div className="relative aspect-[4/3] sm:aspect-[16/10]">
-                        {cs.heroImage?.asset && (
-                          <Image
-                            src={urlFor(cs.heroImage).width(1200).height(750).url()}
-                            alt={cs.heroImage.alt || cs.title}
-                            fill
-                            sizes="(max-width: 1024px) 100vw, 58vw"
-                            className="object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
-                          />
-                        )}
-                        {/* subtle wash so the label chip below stays legible on hover */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-navy/40 via-transparent to-transparent opacity-0 transition duration-500 group-hover:opacity-100" />
-                      </div>
-                    </Link>
-
-                    <div className="lg:col-span-5">
-                      <div className="label mb-5 flex items-center gap-3 text-black/45">
-                        <span className="text-brand-ink">
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
-                        <span className="h-px w-8 bg-black/15" />
-                        <span>{total}</span>
-                        {cs.clientName && (
-                          <span className="text-black/70">· {cs.clientName}</span>
-                        )}
-                      </div>
-
-                      <Link href={`/work/${cs.slug}`}>
-                        <h2 className="display text-4xl leading-[0.95] transition-colors group-hover:text-brand-ink sm:text-5xl lg:text-[3.4rem]">
-                          {cs.title}
-                        </h2>
-                      </Link>
-
-                      {cs.standfirst && (
-                        <p className="mt-5 max-w-md text-lg leading-relaxed text-black/65">
-                          {cs.standfirst}
-                        </p>
-                      )}
-
-                      {cs.services && cs.services.length > 0 && (
-                        <ul className="mt-6 flex flex-wrap gap-2">
-                          {cs.services.map((s) => (
-                            <li
-                              key={s}
-                              className="label rounded-full bg-paper px-3.5 py-1.5 text-black/60 ring-1 ring-black/5"
-                            >
-                              {s}
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-
-                      <Link
-                        href={`/work/${cs.slug}`}
-                        className="label mt-8 inline-flex items-center gap-1.5 text-navy transition-all group-hover:gap-3 group-hover:text-brand-ink"
-                      >
-                        View case <span aria-hidden>→</span>
-                      </Link>
-                    </div>
-                  </article>
-                </Reveal>
-              );
-            })}
-          </div>
+          <WorkGrid studies={studies} tone="light" />
         )}
       </Section>
 

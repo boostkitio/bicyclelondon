@@ -8,7 +8,7 @@ import { Reveal } from "@/components/reveal";
 import { Grain } from "@/components/grain";
 import { MuxBg } from "@/components/mux-bg";
 import { ScrollFillText } from "@/components/scroll/scroll-fill-text";
-import { CardArrow } from "@/components/card-arrow";
+import { WorkGrid } from "@/components/work-grid";
 import { LogoWall } from "@/components/logo-wall";
 import { StatsBand } from "@/components/stats";
 import { TeamStrip } from "@/components/team-strip";
@@ -21,7 +21,6 @@ import { SERVICES } from "@/lib/site";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { featuredCaseStudiesQuery, testimonialsQuery } from "@/sanity/lib/queries";
 import { Testimonials } from "@/components/testimonials";
-import { urlFor } from "@/sanity/lib/image";
 import type { CaseStudyCard, Testimonial } from "@/sanity/lib/types";
 
 export const metadata: Metadata = {
@@ -303,33 +302,8 @@ export default async function HomePage() {
               </Link>
             </div>
           </Reveal>
-          <div className="mt-10 grid gap-8 md:grid-cols-3">
-            {featured.map((cs, i) => (
-              <Reveal key={cs._id} delay={i * 70}>
-                <Link href={`/work/${cs.slug}`} className="group block">
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white/5">
-                    {cs.heroImage?.asset && (
-                      <Image
-                        src={urlFor(cs.heroImage).width(700).height(525).url()}
-                        alt={cs.heroImage.alt || cs.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                        className="object-cover transition duration-500 group-hover:scale-105"
-                      />
-                    )}
-                    <CardArrow />
-                  </div>
-                  {cs.clientName && (
-                    <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-brand">
-                      {cs.clientName}
-                    </p>
-                  )}
-                  <h3 className="mt-1 font-display text-xl font-bold uppercase">
-                    {cs.title}
-                  </h3>
-                </Link>
-              </Reveal>
-            ))}
+          <div className="mt-12">
+            <WorkGrid studies={featured} tone="dark" />
           </div>
         </Section>
       )}
