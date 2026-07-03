@@ -86,15 +86,25 @@ export default function PurposePage() {
       <Section>
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal>
-            <div className="flex aspect-[4/3] items-center justify-center rounded-[2rem] bg-navy p-12">
-              <Image
-                src="/images/bcorp-white.png"
-                alt="Certified B Corporation"
-                width={160}
-                height={269}
-                className="h-40 w-auto sm:h-48"
-              />
-            </div>
+            <a
+              href="https://www.bcorporation.net/en-us/find-a-b-corp/company/bicycle-london-limited/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block"
+            >
+              <div className="flex aspect-[4/3] items-center justify-center rounded-[2rem] bg-navy p-12 transition-colors duration-300 group-hover:bg-deep">
+                <Image
+                  src="/images/bcorp-white.png"
+                  alt="Certified B Corporation"
+                  width={160}
+                  height={269}
+                  className="h-40 w-auto transition-transform duration-500 ease-out group-hover:scale-105 sm:h-48"
+                />
+              </div>
+              <span className="label mt-4 inline-flex items-center gap-2 text-black/50 transition-all group-hover:gap-3 group-hover:text-brand-ink">
+                View our B Corp profile <span aria-hidden>→</span>
+              </span>
+            </a>
           </Reveal>
           <Reveal delay={120}>
             <h2 className="display text-3xl sm:text-4xl lg:text-5xl">
