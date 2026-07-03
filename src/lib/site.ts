@@ -46,6 +46,7 @@ export const SERVICES: {
 
 export const PRIMARY_NAV: NavItem[] = [
   { label: "About", href: "/about" },
+  { label: "Purpose", href: "/purpose" },
   { label: "Work", href: "/work" },
   { label: "Slipstream", href: "/slipstream" },
   { label: "Careers", href: "/careers" },
