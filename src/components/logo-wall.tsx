@@ -14,10 +14,10 @@ function logoSize(name: string): string {
   // Wide marks (OpenTable, Five Guys) are limited by the cell width, so let
   // them run a little into the padding; tall marks grow via max-height.
   if (n.includes("opentable") || n.includes("open table"))
-    return "max-h-[4.5rem] max-w-[112%] sm:max-h-[5.25rem]";
+    return "max-h-[5.25rem] max-w-[130%] sm:max-h-[6rem]";
   if (n.includes("warner")) return "max-h-[4.5rem] max-w-full sm:max-h-[5.75rem]";
   if (n.includes("five guys"))
-    return "max-h-16 max-w-[112%] sm:max-h-[4.75rem]";
+    return "max-h-[4.75rem] max-w-[130%] sm:max-h-[5.5rem]";
   if (n.includes("joe")) return "max-h-[4.5rem] max-w-full sm:max-h-[5.75rem]";
   return "max-h-11 max-w-full sm:max-h-14";
 }
