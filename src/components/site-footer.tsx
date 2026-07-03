@@ -46,13 +46,21 @@ export function SiteFooter() {
                   className="h-16 w-auto"
                 />
               </a>
-              <Image
-                src="/images/royal-charter.png"
-                alt="Incorporated by Royal Charter"
-                width={122}
-                height={59}
-                className="h-11 w-auto"
-              />
+              <a
+                href="https://ipa.co.uk/membership/our-members/ipa-member-agencies/bicycle-london"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="IPA member agency profile (opens in a new tab)"
+                className="transition-opacity hover:opacity-80"
+              >
+                <Image
+                  src="/images/royal-charter.png"
+                  alt="IPA member agency, incorporated by Royal Charter"
+                  width={122}
+                  height={59}
+                  className="h-11 w-auto"
+                />
+              </a>
             </div>
           </div>
 
