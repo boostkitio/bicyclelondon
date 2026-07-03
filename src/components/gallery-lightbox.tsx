@@ -5,7 +5,18 @@ import { createPortal } from "react-dom";
 import Image from "next/image";
 import { Reveal } from "@/components/reveal";
 import { urlFor } from "@/sanity/lib/image";
+import { cn } from "@/lib/utils";
 import type { SanityImage } from "@/sanity/lib/types";
+
+// Editorial gallery rhythm: lopsided pairs (wide + tall) with a gentle drop, so
+// the case-study gallery breaks out of a uniform grid. Widths/heights are baked
+// so each crop respects the image hotspot. Loops for any count.
+const GALLERY_VARIANTS = [
+  { span: "sm:col-span-7", w: 1400, h: 900, drop: "" },
+  { span: "sm:col-span-5", w: 1000, h: 1200, drop: "sm:mt-12" },
+  { span: "sm:col-span-5", w: 1000, h: 1200, drop: "" },
+  { span: "sm:col-span-7", w: 1400, h: 900, drop: "sm:mt-12" },
+] as const;
 
 /**
  * Case-study gallery grid whose images open in a full-screen lightbox.
@@ -52,26 +63,29 @@ export function GalleryLightbox({
 
   return (
     <>
-      <div className="grid gap-5 sm:grid-cols-2">
-        {images.map((img, i) => (
-          <Reveal key={i} delay={(i % 2) * 80}>
-            <button
-              type="button"
-              onClick={() => setOpen(i)}
-              aria-label={`View image ${i + 1} of ${count}: ${img.alt || title}`}
-              className="group block w-full cursor-zoom-in overflow-hidden rounded-2xl bg-paper text-left"
-            >
-              <Image
-                src={urlFor(img).width(1000).height(700).url()}
-                alt={img.alt || title}
-                width={1000}
-                height={700}
-                sizes="(max-width: 640px) 100vw, 512px"
-                className="h-auto w-full transition duration-500 group-hover:scale-105"
-              />
-            </button>
-          </Reveal>
-        ))}
+      <div className="grid grid-cols-1 items-start gap-5 sm:grid-cols-12">
+        {images.map((img, i) => {
+          const v = GALLERY_VARIANTS[i % GALLERY_VARIANTS.length];
+          return (
+            <Reveal key={i} delay={(i % 2) * 80} className={cn(v.span, v.drop)}>
+              <button
+                type="button"
+                onClick={() => setOpen(i)}
+                aria-label={`View image ${i + 1} of ${count}: ${img.alt || title}`}
+                className="group block w-full cursor-zoom-in overflow-hidden rounded-2xl bg-paper text-left"
+              >
+                <Image
+                  src={urlFor(img).width(v.w).height(v.h).url()}
+                  alt={img.alt || title}
+                  width={v.w}
+                  height={v.h}
+                  sizes="(max-width: 640px) 100vw, 640px"
+                  className="h-auto w-full transition duration-500 group-hover:scale-105"
+                />
+              </button>
+            </Reveal>
+          );
+        })}
       </div>
 
       {canPortal &&

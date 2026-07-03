@@ -8,10 +8,23 @@ import { urlFor } from "@/sanity/lib/image";
 import { cn } from "@/lib/utils";
 import type { ArticleCard } from "@/sanity/lib/types";
 
+// Broken editorial rhythm for the article index: lopsided pairs whose big side
+// alternates, then an equal pair, with staggered drops. Rows resolve to 7+5,
+// 5+7, 6+6 so nothing lines up into a uniform card grid. Loops for any count.
+const VARIANTS = [
+  { span: "md:col-span-7", aspect: "aspect-[16/10]", drop: "", big: true },
+  { span: "md:col-span-5", aspect: "aspect-[4/5]", drop: "md:mt-16", big: false },
+  { span: "md:col-span-5", aspect: "aspect-[4/5]", drop: "", big: false },
+  { span: "md:col-span-7", aspect: "aspect-[16/10]", drop: "md:mt-16", big: true },
+  { span: "md:col-span-6", aspect: "aspect-[3/2]", drop: "", big: false },
+  { span: "md:col-span-6", aspect: "aspect-[3/2]", drop: "md:mt-16", big: false },
+] as const;
+
 /**
- * Category chips + an editorial article index: the first (latest) piece runs
- * large as a featured lead, the rest below in a grid. Filtered client-side
- * from the URL's ?category= param so the whole route stays static.
+ * Category chips + an editorial article index: the latest piece runs as a
+ * full-bleed showcase with its title and standfirst over the image, the rest
+ * below in a broken, staggered grid. Filtered client-side from the URL's
+ * ?category= param so the whole route stays static.
  */
 export function SlipstreamGrid({
   articles,
@@ -70,39 +83,37 @@ export function SlipstreamGrid({
             <Reveal>
               <Link
                 href={`/slipstream/${lead.slug}`}
-                className="group mb-16 grid items-center gap-8 lg:mb-20 lg:grid-cols-2 lg:gap-14"
+                className="group relative mb-16 block overflow-hidden rounded-[2rem] bg-navy lg:mb-24"
               >
-                <div className="relative aspect-[16/10] overflow-hidden rounded-[2rem] bg-navy">
+                <div className="relative aspect-[4/5] sm:aspect-[16/10] lg:aspect-[16/9]">
                   {lead.heroImage?.asset ? (
                     <Image
-                      src={urlFor(lead.heroImage).width(1100).height(690).url()}
+                      src={urlFor(lead.heroImage).width(1800).url()}
                       alt={lead.heroImage.alt || lead.title}
                       fill
-                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      priority
+                      sizes="100vw"
                       className="object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
                     />
                   ) : (
-                    <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-navy via-navy to-electric p-8">
-                      <span className="text-center font-display text-3xl font-extrabold uppercase leading-tight text-brand">
-                        {lead.category || "Slipstream"}
-                      </span>
-                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy to-electric" />
                   )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/55 to-navy/10" />
                 </div>
-                <div>
-                  <p className="label flex items-center gap-2.5 text-brand-ink">
-                    <span className="animate-pulse-dot inline-block h-1.5 w-1.5 rounded-full bg-brand-ink" />
+                <div className="absolute inset-x-0 bottom-0 p-6 sm:p-10 lg:p-14">
+                  <p className="label flex items-center gap-2.5 text-brand">
+                    <span className="animate-pulse-dot inline-block h-1.5 w-1.5 rounded-full bg-brand" />
                     Latest{lead.category ? ` · ${lead.category}` : ""}
                   </p>
-                  <h2 className="display mt-5 text-3xl leading-[0.98] transition-colors group-hover:text-brand-ink sm:text-4xl lg:text-5xl">
+                  <h2 className="display mt-4 max-w-3xl text-4xl leading-[0.92] text-white transition-colors group-hover:text-brand sm:text-5xl lg:text-6xl">
                     {lead.title}
                   </h2>
                   {lead.standfirst && (
-                    <p className="mt-5 max-w-md text-lg leading-relaxed text-black/65">
+                    <p className="mt-4 max-w-2xl text-lg leading-relaxed text-white/85">
                       {lead.standfirst}
                     </p>
                   )}
-                  <span className="label mt-8 inline-flex items-center gap-1.5 text-navy transition-all group-hover:gap-3 group-hover:text-brand-ink">
+                  <span className="label mt-6 inline-flex items-center gap-2 text-brand transition-all group-hover:gap-3">
                     Read the piece <span aria-hidden>→</span>
                   </span>
                 </div>
@@ -111,46 +122,72 @@ export function SlipstreamGrid({
           )}
 
           {rest.length > 0 && (
-            <div className="grid items-stretch gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {rest.map((a, i) => (
-                <Reveal key={a._id} delay={(i % 3) * 80} className="flex">
-                  <Link
-                    href={`/slipstream/${a.slug}`}
-                    className="group flex flex-1 flex-col overflow-hidden rounded-3xl bg-paper ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/10 hover:ring-brand"
+            <div className="grid grid-cols-1 items-start gap-x-8 gap-y-14 md:grid-cols-12 md:gap-y-16">
+              {rest.map((a, i) => {
+                const v = VARIANTS[i % VARIANTS.length];
+                return (
+                  <Reveal
+                    key={a._id}
+                    delay={(i % 2) * 80}
+                    className={cn(v.span, v.drop)}
                   >
-                    <div className="relative aspect-[3/2] overflow-hidden bg-navy">
-                      {a.heroImage?.asset ? (
-                        <Image
-                          src={urlFor(a.heroImage).width(700).height(467).url()}
-                          alt={a.heroImage.alt || a.title}
-                          fill
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          className="object-cover transition duration-500 group-hover:scale-105"
-                        />
-                      ) : (
-                        <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-navy via-navy to-electric p-6 transition duration-500 group-hover:scale-105">
-                          <span className="text-center font-display text-2xl font-extrabold uppercase leading-tight text-brand">
-                            {a.category || "Slipstream"}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="flex flex-1 flex-col p-6">
-                      {a.category && (
-                        <p className="label text-brand-ink">{a.category}</p>
-                      )}
-                      <h2 className="mt-2.5 font-display text-xl font-bold uppercase leading-tight">
-                        {a.title}
-                      </h2>
-                      {a.standfirst && (
-                        <p className="mt-2 line-clamp-3 text-sm text-black/60">
-                          {a.standfirst}
-                        </p>
-                      )}
-                    </div>
-                  </Link>
-                </Reveal>
-              ))}
+                    <Link href={`/slipstream/${a.slug}`} className="group block">
+                      <div
+                        className={cn(
+                          "relative overflow-hidden rounded-[1.5rem] bg-navy",
+                          v.aspect,
+                        )}
+                      >
+                        {a.heroImage?.asset ? (
+                          <Image
+                            src={urlFor(a.heroImage).width(1100).url()}
+                            alt={a.heroImage.alt || a.title}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            className="object-cover transition duration-700 ease-out group-hover:scale-[1.05]"
+                          />
+                        ) : (
+                          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-navy via-navy to-electric p-6">
+                            <span className="text-center font-display text-2xl font-extrabold uppercase leading-tight text-brand">
+                              {a.category || "Slipstream"}
+                            </span>
+                          </div>
+                        )}
+                        <div className="absolute inset-0 bg-brand/0 transition-colors duration-500 group-hover:bg-brand/10" />
+                      </div>
+
+                      <div className="mt-5">
+                        {(a.category || a.issue != null) && (
+                          <div className="label flex items-center gap-3 text-black/45">
+                            {a.category && (
+                              <span className="text-brand-ink">{a.category}</span>
+                            )}
+                            {a.category && a.issue != null && (
+                              <span className="h-px w-6 bg-black/20" />
+                            )}
+                            {a.issue != null && (
+                              <span>Issue {String(a.issue).padStart(2, "0")}</span>
+                            )}
+                          </div>
+                        )}
+                        <h3
+                          className={cn(
+                            "display mt-2.5 leading-[0.95] text-ink transition-colors group-hover:text-brand-ink",
+                            v.big ? "text-3xl sm:text-4xl" : "text-2xl sm:text-3xl",
+                          )}
+                        >
+                          {a.title}
+                        </h3>
+                        {a.standfirst && (
+                          <p className="mt-3 line-clamp-3 max-w-md text-base leading-relaxed text-black/60">
+                            {a.standfirst}
+                          </p>
+                        )}
+                      </div>
+                    </Link>
+                  </Reveal>
+                );
+              })}
             </div>
           )}
         </>
