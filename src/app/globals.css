@@ -79,6 +79,16 @@ h4 {
   letter-spacing: -0.01em;
 }
 
+/* Oversized display for hero and wordmark moments (bolder-layout pass). */
+.display-xl {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-weight: 800;
+  line-height: 0.88;
+  letter-spacing: -0.02em;
+  font-size: clamp(3rem, 11vw, 12rem);
+}
+
 /* Utility label: mono voices the data/science half of the brand. Use on
    eyebrows, stat captions, nav utility and section kickers. */
 .label {
