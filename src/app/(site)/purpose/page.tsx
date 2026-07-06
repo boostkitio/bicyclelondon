@@ -6,6 +6,8 @@ import { CtaBand } from "@/components/page/cta-band";
 import { MuxVideo } from "@/components/mux-video";
 import { Parallax } from "@/components/scroll/parallax";
 import { MaskReveal } from "@/components/scroll/mask-reveal";
+import { Marquee } from "@/components/scroll/marquee";
+import { SplitReveal } from "@/components/scroll/split-reveal";
 import { Reveal } from "@/components/reveal";
 import { ButtonLink } from "@/components/ui/button";
 
@@ -64,23 +66,25 @@ export default function PurposePage() {
         </Container>
       </section>
 
-      {/* Accreditations / partners */}
-      <Section tone="navy" className="!py-10">
-        <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 sm:gap-x-16">
-          {PARTNERS.map((p) =>
-            p.chip ? (
-              <span
-                key={p.src}
-                className="inline-flex items-center rounded-xl bg-white px-5 py-3"
-              >
+      {/* Accreditations / partners — steady cruise, surges with scroll velocity */}
+      <Marquee
+        velocity
+        className="bg-navy py-10"
+        items={[...PARTNERS, ...PARTNERS, ...PARTNERS].flatMap((p, i) => [
+          <span key={`p${i}`} className="inline-flex items-center px-8 sm:px-10">
+            {p.chip ? (
+              <span className="inline-flex items-center rounded-xl bg-white px-5 py-3">
                 <Image src={p.src} alt={p.alt} width={p.w} height={p.h} className={p.className} />
               </span>
             ) : (
-              <Image key={p.src} src={p.src} alt={p.alt} width={p.w} height={p.h} className={p.className} />
-            ),
-          )}
-        </div>
-      </Section>
+              <Image src={p.src} alt={p.alt} width={p.w} height={p.h} className={p.className} />
+            )}
+          </span>,
+          <span key={`s${i}`} className="text-2xl font-extrabold text-white/20" aria-hidden>
+            /
+          </span>,
+        ])}
+      />
 
       {/* We're proud to be a B Corp */}
       <Section>
@@ -107,9 +111,12 @@ export default function PurposePage() {
             </a>
           </Reveal>
           <Reveal delay={120}>
-            <h2 className="display text-3xl sm:text-4xl lg:text-5xl">
-              We&rsquo;re proud to be a B Corp
-            </h2>
+            <SplitReveal
+              as="h2"
+              by="word"
+              className="display text-3xl sm:text-4xl lg:text-5xl"
+              text="We’re proud to be a B Corp"
+            />
             <div className="mt-6 space-y-5 text-lg leading-relaxed text-black/70">
               <p>
                 Overnight we became a B Corp. But our journey to certification has
@@ -145,10 +152,12 @@ export default function PurposePage() {
             </div>
           </Reveal>
           <Reveal delay={120} className="lg:order-1">
-            <h2 className="display text-2xl leading-[1.1] sm:text-3xl lg:text-[2.5rem]">
-              We look after our people with a whole-person approach to healthcare,
-              and in turn they choose to look after each other.
-            </h2>
+            <SplitReveal
+              as="h2"
+              by="word"
+              className="display text-2xl leading-[1.1] sm:text-3xl lg:text-[2.5rem]"
+              text="We look after our people with a whole-person approach to healthcare, and in turn they choose to look after each other."
+            />
             <p className="mt-6 text-lg leading-relaxed text-black/70">
               We&rsquo;re putting lots of small measures in place, but becoming a B
               Corp is no small feat. We&rsquo;re now part of a community aiming to
@@ -199,10 +208,12 @@ export default function PurposePage() {
             </p>
           </div>
 
-          <blockquote className="my-10 border-l-4 border-brand pl-6 font-display text-2xl font-bold uppercase leading-[1.15] text-brand sm:text-3xl">
-            It&rsquo;s a genuinely lovely organisation, run by amazing people, that
-            is trying to change a system that&rsquo;s broken.
-          </blockquote>
+          <SplitReveal
+            as="blockquote"
+            by="word"
+            className="my-10 border-l-4 border-brand pl-6 font-display text-2xl font-bold uppercase leading-[1.15] text-brand sm:text-3xl"
+            text="It’s a genuinely lovely organisation, run by amazing people, that is trying to change a system that’s broken."
+          />
 
           <div className="space-y-5 text-lg leading-relaxed text-white/75">
             <p>
@@ -246,11 +257,12 @@ export default function PurposePage() {
             </div>
           </Reveal>
           <Reveal delay={120}>
-            <h2 className="display text-2xl leading-[1.15] sm:text-3xl">
-              We support XO Bikes with their recycle-to-work scheme, giving
-              employees access to a completely refurbished, warranty-holding bike
-              at around half the price of its retail equivalent.
-            </h2>
+            <SplitReveal
+              as="h2"
+              by="word"
+              className="display text-2xl leading-[1.15] sm:text-3xl"
+              text="We support XO Bikes with their recycle-to-work scheme, giving employees access to a completely refurbished, warranty-holding bike at around half the price of its retail equivalent."
+            />
             <div className="mt-6 space-y-5 text-lg leading-relaxed text-black/70">
               <p>
                 We also took part in their mammoth charity bike ride, The Great
