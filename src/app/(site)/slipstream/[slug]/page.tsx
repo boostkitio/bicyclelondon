@@ -6,6 +6,7 @@ import { CtaBand } from "@/components/page/cta-band";
 import { Section } from "@/components/ui/section";
 import { PortableText } from "@/components/portable-text";
 import { ArticleByline } from "@/components/article-byline";
+import { ReadingProgress } from "@/components/scroll/reading-progress";
 import { NewsletterSignup } from "@/components/forms/newsletter-signup";
 import { JsonLd } from "@/components/seo/json-ld";
 import { sanityFetch } from "@/sanity/lib/fetch";
@@ -74,6 +75,7 @@ export default async function ArticlePage({ params }: Props) {
 
   return (
     <>
+      <ReadingProgress targetId="article" />
       <JsonLd
         data={articleSchema({
           title: a.title,
@@ -99,7 +101,7 @@ export default async function ArticlePage({ params }: Props) {
       />
 
       <Section>
-        <article className="mx-auto max-w-3xl">
+        <article id="article" className="mx-auto max-w-3xl">
           <Link
             href="/slipstream"
             className="group mb-8 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-brand-ink transition hover:text-ink"

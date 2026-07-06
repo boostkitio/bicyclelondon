@@ -83,6 +83,7 @@ export function SlipstreamGrid({
             <Reveal>
               <Link
                 href={`/slipstream/${lead.slug}`}
+                data-cursor="View"
                 className="group relative mb-16 block overflow-hidden rounded-[2rem] bg-navy lg:mb-24"
               >
                 <div className="relative aspect-[4/5] sm:aspect-[16/10] lg:aspect-[16/9]">
@@ -93,7 +94,7 @@ export function SlipstreamGrid({
                       fill
                       priority
                       sizes="100vw"
-                      className="object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
+                      className="object-cover transition duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transform-none"
                     />
                   ) : (
                     <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy to-electric" />
@@ -128,10 +129,14 @@ export function SlipstreamGrid({
                 return (
                   <Reveal
                     key={a._id}
-                    delay={(i % 2) * 80}
+                    delay={i * 60}
                     className={cn(v.span, v.drop)}
                   >
-                    <Link href={`/slipstream/${a.slug}`} className="group block">
+                    <Link
+                      href={`/slipstream/${a.slug}`}
+                      data-cursor="View"
+                      className="group block"
+                    >
                       <div
                         className={cn(
                           "relative overflow-hidden rounded-[1.5rem] bg-navy",
@@ -144,7 +149,7 @@ export function SlipstreamGrid({
                             alt={a.heroImage.alt || a.title}
                             fill
                             sizes="(max-width: 768px) 100vw, 50vw"
-                            className="object-cover transition duration-700 ease-out group-hover:scale-[1.05]"
+                            className="object-cover transition duration-700 ease-out group-hover:scale-[1.05] motion-reduce:transform-none"
                           />
                         ) : (
                           <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-navy via-navy to-electric p-6">
