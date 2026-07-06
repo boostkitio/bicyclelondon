@@ -6,7 +6,6 @@ import { CtaBand } from "@/components/page/cta-band";
 import { MuxVideo } from "@/components/mux-video";
 import { Parallax } from "@/components/scroll/parallax";
 import { MaskReveal } from "@/components/scroll/mask-reveal";
-import { Marquee } from "@/components/scroll/marquee";
 import { SplitReveal } from "@/components/scroll/split-reveal";
 import { Reveal } from "@/components/reveal";
 import { ButtonLink } from "@/components/ui/button";
@@ -66,25 +65,30 @@ export default function PurposePage() {
         </Container>
       </section>
 
-      {/* Accreditations / partners — steady cruise, surges with scroll velocity */}
-      <Marquee
-        velocity
-        className="bg-navy py-10"
-        items={[...PARTNERS, ...PARTNERS, ...PARTNERS].flatMap((p, i) => [
-          <span key={`p${i}`} className="inline-flex items-center px-8 sm:px-10">
-            {p.chip ? (
-              <span className="inline-flex items-center rounded-xl bg-white px-5 py-3">
+      {/* Accreditations / partners — a calm, evenly-spaced, centred row */}
+      <section className="bg-navy py-14">
+        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-x-14 gap-y-10 px-6 sm:gap-x-20">
+          {PARTNERS.map((p) =>
+            p.chip ? (
+              <span
+                key={p.alt}
+                className="inline-flex shrink-0 items-center rounded-xl bg-white px-5 py-3"
+              >
                 <Image src={p.src} alt={p.alt} width={p.w} height={p.h} className={`${p.className} min-w-fit`} />
               </span>
             ) : (
-              <Image src={p.src} alt={p.alt} width={p.w} height={p.h} className={`${p.className} min-w-fit`} />
-            )}
-          </span>,
-          <span key={`s${i}`} className="text-2xl font-extrabold text-white/20" aria-hidden>
-            /
-          </span>,
-        ])}
-      />
+              <Image
+                key={p.alt}
+                src={p.src}
+                alt={p.alt}
+                width={p.w}
+                height={p.h}
+                className={`${p.className} min-w-fit shrink-0`}
+              />
+            ),
+          )}
+        </div>
+      </section>
 
       {/* We're proud to be a B Corp */}
       <Section>
