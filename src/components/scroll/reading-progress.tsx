@@ -22,6 +22,6 @@ export function ReadingProgress({ targetId }: { targetId: string }) {
     return () => mm.revert();
   });
   return (
-    <div ref={ref} aria-hidden className="fixed left-0 top-0 z-[140] h-[3px] w-full bg-brand" style={{ transform: "scaleX(0)" }} />
+    <div ref={ref} aria-hidden className="fixed left-0 top-0 z-[160] h-[3px] w-full bg-brand" style={{ transform: "scaleX(0)" }} />
   );
 }

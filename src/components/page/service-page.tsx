@@ -50,14 +50,14 @@ export function ServicePage({ content }: { content: ServiceContent }) {
           glowing in, its logo lockup as the identity. */}
       <section className="relative flex min-h-[80vh] items-end overflow-hidden bg-deep text-white">
         {content.heroVideoPlaybackId ? (
-          <Parallax speed={-0.08} className="absolute inset-0 opacity-90">
+          <Parallax speed={-0.08} className="absolute inset-0 scale-110 opacity-90">
             <MuxBg
               playbackId={content.heroVideoPlaybackId}
               poster={content.heroImage}
             />
           </Parallax>
         ) : content.heroImage ? (
-          <Parallax speed={-0.08} className="absolute inset-0">
+          <Parallax speed={-0.08} className="absolute inset-0 scale-110">
             <Image
               src={content.heroImage}
               alt=""
@@ -146,7 +146,6 @@ export function ServicePage({ content }: { content: ServiceContent }) {
             {content.points.map((pt, i) => (
               <Reveal key={i} delay={i * 70}>
                 <div
-                  data-cursor="View"
                   className="h-full rounded-3xl bg-white/[0.04] p-8 ring-1 ring-white/10 transition duration-300 hover:-translate-y-1 hover:bg-white/[0.07]"
                 >
                   <span
@@ -196,7 +195,6 @@ export function ServicePage({ content }: { content: ServiceContent }) {
             {content.brands.logos.map((b) => (
               <div
                 key={b.src}
-                data-cursor="View"
                 className="group flex items-center justify-center"
               >
                 <Image
