@@ -205,3 +205,13 @@ h4 {
     animation: none;
   }
 }
+
+/* Custom cursor: hide the native pointer only when the JS cursor is mounted
+   (fine pointer + motion allowed). Never hides it under reduced motion/touch,
+   because the class is only added then. */
+.has-custom-cursor,
+.has-custom-cursor a,
+.has-custom-cursor button,
+.has-custom-cursor [data-cursor] {
+  cursor: none;
+}
