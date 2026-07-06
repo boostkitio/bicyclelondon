@@ -174,10 +174,15 @@ export default async function CaseStudyPage({ params }: Props) {
         {cs.gallery && cs.gallery.length > 0 && (
           <div className="mx-auto mt-20 max-w-5xl">
             <h2 className="display mb-8 text-2xl sm:text-3xl">The work</h2>
-            <GalleryLightbox
-              images={cs.gallery.filter((img) => img.asset)}
-              title={cs.title}
-            />
+            {/* data-cursor is a plain DOM attribute the custom cursor reads via
+                closest(), so it works across the client-component boundary
+                without touching GalleryLightbox's internals or its lightbox. */}
+            <div data-cursor="View">
+              <GalleryLightbox
+                images={cs.gallery.filter((img) => img.asset)}
+                title={cs.title}
+              />
+            </div>
           </div>
         )}
 
