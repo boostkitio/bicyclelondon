@@ -20,7 +20,7 @@ import { MagneticButton } from "@/components/scroll/magnetic-button";
 import { SERVICES } from "@/lib/site";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { featuredCaseStudiesQuery, testimonialsQuery } from "@/sanity/lib/queries";
-import { Testimonials } from "@/components/testimonials";
+import { StickyStack } from "@/components/scroll/sticky-stack";
 import type { CaseStudyCard, Testimonial } from "@/sanity/lib/types";
 
 export const metadata: Metadata = {
@@ -239,7 +239,7 @@ export default async function HomePage() {
       {/* What we do — big-type index, each unit in its own sub-brand colour */}
       <Section tone="navy">
         <Reveal mask>
-          <h2 className="display text-4xl sm:text-5xl">What we do</h2>
+          <h2 className="display text-5xl sm:text-6xl lg:text-7xl">What we do</h2>
           <p className="mt-4 max-w-2xl text-lg text-white/60">
             We don&rsquo;t have to do everything for every client. But when it all
             comes together, something special happens.
@@ -297,7 +297,7 @@ export default async function HomePage() {
         <Section tone="navy" className="!pt-0">
           <Reveal mask>
             <div className="flex items-end justify-between gap-6">
-              <h2 className="display text-4xl sm:text-5xl">Selected work</h2>
+              <h2 className="display text-5xl sm:text-6xl lg:text-7xl">Selected work</h2>
               <Link
                 href="/work"
                 className="shrink-0 text-sm font-semibold uppercase tracking-wide text-brand hover:text-white"
@@ -323,7 +323,19 @@ export default async function HomePage() {
               The people we ride with
             </h2>
           </Reveal>
-          <Testimonials items={testimonials} />
+          <StickyStack className="mx-auto max-w-3xl">
+            {testimonials.map((t) => (
+              <blockquote
+                key={t._id}
+                className="rounded-[2rem] bg-navy p-10 text-white shadow-xl"
+              >
+                <p className="display text-2xl leading-snug sm:text-3xl">{t.quote}</p>
+                <footer className="label mt-6 text-brand">
+                  {[t.authorName, t.authorRole, t.company].filter(Boolean).join(", ")}
+                </footer>
+              </blockquote>
+            ))}
+          </StickyStack>
         </Section>
       )}
 
