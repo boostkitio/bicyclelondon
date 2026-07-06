@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/page/page-hero";
 import { CtaBand } from "@/components/page/cta-band";
 import { Section } from "@/components/ui/section";
+import { Reveal } from "@/components/reveal";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/careers/benefits" },
@@ -75,22 +76,24 @@ export default function BenefitsPage() {
 
       <Section>
         <div className="grid gap-10 sm:grid-cols-2">
-          {groups.map((group) => (
-            <div key={group.title}>
-              <h2 className="label text-black/45">
-                {group.title}
-              </h2>
-              <ul className="mt-4 space-y-3">
-                {group.items.map((item) => (
-                  <li key={item} className="flex gap-3 text-black/75">
-                    <span aria-hidden className="mt-1 text-brand-ink">
-                      &bull;
-                    </span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          {groups.map((group, i) => (
+            <Reveal key={group.title} delay={i * 80}>
+              <div>
+                <h2 className="label text-black/45">
+                  {group.title}
+                </h2>
+                <ul className="mt-4 space-y-3">
+                  {group.items.map((item) => (
+                    <li key={item} className="flex gap-3 text-black/75">
+                      <span aria-hidden className="mt-1 text-brand-ink">
+                        &bull;
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
           ))}
         </div>
       </Section>

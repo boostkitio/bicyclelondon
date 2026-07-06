@@ -85,6 +85,7 @@ export default async function PelotonPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${m.name} on LinkedIn`}
+                  data-cursor="View"
                 >
                   <MemberCard m={m} />
                 </a>

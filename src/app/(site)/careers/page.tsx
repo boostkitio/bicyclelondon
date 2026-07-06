@@ -5,6 +5,7 @@ import { PageHero } from "@/components/page/page-hero";
 import { CtaBand } from "@/components/page/cta-band";
 import { Section } from "@/components/ui/section";
 import { Avatar } from "@/components/avatar";
+import { Reveal } from "@/components/reveal";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { allJobsQuery } from "@/sanity/lib/queries";
 import { SITE } from "@/lib/site";
@@ -112,27 +113,30 @@ export default async function CareersPage() {
             </p>
           ) : (
             <ul className="mt-6 border-t border-black/10">
-              {jobs.map((job) => (
+              {jobs.map((job, i) => (
                 <li key={job._id} className="border-b border-black/10">
-                  <Link
-                    href={`/careers/${job.slug}`}
-                    className="group flex items-center justify-between gap-4 px-2 py-6 transition-colors hover:bg-paper sm:px-4"
-                  >
-                    <span>
-                      <span className="block font-display text-2xl font-bold uppercase leading-tight transition-colors group-hover:text-brand-ink sm:text-3xl">
-                        {job.title}
-                      </span>
-                      <span className="label mt-2 block text-black/45">
-                        {[job.team, job.location].filter(Boolean).join(" · ")}
-                      </span>
-                    </span>
-                    <span
-                      aria-hidden="true"
-                      className="shrink-0 text-2xl text-brand-ink transition-transform duration-300 group-hover:translate-x-1.5"
+                  <Reveal delay={i * 60}>
+                    <Link
+                      href={`/careers/${job.slug}`}
+                      data-cursor="View"
+                      className="group flex items-center justify-between gap-4 px-2 py-6 transition-colors hover:bg-paper sm:px-4"
                     >
-                      →
-                    </span>
-                  </Link>
+                      <span>
+                        <span className="block font-display text-2xl font-bold uppercase leading-tight transition-colors group-hover:text-brand-ink sm:text-3xl">
+                          {job.title}
+                        </span>
+                        <span className="label mt-2 block text-black/45">
+                          {[job.team, job.location].filter(Boolean).join(" · ")}
+                        </span>
+                      </span>
+                      <span
+                        aria-hidden="true"
+                        className="shrink-0 text-2xl text-brand-ink transition-transform duration-300 group-hover:translate-x-1.5"
+                      >
+                        →
+                      </span>
+                    </Link>
+                  </Reveal>
                 </li>
               ))}
             </ul>
@@ -142,17 +146,19 @@ export default async function CareersPage() {
 
       <Section>
         <div className="grid gap-4 sm:grid-cols-3">
-          {moreLinks.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="group block rounded-2xl bg-paper p-6 ring-1 ring-black/5 transition-colors hover:bg-white hover:ring-black/10"
-            >
-              <span className="font-display text-lg font-bold uppercase text-navy transition-colors group-hover:text-brand-ink">
-                {item.title}
-              </span>
-              <p className="mt-2 text-sm text-black/65">{item.detail}</p>
-            </Link>
+          {moreLinks.map((item, i) => (
+            <Reveal key={item.href} delay={i * 60}>
+              <Link
+                href={item.href}
+                data-cursor="View"
+                className="group block rounded-2xl bg-paper p-6 ring-1 ring-black/5 transition-colors hover:bg-white hover:ring-black/10"
+              >
+                <span className="font-display text-lg font-bold uppercase text-navy transition-colors group-hover:text-brand-ink">
+                  {item.title}
+                </span>
+                <p className="mt-2 text-sm text-black/65">{item.detail}</p>
+              </Link>
+            </Reveal>
           ))}
         </div>
       </Section>
@@ -196,16 +202,15 @@ export default async function CareersPage() {
           What’s life at Bicycle like?
         </h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
-          {testimonials.map((t) => (
-            <blockquote
-              key={t.name}
-              className="rounded-2xl bg-paper p-6 text-black/75 ring-1 ring-black/5"
-            >
-              <p className="italic leading-relaxed">“{t.quote}”</p>
-              <footer className="mt-4 text-sm font-semibold not-italic text-black/60">
-                {t.name}, {t.role}
-              </footer>
-            </blockquote>
+          {testimonials.map((t, i) => (
+            <Reveal key={t.name} delay={i * 60}>
+              <blockquote className="rounded-2xl bg-paper p-6 text-black/75 ring-1 ring-black/5">
+                <p className="italic leading-relaxed">“{t.quote}”</p>
+                <footer className="mt-4 text-sm font-semibold not-italic text-black/60">
+                  {t.name}, {t.role}
+                </footer>
+              </blockquote>
+            </Reveal>
           ))}
         </div>
 
@@ -213,22 +218,24 @@ export default async function CareersPage() {
           Meet the Peloton
         </h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
-          {peloton.map((person) => (
-            <Link
-              key={person.href}
-              href={person.href}
-              className="group flex items-center gap-5 rounded-2xl bg-paper p-5 ring-1 ring-black/5 transition-colors hover:bg-white hover:ring-black/10"
-            >
-              <div className="w-16 shrink-0">
-                <Avatar src={person.photo} name={person.name} initials={person.name[0]} />
-              </div>
-              <div>
-                <span className="font-display text-lg font-bold text-navy transition-colors group-hover:text-brand-ink">
-                  {person.name}
-                </span>
-                <p className="mt-1 text-sm text-black/65">{person.role}</p>
-              </div>
-            </Link>
+          {peloton.map((person, i) => (
+            <Reveal key={person.href} delay={i * 60}>
+              <Link
+                href={person.href}
+                data-cursor="View"
+                className="group flex items-center gap-5 rounded-2xl bg-paper p-5 ring-1 ring-black/5 transition-colors hover:bg-white hover:ring-black/10"
+              >
+                <div className="w-16 shrink-0">
+                  <Avatar src={person.photo} name={person.name} initials={person.name[0]} />
+                </div>
+                <div>
+                  <span className="font-display text-lg font-bold text-navy transition-colors group-hover:text-brand-ink">
+                    {person.name}
+                  </span>
+                  <p className="mt-1 text-sm text-black/65">{person.role}</p>
+                </div>
+              </Link>
+            </Reveal>
           ))}
         </div>
       </Section>

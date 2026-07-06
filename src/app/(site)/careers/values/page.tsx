@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/page/page-hero";
 import { CtaBand } from "@/components/page/cta-band";
 import { Section } from "@/components/ui/section";
+import { Reveal } from "@/components/reveal";
+import { SplitReveal } from "@/components/scroll/split-reveal";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/careers/values" },
@@ -55,15 +57,20 @@ export default function ValuesPage() {
           Bicycle values
         </h2>
         <div className="mt-8 grid gap-8 md:grid-cols-3">
-          {values.map((value) => (
-            <article key={value.title}>
-              <h3 className="font-display text-2xl font-bold uppercase text-navy">
-                {value.title}
-              </h3>
-              <p className="mt-4 leading-relaxed text-black/75">
-                {value.detail}
-              </p>
-            </article>
+          {values.map((value, i) => (
+            <Reveal key={value.title} delay={i * 80}>
+              <article>
+                <SplitReveal
+                  text={value.title}
+                  by="char"
+                  as="h3"
+                  className="font-display text-2xl font-bold uppercase text-navy"
+                />
+                <p className="mt-4 leading-relaxed text-black/75">
+                  {value.detail}
+                </p>
+              </article>
+            </Reveal>
           ))}
         </div>
       </Section>
