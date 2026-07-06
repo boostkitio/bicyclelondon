@@ -15,7 +15,7 @@ import { TeamStrip } from "@/components/team-strip";
 import { HomeHero } from "@/components/home-hero";
 import { Parallax } from "@/components/scroll/parallax";
 import { Marquee } from "@/components/scroll/marquee";
-import { MaskReveal } from "@/components/scroll/mask-reveal";
+import { SplitReveal } from "@/components/scroll/split-reveal";
 import { MagneticButton } from "@/components/scroll/magnetic-button";
 import { SERVICES } from "@/lib/site";
 import { sanityFetch } from "@/sanity/lib/fetch";
@@ -118,14 +118,18 @@ export default async function HomePage() {
       {/* Power of AND — static stacked statement (no scroll hijack) */}
       <section className="relative overflow-hidden bg-navy px-5 py-24 text-center text-white sm:px-8 sm:py-32">
         <Grain />
-        <MaskReveal
-          className="relative display text-center text-[clamp(34px,7vw,92px)] leading-[1.08]"
-          lines={ANDS.map(([a, b]) => (
-            <>
-              {a} <span className="text-brand">&amp;</span> {b}
-            </>
+        <div className="relative space-y-2">
+          {ANDS.map(([a, b]) => (
+            <SplitReveal
+              key={a}
+              as="h2"
+              by="word"
+              scrub
+              className="display-xl text-center text-white"
+              text={`${a} & ${b}`}
+            />
           ))}
-        />
+        </div>
       </section>
 
       {/* Meet Bicycle */}
