@@ -84,25 +84,27 @@ export default function AboutPage() {
       </Section>
 
       <Section>
-        <div className="mx-auto max-w-3xl">
-          <p className="display text-2xl sm:text-3xl">
-            Three years on, Bicycle is now one of the fastest-growing agencies in
-            the UK, with a headcount of 63 (and three dogs).
-          </p>
-          <p className="mt-6 text-lg leading-relaxed text-black/75">
-            Our headquarters are in Clerkenwell, London and we have fully global
-            capabilities in-house. We’re home to curious, intelligent and lovely
-            people who want to create incredible work on interesting brands. We
-            are 100% independent, with no external investment whatsoever. And
-            we’re going to change what you thought it was possible for a modern
-            agency to be.
-          </p>
-          <div className="mt-8">
-            <ButtonLink href="/the-peloton" variant="outline">
-              Meet the Peloton
-            </ButtonLink>
+        <Reveal>
+          <div className="mx-auto max-w-3xl">
+            <p className="display text-2xl sm:text-3xl">
+              Three years on, Bicycle is now one of the fastest-growing agencies in
+              the UK, with a headcount of 63 (and three dogs).
+            </p>
+            <p className="mt-6 text-lg leading-relaxed text-black/75">
+              Our headquarters are in Clerkenwell, London and we have fully global
+              capabilities in-house. We’re home to curious, intelligent and lovely
+              people who want to create incredible work on interesting brands. We
+              are 100% independent, with no external investment whatsoever. And
+              we’re going to change what you thought it was possible for a modern
+              agency to be.
+            </p>
+            <div className="mt-8">
+              <ButtonLink href="/the-peloton" variant="outline">
+                Meet the Peloton
+              </ButtonLink>
+            </div>
           </div>
-        </div>
+        </Reveal>
       </Section>
 
       <Section tone="navy">

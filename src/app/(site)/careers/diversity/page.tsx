@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/page/page-hero";
 import { CtaBand } from "@/components/page/cta-band";
 import { Section } from "@/components/ui/section";
+import { Reveal } from "@/components/reveal";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -21,7 +22,7 @@ export default function DiversityPage() {
       />
 
       <Section>
-        <div className="max-w-3xl space-y-6 text-lg leading-relaxed text-black/75">
+        <Reveal className="max-w-3xl space-y-6 text-lg leading-relaxed text-black/75">
           <h2 className="label text-black/45">
             Diversity &amp; representation
           </h2>
@@ -60,7 +61,7 @@ export default function DiversityPage() {
             if you require additional support or adjustments to ensure you
             have the best possible chance in your interview.
           </p>
-        </div>
+        </Reveal>
       </Section>
 
       <CtaBand

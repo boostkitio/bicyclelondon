@@ -6,6 +6,7 @@ import { Section } from "@/components/ui/section";
 import { PortableText } from "@/components/portable-text";
 import { JsonLd } from "@/components/seo/json-ld";
 import { ButtonLink } from "@/components/ui/button";
+import { Reveal } from "@/components/reveal";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { jobBySlugQuery, jobSlugsQuery } from "@/sanity/lib/queries";
 import { SITE } from "@/lib/site";
@@ -103,7 +104,7 @@ export default async function JobPage({ params }: Props) {
       <PageHero eyebrow={job.team || "Careers"} title={job.title} lead={job.summary} />
 
       <Section>
-        <div className="mx-auto max-w-3xl">
+        <Reveal className="mx-auto max-w-3xl">
           {meta.length > 0 && (
             <ul className="mb-10 flex flex-wrap gap-2">
               {meta.map((m) => (
@@ -150,7 +151,7 @@ export default async function JobPage({ params }: Props) {
               )}
             </div>
           </div>
-        </div>
+        </Reveal>
       </Section>
 
       <CtaBand

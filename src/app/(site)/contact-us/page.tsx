@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/page/page-hero";
 import { Section } from "@/components/ui/section";
 import { ContactForm } from "@/components/forms/contact-form";
+import { Reveal } from "@/components/reveal";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -38,7 +39,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="space-y-8">
+          <Reveal className="space-y-8">
             <div>
               <h2 className="font-display text-xs font-semibold uppercase tracking-widest text-black/50">
                 Email us
@@ -49,6 +50,7 @@ export default function ContactPage() {
                     <p className="text-sm text-black/55">{c.label}</p>
                     <a
                       href={`mailto:${c.email}`}
+                      data-cursor
                       className="font-display font-semibold hover:text-brand-ink"
                     >
                       {c.email}
@@ -77,12 +79,13 @@ export default function ContactPage() {
               </h2>
               <a
                 href={`tel:${SITE.phone.replace(/\s/g, "")}`}
+                data-cursor
                 className="mt-4 inline-block font-display font-semibold hover:text-brand-ink"
               >
                 {SITE.phone}
               </a>
             </div>
-          </div>
+          </Reveal>
         </div>
       </Section>
     </>

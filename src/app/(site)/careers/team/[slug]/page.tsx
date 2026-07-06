@@ -5,6 +5,8 @@ import { CtaBand } from "@/components/page/cta-band";
 import { Section } from "@/components/ui/section";
 import { Avatar } from "@/components/avatar";
 import { JsonLd } from "@/components/seo/json-ld";
+import { Reveal } from "@/components/reveal";
+import { Parallax } from "@/components/scroll/parallax";
 import { TEAM_STORIES } from "@/content/team-stories";
 import { SITE } from "@/lib/site";
 
@@ -56,21 +58,21 @@ export default async function TeamStoryPage({ params }: Props) {
 
       <Section>
         <div className="grid gap-10 md:grid-cols-[220px_1fr]">
-          <div className="w-40 md:w-full">
+          <Parallax speed={0.08} className="w-40 md:w-full">
             <Avatar
               src={story.avatar}
               name={story.name}
               initials={story.initials}
             />
-          </div>
-          <div className="max-w-2xl space-y-5 text-lg leading-relaxed text-black/75">
+          </Parallax>
+          <Reveal className="max-w-2xl space-y-5 text-lg leading-relaxed text-black/75">
             {story.paragraphs.map((text, i) => (
               <p key={i}>{text}</p>
             ))}
             {story.signoff && (
               <p className="font-semibold text-black/60">{story.signoff}</p>
             )}
-          </div>
+          </Reveal>
         </div>
       </Section>
 
