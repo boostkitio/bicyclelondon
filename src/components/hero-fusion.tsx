@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, type MutableRefObject } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 
 // The pairs Bicycle fuses. The ticker performs them; the ampersand is the
@@ -19,7 +19,11 @@ const PAIRS: [string, string][] = [
  * "and", and cycling). A mono ticker underneath performs the pairs the agency
  * fuses. Reduced motion: wheel and ticker hold still on the first pair.
  */
-export function HeroFusion() {
+export function HeroFusion({
+  velocityRef,
+}: {
+  velocityRef?: MutableRefObject<number>;
+} = {}) {
   const root = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -27,14 +31,16 @@ export function HeroFusion() {
       const mm = gsap.matchMedia();
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        // The wheel turns; the ampersand breathes.
-        gsap.to(".hero-wheel", {
-          rotation: 360,
-          transformOrigin: "50% 50%",
-          repeat: -1,
-          duration: 26,
-          ease: "none",
-        });
+        // The wheel turns (idle cruise + scroll-velocity surge); the ampersand breathes.
+        const wheel = root.current!.querySelector<SVGSVGElement>(".hero-wheel");
+        let rot = 0;
+        const spin = () => {
+          const boost = velocityRef?.current ?? 0;
+          rot += 0.35 + boost * 0.6; // deg per frame: idle cruise + scroll surge
+          if (wheel) gsap.set(wheel, { rotation: rot, transformOrigin: "50% 50%" });
+        };
+        gsap.ticker.add(spin);
+
         gsap.to(".hero-amp-glyph", {
           scale: 1.05,
           transformOrigin: "50% 55%",
@@ -59,6 +65,8 @@ export function HeroFusion() {
           tl.to(item, { opacity: 1, duration: 0.5, ease: "power2.out" }, i * 1.9)
             .to(item, { opacity: 0, duration: 0.5, ease: "power2.in" }, i * 1.9 + 1.5);
         });
+
+        return () => gsap.ticker.remove(spin);
       });
 
       mm.add("(prefers-reduced-motion: reduce)", () => {

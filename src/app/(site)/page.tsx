@@ -12,7 +12,7 @@ import { WorkGrid } from "@/components/work-grid";
 import { LogoWall } from "@/components/logo-wall";
 import { StatsBand } from "@/components/stats";
 import { TeamStrip } from "@/components/team-strip";
-import { HeroFusion } from "@/components/hero-fusion";
+import { HomeHero } from "@/components/home-hero";
 import { Parallax } from "@/components/scroll/parallax";
 import { Marquee } from "@/components/scroll/marquee";
 import { MaskReveal } from "@/components/scroll/mask-reveal";
@@ -65,7 +65,7 @@ export default async function HomePage() {
               <span className="animate-pulse-dot inline-block h-2 w-2 rounded-full bg-brand" />
               Independent · integrated · media &amp; creative
             </p>
-            <HeroFusion />
+            <HomeHero />
             <div className="-ml-6 mt-10 flex flex-wrap items-center">
               <MagneticButton
                 href="/work"
