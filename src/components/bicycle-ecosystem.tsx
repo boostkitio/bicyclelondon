@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 import { Reveal } from "@/components/reveal";
 import { Container } from "@/components/ui/container";
 
@@ -9,8 +10,8 @@ const CORAL = "#f06060";
 
 type Label = { x: string; y: string; w: string; el: ReactNode };
 
-const brandName = "font-display text-xl font-extrabold leading-none sm:text-2xl lg:text-3xl";
-const brandSub = "mt-2 text-[11px] leading-snug text-white/75 sm:text-sm";
+const brandLogo = "mx-auto h-7 w-auto sm:h-9";
+const brandSub = "mt-3 text-[11px] leading-snug text-white/75 sm:text-sm";
 const overlap = "text-[11px] font-medium leading-snug text-white/85 sm:text-sm";
 
 const LABELS: Label[] = [
@@ -20,9 +21,13 @@ const LABELS: Label[] = [
     w: "40%",
     el: (
       <>
-        <span className={brandName} style={{ color: GREEN }}>
-          Bicycle
-        </span>
+        <Image
+          src="/images/logo-bicycle-white.png"
+          alt="Bicycle"
+          width={10001}
+          height={3295}
+          className={brandLogo}
+        />
         <p className={brandSub}>
           ‘Brand-first’ media planning, buying &amp; consultancy
         </p>
@@ -35,9 +40,13 @@ const LABELS: Label[] = [
     w: "26%",
     el: (
       <>
-        <span className={brandName} style={{ color: ORANGE }}>
-          Bicycle Studio
-        </span>
+        <Image
+          src="/images/logo-studio.png"
+          alt="Bicycle Studio"
+          width={1117}
+          height={399}
+          className={brandLogo}
+        />
         <p className={brandSub}>Production solutions</p>
       </>
     ),
@@ -48,9 +57,13 @@ const LABELS: Label[] = [
     w: "28%",
     el: (
       <>
-        <span className={brandName} style={{ color: CORAL }}>
-          Bicycle Blade
-        </span>
+        <Image
+          src="/images/logo-blade.png"
+          alt="Bicycle Blade"
+          width={1043}
+          height={400}
+          className={brandLogo}
+        />
         <p className={brandSub}>
           ‘Performance-first’ media planning, buying &amp; consultancy
         </p>

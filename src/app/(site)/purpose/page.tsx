@@ -74,10 +74,10 @@ export default function PurposePage() {
           <span key={`p${i}`} className="inline-flex items-center px-8 sm:px-10">
             {p.chip ? (
               <span className="inline-flex items-center rounded-xl bg-white px-5 py-3">
-                <Image src={p.src} alt={p.alt} width={p.w} height={p.h} className={p.className} />
+                <Image src={p.src} alt={p.alt} width={p.w} height={p.h} className={`${p.className} min-w-fit`} />
               </span>
             ) : (
-              <Image src={p.src} alt={p.alt} width={p.w} height={p.h} className={p.className} />
+              <Image src={p.src} alt={p.alt} width={p.w} height={p.h} className={`${p.className} min-w-fit`} />
             )}
           </span>,
           <span key={`s${i}`} className="text-2xl font-extrabold text-white/20" aria-hidden>

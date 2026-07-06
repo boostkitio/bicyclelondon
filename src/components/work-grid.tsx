@@ -119,7 +119,7 @@ export function WorkGrid({
                         </ul>
                       )}
                       <span className="label inline-flex items-center gap-2 text-brand transition-all group-hover:gap-3">
-                        View case <span aria-hidden>→</span>
+                        View case study <span aria-hidden>→</span>
                       </span>
                     </div>
                   </div>
@@ -156,7 +156,7 @@ export function WorkGrid({
                     {/* green 'View case' bar wipes up on hover */}
                     <div className="absolute inset-x-0 bottom-0 translate-y-full bg-brand px-5 py-3.5 text-black transition-transform duration-500 ease-out group-hover:translate-y-0">
                       <span className="label flex items-center justify-between">
-                        View case <span aria-hidden>→</span>
+                        View case study <span aria-hidden>→</span>
                       </span>
                     </div>
                   </div>
