@@ -2,6 +2,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ScrollToTop } from "@/components/scroll-to-top";
 import { CustomCursor } from "@/components/cursor/custom-cursor";
+import { ScrollProgress } from "@/components/scroll/scroll-progress";
 import { JsonLd } from "@/components/seo/json-ld";
 import { SITE } from "@/lib/site";
 
@@ -48,6 +49,7 @@ export default function SiteLayout({
   return (
     <>
       <CustomCursor />
+      <ScrollProgress />
       <JsonLd data={organisationSchema} />
       <JsonLd data={websiteSchema} />
       <a href="#main" className="skip-link">
