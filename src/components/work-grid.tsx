@@ -66,7 +66,11 @@ export function WorkGrid({
 
         return (
           <Reveal key={cs._id} delay={(i % 2) * 90} className={cn(v.span, v.drop)}>
-            <Link href={`/work/${cs.slug}`} className="group block">
+            <Link
+              href={`/work/${cs.slug}`}
+              className="group block"
+              data-cursor="View"
+            >
               {feature ? (
                 // Full-bleed showcase — number, huge title and intro over the image.
                 <div
@@ -81,7 +85,7 @@ export function WorkGrid({
                       alt={cs.heroImage.alt || cs.title}
                       fill
                       sizes="100vw"
-                      className="object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
+                      className="object-cover transition duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transform-none"
                     />
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/55 to-navy/10" />
@@ -140,7 +144,7 @@ export function WorkGrid({
                             ? "(max-width: 768px) 100vw, 58vw"
                             : "(max-width: 768px) 100vw, 42vw"
                         }
-                        className="object-cover transition duration-700 ease-out group-hover:scale-[1.05]"
+                        className="object-cover transition duration-700 ease-out group-hover:scale-[1.05] motion-reduce:transform-none"
                       />
                     )}
                     {/* scrim so the index numeral stays legible over any image */}
