@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { MuxBg } from "@/components/mux-bg";
 import { Parallax } from "@/components/scroll/parallax";
-import { MaskReveal } from "@/components/scroll/mask-reveal";
+import { SplitReveal } from "@/components/scroll/split-reveal";
 import { cn } from "@/lib/utils";
 
 export function PageHero({
@@ -64,10 +64,11 @@ export function PageHero({
               {eyebrow}
             </p>
           )}
-          <MaskReveal
+          <SplitReveal
             as="h1"
             className="display text-5xl sm:text-6xl lg:text-7xl"
-            lines={[title]}
+            text={title}
+            by="word"
           />
           {lead && (
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/80">
