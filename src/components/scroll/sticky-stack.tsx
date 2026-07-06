@@ -35,7 +35,10 @@ export function StickyStack({
             });
           },
         });
-        return () => st.kill();
+        return () => {
+          st.kill();
+          cards.forEach((c) => (c.style.position = ""));
+        };
       });
       return () => mm.revert();
     },
