@@ -35,7 +35,21 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
       onMouseLeave={() => setPaused(false)}
     >
       <div
-        className="relative h-[24rem] select-none [perspective:1400px] sm:h-[22rem]"
+        className="relative h-[26rem] select-none [perspective:1400px] focus:outline-none sm:h-[24rem]"
+        role="group"
+        aria-roledescription="carousel"
+        aria-label="Client testimonials, use the left and right arrow keys to navigate"
+        tabIndex={0}
+        data-cursor="Drag"
+        onKeyDown={(e) => {
+          if (e.key === "ArrowLeft") {
+            e.preventDefault();
+            go(-1);
+          } else if (e.key === "ArrowRight") {
+            e.preventDefault();
+            go(1);
+          }
+        }}
         onPointerDown={(e) => {
           drag.current = { x: e.clientX, moved: false };
         }}
@@ -68,7 +82,7 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
               }}
             >
               <p className="font-display text-3xl leading-none text-brand">“</p>
-              <blockquote className="-mt-4 text-lg leading-relaxed text-navy sm:text-xl">
+              <blockquote className="-mt-4 text-xl font-medium leading-snug text-navy sm:text-2xl lg:text-[1.75rem]">
                 {t.quote}
               </blockquote>
               <figcaption className="mt-6 flex items-center gap-3">

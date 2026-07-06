@@ -20,7 +20,7 @@ import { MagneticButton } from "@/components/scroll/magnetic-button";
 import { SERVICES } from "@/lib/site";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { featuredCaseStudiesQuery, testimonialsQuery } from "@/sanity/lib/queries";
-import { StickyStack } from "@/components/scroll/sticky-stack";
+import { Testimonials } from "@/components/testimonials";
 import type { CaseStudyCard, Testimonial } from "@/sanity/lib/types";
 
 export const metadata: Metadata = {
@@ -312,7 +312,7 @@ export default async function HomePage() {
         </Section>
       )}
 
-      {/* Testimonials — stacked cards */}
+      {/* Testimonials — focus carousel (one quote in view, fanned deck behind) */}
       {testimonials.length > 0 && (
         <Section tone="paper">
           <Reveal mask className="mb-12 text-center">
@@ -323,19 +323,7 @@ export default async function HomePage() {
               The people we ride with
             </h2>
           </Reveal>
-          <StickyStack className="mx-auto max-w-3xl">
-            {testimonials.map((t) => (
-              <blockquote
-                key={t._id}
-                className="rounded-[2rem] bg-navy p-10 text-white shadow-xl"
-              >
-                <p className="display text-2xl leading-snug sm:text-3xl">{t.quote}</p>
-                <footer className="label mt-6 text-brand">
-                  {[t.authorName, t.authorRole, t.company].filter(Boolean).join(", ")}
-                </footer>
-              </blockquote>
-            ))}
-          </StickyStack>
+          <Testimonials items={testimonials} />
         </Section>
       )}
 
