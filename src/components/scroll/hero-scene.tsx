@@ -20,7 +20,6 @@ export function HeroScene({
   className?: string;
   onVelocity?: (boost: number) => void;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
   const boost = useRef(0);
 
   useEffect(() => {
@@ -48,7 +47,7 @@ export function HeroScene({
   }, [onVelocity]);
 
   return (
-    <div ref={ref} className={className}>
+    <div className={className}>
       {children}
     </div>
   );

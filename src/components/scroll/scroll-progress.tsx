@@ -26,7 +26,7 @@ export function ScrollProgress() {
     <div
       ref={ref}
       aria-hidden
-      className="fixed left-0 top-0 z-[150] h-[3px] w-full bg-brand"
+      className="pointer-events-none fixed left-0 top-0 z-[150] h-[3px] w-full bg-brand"
       style={{ transform: "scaleX(0)" }}
     />
   );

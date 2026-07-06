@@ -12,10 +12,15 @@ import { gsap, useGSAP } from "@/lib/gsap";
  */
 export function PageTransition() {
   const ref = useRef<HTMLDivElement>(null);
+  const firstRender = useRef(true);
   const pathname = usePathname();
 
   useGSAP(
     () => {
+      if (firstRender.current) {
+        firstRender.current = false;
+        return;
+      }
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         gsap
