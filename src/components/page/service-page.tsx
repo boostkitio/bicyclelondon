@@ -9,6 +9,8 @@ import { MuxBg } from "@/components/mux-bg";
 import { BicycleEcosystem } from "@/components/bicycle-ecosystem";
 import { JsonLd } from "@/components/seo/json-ld";
 import { serviceSchema } from "@/lib/schema";
+import { Parallax } from "@/components/scroll/parallax";
+import { SplitReveal } from "@/components/scroll/split-reveal";
 
 export type ServicePoint = { title: string; body: string };
 export type ServiceSection = { heading?: string; body: string[] };
@@ -48,21 +50,23 @@ export function ServicePage({ content }: { content: ServiceContent }) {
           glowing in, its logo lockup as the identity. */}
       <section className="relative flex min-h-[80vh] items-end overflow-hidden bg-deep text-white">
         {content.heroVideoPlaybackId ? (
-          <div className="absolute inset-0 opacity-90">
+          <Parallax speed={-0.08} className="absolute inset-0 opacity-90">
             <MuxBg
               playbackId={content.heroVideoPlaybackId}
               poster={content.heroImage}
             />
-          </div>
+          </Parallax>
         ) : content.heroImage ? (
-          <Image
-            src={content.heroImage}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover opacity-90"
-          />
+          <Parallax speed={-0.08} className="absolute inset-0">
+            <Image
+              src={content.heroImage}
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover opacity-90"
+            />
+          </Parallax>
         ) : null}
         <div className="absolute inset-0 bg-gradient-to-t from-deep via-deep/55 to-deep/25" />
         <div className="absolute inset-0 bg-gradient-to-r from-deep/90 via-deep/25 to-transparent" />
@@ -95,12 +99,12 @@ export function ServicePage({ content }: { content: ServiceContent }) {
               <h1 className="sr-only">{content.title}</h1>
             </>
           ) : (
-            <h1
-              className="display text-5xl sm:text-6xl lg:text-7xl"
-              style={{ color: "var(--accent)" }}
-            >
-              {content.title}
-            </h1>
+            <SplitReveal
+              as="h1"
+              text={content.title}
+              by="word"
+              className="display text-5xl sm:text-6xl lg:text-7xl text-[var(--accent)]"
+            />
           )}
         </Container>
       </section>
@@ -141,7 +145,10 @@ export function ServicePage({ content }: { content: ServiceContent }) {
           <div className="grid gap-6 md:grid-cols-3">
             {content.points.map((pt, i) => (
               <Reveal key={i} delay={i * 70}>
-                <div className="h-full rounded-3xl bg-white/[0.04] p-8 ring-1 ring-white/10 transition duration-300 hover:-translate-y-1 hover:bg-white/[0.07]">
+                <div
+                  data-cursor="View"
+                  className="h-full rounded-3xl bg-white/[0.04] p-8 ring-1 ring-white/10 transition duration-300 hover:-translate-y-1 hover:bg-white/[0.07]"
+                >
                   <span
                     className="block h-1.5 w-10 rounded-full"
                     style={{ background: "var(--accent)" }}
@@ -187,7 +194,11 @@ export function ServicePage({ content }: { content: ServiceContent }) {
           </Reveal>
           <div className="mt-12 grid grid-cols-2 items-center gap-x-8 gap-y-12 sm:grid-cols-3 lg:grid-cols-6">
             {content.brands.logos.map((b) => (
-              <div key={b.src} className="group flex items-center justify-center">
+              <div
+                key={b.src}
+                data-cursor="View"
+                className="group flex items-center justify-center"
+              >
                 <Image
                   src={b.src}
                   alt={b.alt}
@@ -213,12 +224,14 @@ export function ServicePage({ content }: { content: ServiceContent }) {
             </h2>
           </Reveal>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {content.videos.map((v) => (
-              <Reveal key={v.playbackId}>
-                <MuxVideo playbackId={v.playbackId} title={v.title} />
-                <p className="mt-3 font-display text-sm font-bold uppercase">
-                  {v.title}
-                </p>
+            {content.videos.map((v, i) => (
+              <Reveal key={v.playbackId} delay={i * 60}>
+                <div data-cursor="Play">
+                  <MuxVideo playbackId={v.playbackId} title={v.title} />
+                  <p className="mt-3 font-display text-sm font-bold uppercase">
+                    {v.title}
+                  </p>
+                </div>
               </Reveal>
             ))}
           </div>
