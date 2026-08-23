@@ -18,9 +18,15 @@ export function CustomCursor() {
 
   // Only enable on fine pointers with motion allowed. Checked on the client.
   useEffect(() => {
-    if (reduced) return setEnabled(false);
-    const fine = window.matchMedia("(pointer: fine)").matches;
-    setEnabled(fine);
+    let cancelled = false;
+    queueMicrotask(() => {
+      if (cancelled) return;
+      const fine = window.matchMedia("(pointer: fine)").matches;
+      setEnabled(!reduced && fine);
+    });
+    return () => {
+      cancelled = true;
+    };
   }, [reduced]);
 
   useEffect(() => {
