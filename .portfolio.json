@@ -1,0 +1,17 @@
+﻿{
+    "schemaVersion":  2,
+    "id":  "bicycle",
+    "canonicalPath":  "C:\\dev\\projects\\bicycle",
+    "kind":  "client",
+    "business":  "boostkit",
+    "clientId":  "bicycle-london",
+    "status":  "uncertain",
+    "criticality":  "medium",
+    "updateTier":  "C",
+    "productionDeploymentRequiresApproval":  true,
+    "context":  {
+                    "companyBrain":  "C:\\dev\\projects\\_TOOLS\\company-brain",
+                    "workstream":  "C:\\dev\\projects\\_TOOLS\\company-brain\\workstreams\\bicycle",
+                    "repositoryContext":  "C:\\dev\\projects\\bicycle\\docs\\agent-context\\project.md"
+                }
+}
