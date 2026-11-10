@@ -8,7 +8,8 @@ import {
   jobSlugsQuery,
 } from "@/sanity/lib/queries";
 
-export const revalidate = 3600;
+// Daily backstop: the Sanity webhook refreshes the sitemap on publish.
+export const revalidate = 86400;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = SITE.url;

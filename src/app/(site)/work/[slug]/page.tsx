@@ -23,7 +23,6 @@ type Props = { params: Promise<{ slug: string }> };
 export async function generateStaticParams() {
   const slugs = await sanityFetch<{ slug: string }[]>({
     query: caseStudySlugsQuery,
-    revalidate: 3600,
   });
   return slugs.map((s) => ({ slug: s.slug }));
 }

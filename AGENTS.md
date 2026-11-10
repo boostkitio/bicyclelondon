@@ -44,6 +44,13 @@ Project `2nfeuqe8`, dataset `production`. Editable types: `slipstreamArticle`,
 `caseStudy`, `job`, plus `author`, `category`, `client`, `siteSettings`.
 Marketing/service pages are hard-coded React in `src/content` + `src/app/(site)`.
 
+Publishing refreshes the site straight away: the Sanity "Instant publish"
+webhook calls `/api/revalidate` (signed with `SANITY_REVALIDATE_SECRET`), which
+expires the `sanity` tag every `sanityFetch` carries. The timer is only a daily
+backstop because each page regeneration is billed; keep nothing under an hour.
+The webhook targets `bicyclelondon.vercel.app` until the domain cutover, when
+its URL must change to the live domain in Sanity (API > Webhooks).
+
 Migration scripts (idempotent, deterministic `_id`s, read env from `.env.local`
 and `C:/dev/projects/.env.boostkit-shared`):
 

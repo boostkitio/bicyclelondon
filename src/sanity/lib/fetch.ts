@@ -8,16 +8,23 @@ type FetchArgs = {
   tags?: string[];
 };
 
+// Content refreshes on publish: the Sanity webhook calls /api/revalidate,
+// which expires the "sanity" tag every fetch carries. The timer is only a
+// daily backstop, because Vercel bills each page regeneration. Nothing on the
+// site changes with the clock alone, so nothing needs a shorter timer.
+export const SANITY_TAG = "sanity";
+const DAILY = 86400;
+
 export async function sanityFetch<T>({
   query,
   params = {},
-  revalidate = 60,
+  revalidate = DAILY,
   tags = [],
 }: FetchArgs): Promise<T> {
   return client.fetch<T>(query, params, {
     next: {
       revalidate,
-      tags,
+      tags: [SANITY_TAG, ...tags],
     },
   });
 }
