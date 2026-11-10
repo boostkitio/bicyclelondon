@@ -83,8 +83,8 @@ Recorded so they are not re-audited:
   browser dedupes repeated URLs; the fix (CSS clones/sprites) is not worth
   the churn now.
 - **`GsapHeroHeading` importing gsap directly instead of via `@/lib/gsap`**:
-  harmless today (no plugins used); fold into any future edit of that file
-  rather than a standalone change.
+  no longer applies. The component was unused and has been removed
+  (`src/components/gsap-hero-heading.tsx`).
 - **Render-time URL-scheme validation for CMS links**: mitigated at
   authoring time by Sanity schema validation; noted in plan 003's
   maintenance notes as defence-in-depth if the content surface grows.

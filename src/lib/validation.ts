@@ -12,8 +12,6 @@ export const contactSchema = z.object({
   website: z.string().max(200).optional(),
 });
 
-export type ContactInput = z.infer<typeof contactSchema>;
-
 // Strip CR/LF so values can never be used for header injection.
 export function sanitiseLine(value: string): string {
   return value.replace(/[\r\n]+/g, " ").trim();
