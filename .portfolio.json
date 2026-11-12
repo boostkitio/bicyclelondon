@@ -8,10 +8,8 @@
     "status":  "uncertain",
     "criticality":  "medium",
     "updateTier":  "C",
-    "productionDeploymentRequiresApproval":  true,
     "context":  {
                     "companyBrain":  "C:\\dev\\projects\\_TOOLS\\company-brain",
-                    "workstream":  "C:\\dev\\projects\\_TOOLS\\company-brain\\workstreams\\bicycle",
-                    "repositoryContext":  "C:\\dev\\projects\\bicycle\\docs\\agent-context\\project.md"
+                    "workstream":  "C:\\dev\\projects\\_TOOLS\\company-brain\\workstreams\\bicycle"
                 }
 }
