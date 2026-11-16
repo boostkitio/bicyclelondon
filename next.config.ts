@@ -31,7 +31,8 @@ const studioCsp = [
   "img-src 'self' blob: data: https://cdn.sanity.io https://*.sanity-cdn.com",
   "media-src 'self' blob: https://cdn.sanity.io",
   "connect-src 'self' https://api.sanity.io https://*.api.sanity.io wss://*.api.sanity.io https://*.apicdn.sanity.io https://cdn.sanity.io https://*.sanity-cdn.com",
-  "font-src 'self' data:",
+  // Studio's UI loads its Inter webfont from Sanity's design-system host.
+  "font-src 'self' data: https://design-system-static.sanity.io",
   "worker-src 'self' blob:",
   "frame-ancestors 'none'",
   "base-uri 'self'",
